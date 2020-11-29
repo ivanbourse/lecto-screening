@@ -30,7 +30,7 @@ const Test = () => {
 	const history = useHistory();
 
 	useEffect(() => {
-		const test = generateTest(1);
+		const test = generateTest(2);
 		setTestQuestions(test);
 		setLoading(false);
 

@@ -26,7 +26,7 @@ const exercisesInfo = {
 		instructions: ['Apretá el botón de abajo para escuchar la letra', 'Escribí la letra que escuchás acá'],
 	},
 	'draw-word': {
-		title: 'Escribí la letra que escuchás',
+		title: 'Dibujá la palabra que está en pantalla',
 	},
 };
 
@@ -228,11 +228,10 @@ const generateTest = (exercisesPerType = 2) => {
 		//* SEPTIMO EJERCICIO: DIBUJAR LAS PALABRAS
 		finalTest.push(drawTheWord.generateForTest());
 	}
-	console.log(finalTest);
+	// Randomizar el orden
+	finalTest.sort((a, b) => 0.5 - Math.random());
+
 	return finalTest;
 };
-// finalTest.map(item => exercisesInfo[item.exerciseId].title);
-
-console.log(generateTest());
 
 module.exports = { generateTest, exercisesInfo };

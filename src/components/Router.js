@@ -1,6 +1,6 @@
 import React from 'react';
-
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import Landing from '../pages/Landing';
 import GetStarted from '../pages/GetStarted';
 import GetStartedForm from '../pages/GetStartedForm';
