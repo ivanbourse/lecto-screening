@@ -1,0 +1,13 @@
+:root {
+	--fs-xsmall: calc(14px + (18 - 14) * ((100vw - 300px) / (1600 - 300)));
+	--fs-small: calc(18px + (24 - 18) * ((100vw - 300px) / (1600 - 300)));
+	--fs-medium: calc(24px + (30 - 24) * ((100vw - 300px) / (1600 - 300)));
+	--fs-large: calc(32px + (44 - 32) * ((100vw - 300px) / (1600 - 300)));
+	--fs-xlarge: calc(44px + (60 - 44) * ((100vw - 300px) / (1600 - 300)));
+
+	--clr-main: #0db3d4;
+	--clr-red: #e9545c;
+	--clr-yellow: #f6bd2a;
+	--clr-purple: #82368a;
+	--clr-green: #3ca936;
+}

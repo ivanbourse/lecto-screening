@@ -1,0 +1,27 @@
+.finished-test-container {
+	background-color: var(--clr-main);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	color: #fff;
+	min-height: 100vh;
+	text-align: center;
+	.title {
+		font-size: calc(80px + (130 - 80) * ((100vw - 300px) / (1600 - 300)));
+	}
+	.subtitle {
+		margin: 4vh 0;
+		font-size: var(--fs-large);
+		padding: 0 5vw;
+	}
+	.emoji {
+		font-size: calc(120px + (200 - 120) * ((100vw - 300px) / (1600 - 300)));
+		user-select: none;
+	}
+	.button {
+		@include button;
+		background-color: var(--clr-yellow);
+		margin: 4vh 0;
+	}
+}

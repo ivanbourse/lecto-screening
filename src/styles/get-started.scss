@@ -1,0 +1,154 @@
+.get-started-header {
+	background: linear-gradient(107.92deg, #4effbf -2.1%, #6ac1f2 120.27%);
+	.link {
+		margin: 0;
+		padding: 0;
+		height: 85%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+.get-started-container {
+	padding: 5vh 2vw;
+	height: 86vh;
+	overflow-x: hidden;
+	background-color: #fafafa;
+	@include desktop {
+		overflow: hidden;
+	}
+
+	.instructions {
+		font-size: var(--fs-medium);
+		color: #433a3a;
+		text-align: center;
+	}
+	.options {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		@include mobile {
+			flex-direction: column;
+		}
+		@include tablet {
+			height: 100%;
+		}
+		.option {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			padding: 5vh 0;
+			flex: 1;
+			height: 100%;
+			.hover {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				transition: 0.3s;
+				user-select: none;
+				cursor: pointer;
+				text-decoration: none;
+				&:hover {
+					transform: scale(1.15);
+				}
+			}
+			.image {
+				@include mobile {
+					width: 30vw;
+				}
+			}
+			.label {
+				color: #424242;
+				font-size: var(--fs-medium);
+				margin: 3vh 0 0 0;
+			}
+		}
+		.divider {
+			width: 4px;
+			background-color: #ccc;
+			height: 80%;
+		}
+	}
+	.inputs {
+		width: 50%;
+		padding: 2vw 0 0 0;
+		margin: auto;
+
+		.input-group {
+			@include input;
+		}
+
+		@include mobile {
+			width: 90%;
+		}
+		.group {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			@include mobile {
+				display: block;
+			}
+			.input-group {
+				flex: 1;
+			}
+			.tiny {
+				flex: 0;
+				@include tablet {
+					margin-left: 3em;
+				}
+			}
+		}
+		.checkbox {
+			@include checkbox;
+			margin: 3vh 0;
+			-webkit-user-select: none;
+			cursor: pointer;
+			.info {
+				position: relative;
+				display: inline-block;
+				&:hover {
+					.tooltip {
+						visibility: visible;
+						opacity: 1;
+					}
+				}
+				.icon {
+					background-color: var(--clr-main);
+					border-radius: 50%;
+					width: 1.4em;
+					height: 1.4em;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					font-weight: bold;
+					color: #fff;
+					margin-left: 0.4em;
+				}
+				.tooltip {
+					opacity: 0;
+					transition: 0.2s;
+					visibility: hidden;
+					background-color: rgb(46, 46, 46);
+					color: #fff;
+					text-align: center;
+					padding: 0.4em 0.6em;
+					border-radius: 6px;
+					position: absolute;
+					z-index: 1;
+					left: 50%;
+					top: 120%;
+					width: 200px;
+					transform: translateX(-50%);
+				}
+			}
+		}
+	}
+	.button {
+		@include button;
+		width: fit-content;
+		margin: 10vh auto 0 auto;
+	}
+}

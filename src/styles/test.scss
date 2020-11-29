@@ -1,0 +1,246 @@
+.test-container {
+	background-color: #f8f8f8;
+	min-height: 100vh;
+	overflow-x: hidden;
+	.next-button {
+		@include button;
+		margin: 4vh auto;
+	}
+	.warning {
+		font-size: var(--fs-small);
+		color: var(--clr-red);
+		text-align: center;
+	}
+}
+
+.test-exercise-container {
+	background-color: #f8f8f8;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: column;
+	padding: 4vh 5vw;
+
+	.icon {
+		@include icon-button;
+	}
+
+	.instruction {
+		font-size: var(--fs-medium);
+		font-weight: 600;
+		color: #3a3a3a;
+		text-align: center;
+		z-index: 1;
+	}
+
+	.number {
+		@include number;
+	}
+}
+
+.test-header {
+	background-color: var(--clr-main);
+	color: #fff;
+	height: unset;
+	padding: 6vh 0;
+	.title {
+		font-size: var(--fs-large);
+		text-align: center;
+		width: 80%;
+	}
+}
+
+.count-items-container {
+	.images {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		margin: 5vh 0 10vh 0;
+		flex-wrap: wrap;
+		.count-image {
+			width: 100px;
+
+			@include desktop {
+				margin: 0 1vw;
+			}
+			margin: 1rem;
+		}
+	}
+	.numbers {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: row;
+		margin: 3vh 0;
+		flex-wrap: wrap;
+		.number {
+			width: 100px;
+			height: 100px;
+			cursor: pointer;
+			@include desktop {
+				margin: 0 1.5rem;
+			}
+			margin: 1rem;
+			&:hover:not(.selected) {
+				background-color: rgb(218, 218, 218);
+			}
+		}
+		.selected {
+			background-color: var(--clr-yellow);
+		}
+	}
+}
+
+.number-on-screen-container {
+	.number {
+		width: 200px;
+		height: 200px;
+		font-size: 80px;
+	}
+	.instruction {
+		margin: 5vh 0 0 0;
+	}
+}
+
+.prev-post-container {
+	.numbers {
+		display: flex;
+		width: 60vw;
+		@include tablet {
+			margin: 8vh 0;
+			justify-content: space-between;
+		}
+		@include mobile {
+			flex-direction: column;
+			align-items: center;
+		}
+		.number {
+			width: 15vw;
+			height: 15vw;
+			font-size: calc(70px + (100 - 70) * ((100vw - 300px) / (1600 - 300)));
+			@include mobile {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 25vw;
+				height: 25vw;
+			}
+		}
+		.number-input {
+			@include number-input;
+			@include mobile {
+				margin: 4vh 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column-reverse;
+				label {
+					margin: 0 0 2vh 0;
+				}
+			}
+		}
+	}
+}
+.draw-word-container {
+	.word-to-draw {
+		font-size: var(--fs-large);
+		margin: 0 0 2vh 0;
+		z-index: 1;
+	}
+	.sketch-container {
+		position: relative;
+		.sketch {
+			@include shadows;
+		}
+		.controls {
+			position: absolute;
+			bottom: 30px;
+			left: 50%;
+			transform: translateX(-50%);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			.color {
+				@include shadows;
+				width: 36px;
+				height: 36px;
+				margin: 0 0.5em;
+				border-radius: 50%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.red {
+				background-color: var(--clr-red);
+			}
+			.blue {
+				background-color: var(--clr-main);
+			}
+			.green {
+				background-color: var(--clr-green);
+			}
+			.yellow {
+				background-color: var(--clr-yellow);
+			}
+			.black {
+				background-color: #121212;
+			}
+			.eraser {
+				background-color: #ddd;
+			}
+		}
+	}
+}
+
+.join-with-arrows-container {
+	.images {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 4vw;
+		padding: 3vh 0;
+		.image {
+			@include number;
+			padding: 1vw;
+			width: 120px;
+			height: 120px;
+		}
+	}
+}
+
+.split-syllables-container {
+	.image {
+		@include number;
+		width: 300px;
+		height: 300px;
+		margin: 2vh 0;
+	}
+	.word-to-split {
+		background-color: rgba(0, 0, 0, 0);
+		border: none;
+		font-size: var(--fs-xlarge);
+		text-align: center;
+		font-weight: bold;
+		color: #3ca936;
+		letter-spacing: 0.05em;
+		text-decoration: underline;
+		padding: 2vh 0;
+		&:focus {
+			outline: none;
+		}
+	}
+}
+
+.write-letter-container {
+	.number {
+		@include number-input;
+		width: 200px;
+		height: 200px;
+		margin: 4vh 0 0 0;
+		input {
+			font-weight: bold;
+			color: #121212;
+			text-transform: uppercase;
+		}
+	}
+}

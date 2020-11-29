@@ -1,0 +1,56 @@
+.landing-container {
+	background-color: #fff;
+}
+.landing-page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 85vh;
+	@include mobile {
+		flex-direction: column;
+	}
+	.container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 5vh 0 5vh 6vw;
+		height: 100%;
+	}
+	.title-container {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		.title {
+			font-weight: 300;
+			font-size: var(--fs-xlarge);
+			color: #242424;
+			@include mobile {
+				text-align: center;
+			}
+		}
+		.button {
+			@include button;
+			background-color: #e428a4;
+			margin: 4vh 0 0 0;
+			@include tablet {
+				align-self: flex-start;
+			}
+		}
+	}
+	.illustration-container {
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+		-moz-user-select: none;
+
+		@include mobile {
+			display: none;
+		}
+
+		.illustration {
+			width: 40vw;
+			position: absolute;
+			right: -10vw;
+		}
+	}
+}

@@ -1,0 +1,152 @@
+@mixin mobile {
+	@media (max-width: 800px) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media (min-width: 800px) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media (min-width: 1300px) {
+		@content;
+	}
+}
+
+@mixin header {
+	height: 14vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.logo {
+		height: 75%;
+	}
+}
+
+@mixin shadows {
+	box-shadow: 32.05882263183594px 32.05882263183594px 96.17646789550781px 0px rgba(217, 217, 217, 0.5),
+		-32.05882263183594px -32.05882263183594px 96.17646789550781px 0px rgba(227, 227, 227, 0.3);
+}
+
+@mixin input {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding: 1em 0;
+	.label {
+		font-weight: 600;
+		color: #282828;
+		font-size: var(--fs-xsmall);
+		margin: 0 0 0.5em 0;
+		z-index: 1;
+	}
+	.input {
+		@include shadows;
+		border-radius: 16px;
+		font-size: var(--fs-small);
+		padding: 0.7em 0.8em;
+		background: #fff;
+		border: 4px solid rgb(231, 231, 231);
+		color: #121212;
+		&:focus {
+			outline: none;
+			box-shadow: inset 0 0 0px 3px var(--clr-main);
+		}
+	}
+
+	.error {
+		color: var(--clr-red);
+		line-height: 2;
+	}
+}
+
+@mixin checkbox {
+	display: flex;
+	align-items: center;
+	.label {
+		color: #282828;
+		font-size: var(--fs-xsmall);
+		margin-left: 0.6em;
+	}
+
+	.check {
+		@include shadows;
+		border-radius: 16px;
+	}
+}
+
+@mixin button {
+	color: #fff;
+	background-color: var(--clr-main);
+	font-weight: bold;
+	font-size: var(--fs-medium);
+	padding: 0.6em 1.8em;
+	border-radius: 14px;
+	cursor: pointer;
+	text-decoration: none;
+	display: block;
+	border: none;
+	transition: 0.2s;
+	&:focus {
+		outline: none;
+		box-shadow: inset 0 0 0 2px #fff, 0 0 0px 5px var(--clr-main);
+	}
+}
+
+@mixin number {
+	box-shadow: 20px 20px 60px 0 rgba(217, 217, 217, 0.5), -20px -20px 60px 0 rgba(227, 227, 227, 0.3);
+	font-size: var(--fs-large);
+	font-weight: 700;
+	color: #101010;
+	transition: 0.3s;
+	border-radius: 12px;
+	-webkit-user-select: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin number-input {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	input {
+		font-weight: 300;
+		color: #444;
+		box-shadow: none;
+		font-size: calc(70px + (100 - 70) * ((100vw - 300px) / (1600 - 300)));
+		background: #fff;
+		border: none;
+		height: 100%;
+		width: 100%;
+		text-align: center;
+		&:focus {
+			outline: none;
+		}
+	}
+
+	.label {
+		color: #3ca936;
+		font-size: var(--fs-medium);
+	}
+}
+
+@mixin icon-button {
+	background-color: var(--clr-yellow);
+	width: 120px;
+	height: 120px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	margin: 4vh 0;
+	cursor: pointer;
+	transition: 0.2s;
+	&:hover {
+		transform: scale(1.1);
+	}
+}
