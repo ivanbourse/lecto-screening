@@ -234,4 +234,4 @@ const generateTest = (exercisesPerType = 2) => {
 	return finalTest;
 };
 
-module.exports = { generateTest, exercisesInfo };
+export { generateTest, exercisesInfo };
