@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
-import { SketchField, Tools } from 'react-sketch';
+/* import { SketchField, Tools } from 'react-sketch'; */
+import CanvasDraw from 'react-canvas-draw';
 
 import eraser from '../../assets/eraser.svg';
 
@@ -11,7 +12,7 @@ const DrawWord = props => {
 
 	const [color, setColor] = useState('#121212');
 
-	const defaultWidth = 4;
+	const defaultWidth = 3;
 	const [width, setWidth] = useState(defaultWidth);
 
 	const changeColor = color => {
@@ -29,13 +30,22 @@ const DrawWord = props => {
 			<h3 className='word-to-draw'>{exercise.word.toUpperCase()}</h3>
 			<div className='sketch-container'>
 				<div onClick={() => setCurrentAnswer({ ableToContinue: true })}>
-					<SketchField
+					{/* <SketchField
 						className='sketch'
 						tool={Tools.Pencil}
 						width='800px'
 						height='400px'
 						lineColor={color}
 						lineWidth={width}
+					/> */}
+					<CanvasDraw
+						hideInterface={true}
+						brushColor={color}
+						canvasWidth='800px'
+						canvasHeight='400px'
+						hideGrid={true}
+						lazyRadius={0}
+						brushRadius={width}
 					/>
 				</div>
 				<div className='controls'>
@@ -47,7 +57,7 @@ const DrawWord = props => {
 					<div
 						className='color eraser'
 						onClick={() => {
-							setColor('#F8F8F8');
+							setColor('#fff');
 							setWidth(30);
 						}}
 					>
