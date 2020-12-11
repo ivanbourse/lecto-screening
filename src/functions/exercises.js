@@ -186,7 +186,7 @@ export const exercisesInfo = {
 	},
 	'number-on-screen': {
 		title: '¿Cuál es el número que está en pantalla?',
-		instructions: ['Hacé click en el botón de abajo y decí el número en voz alta'],
+		instructions: ['Hacé click en el botón de abajo y decí el número en voz alta (el reconocimiento solo funciona en Chrome)'],
 	},
 	'prev-post': {
 		title: '¿Cuales son el anterior y el posterior de este número?',
