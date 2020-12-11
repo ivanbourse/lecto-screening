@@ -1,11 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-
-const styles = {
-	none: { backgroundColor: "white" },
-	selected: { backgroundColor: "green" },
-	used: { visibility: "hidden", backgroundColor: "green"}
-}
+import "../../styles/matching.scss";
 
 let selected = -1, cantCorrectos = 0;
 
@@ -20,7 +15,7 @@ const JoinWithArrows = props => {
 				list.push({
 					pair: ind,
 					url: item.url,
-					selectionState: "none", // none, selected, used
+					selectionState: "none", // none, wnone, selected, used
 				});
 			});
 		});
@@ -31,23 +26,20 @@ const JoinWithArrows = props => {
 		let modify = [...imageState];
 
 		if (modify[num].selectionState === "selected") {
-
 			modify[num].selectionState = "none";
 			selected = -1;
-
-		} else if (modify[num].selectionState === "none") {
-
+		} else if (modify[num].selectionState === "none" ||
+				   modify[num].selectionState === "wnone") {
 			if (selected !== -1) {
-
 				if (modify[selected].pair === modify[num].pair) {
 					modify[selected].selectionState = "used";
 					modify[num].selectionState = "used";
 					cantCorrectos += 2;
 				} else {
-					modify[selected].selectionState = "none";
+					modify[selected].selectionState = "wnone";
+					modify[num].selectionState = "wnone";
 				}
 				selected = -1;
-
 			} else {
 				modify[num].selectionState = "selected";
 				selected = num;
@@ -72,8 +64,7 @@ const JoinWithArrows = props => {
 					<img
 						src={item.url}
 						alt='Ilustración LectO Screening'
-						className='image'
-						style={styles[item.selectionState]}
+						className={'image ' + item.selectionState}
 						onClick={(e) => imageClicked(e, ind)}
 					/>
 				)}

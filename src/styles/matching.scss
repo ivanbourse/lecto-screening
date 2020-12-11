@@ -1,0 +1,30 @@
+@keyframes wrongAnswer {
+    from { background-color: greenyellow; }
+    50% { background-color: red; }
+    to { background-color: white; }
+}
+
+@keyframes correctAnswer {
+    from {background-color: greenyellow;}
+    to {background-color: green; visibility: hidden;}
+}
+
+.none {
+    background-color: white;
+}
+
+.wnone {
+    animation-name: wrongAnswer;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.selected {
+    background-color: greenyellow;
+}
+
+.used { 
+    animation-name: correctAnswer;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
