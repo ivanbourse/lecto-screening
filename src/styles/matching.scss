@@ -6,7 +6,7 @@
 
 @keyframes correctAnswer {
     from {background-color: greenyellow;}
-    to {background-color: green; visibility: hidden;}
+    to {background-color: green; }
 }
 
 .none {
@@ -16,7 +16,6 @@
 .wnone {
     animation-name: wrongAnswer;
     animation-duration: 1s;
-    animation-fill-mode: forwards;
 }
 
 .selected {
@@ -26,5 +25,6 @@
 .used { 
     animation-name: correctAnswer;
     animation-duration: 1s;
-    animation-fill-mode: forwards;
+    background-color: green;
+    visibility: hidden;
 }

@@ -8,6 +8,7 @@ const JoinWithArrows = props => {
 	const { info, setCurrentAnswer } = props;
 	const exercise = props.exercise.exercise;
 
+	// Creación del estado
 	const [imageState, setImageState] = React.useState(() => {
 		let list = [];
 		exercise.pair.forEach((item, ind) => {
@@ -22,6 +23,7 @@ const JoinWithArrows = props => {
 		return list;
 	});
 
+	// Lógica de la aplicación
 	const imageClicked = (e, num) => {
 		let modify = [...imageState];
 
@@ -50,6 +52,16 @@ const JoinWithArrows = props => {
 		setImageState(modify);
 	}
 
+	// Control de animaciones
+	const onAnimationEnd = (e, ind) => {
+		console.log(e);
+		if (e.animationName === "wrongAnswer") {
+			let modify = [...imageState];
+			modify[ind].selectionState = "none";
+			setImageState(modify);
+		}
+	}
+
 	return (
 		<motion.div
 			className='join-with-arrows-container test-exercise-container'
@@ -66,6 +78,7 @@ const JoinWithArrows = props => {
 						alt='Ilustración LectO Screening'
 						className={'image ' + item.selectionState}
 						onClick={(e) => imageClicked(e, ind)}
+						onAnimationEnd={(e) => onAnimationEnd(e, ind)}
 					/>
 				)}
 			</div>
