@@ -1,0 +1,23 @@
+{
+    "user": {
+        "comment": "Información del usuario"
+    },
+    "resultados": {
+        "0": {
+            "correcta": false,
+            "tiempo": 0,
+            "respuesta": "string",
+            "intentos": "opiconal"
+        }
+    },
+    "preguntas": {
+        "0": {
+            "tipo": "opcion entre tipos",
+            "titulo": "string",
+            "subtitulo": "string",
+            "propio": {
+                "imagenes": ["a", "b"]
+            }
+        }
+    }
+}

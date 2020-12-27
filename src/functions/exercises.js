@@ -1,4 +1,7 @@
 // 7 TIPOS
+
+// El testeo no es mas random. Hacer un examen fijo.
+
 const randomBetweenNumbers = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 const getCount = {
