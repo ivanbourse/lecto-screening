@@ -26,15 +26,15 @@ const slice = createSlice({
     },
     extraReducers: {
         [loadQuestions.pending]: (state, action) => {
-            state.status = 'loading'
+            state.status = 'loading';
         },
         [loadQuestions.fulfilled]: (state, action) => {
-            state.status = 'succeeded'
-            state.posts = state.questions.push(action.payload)
+            state.status = 'succeeded';
+            state.questions = action.payload;
         },
         [loadQuestions.rejected]: (state, action) => {
-            state.status = 'failed'
-            state.error = action.error.message
+            state.status = 'failed';
+            state.error = action.error.message;
         },
     }
 });

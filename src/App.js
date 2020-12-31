@@ -6,9 +6,11 @@ import {useSelector, useDispatch} from 'react-redux';
 
 function App() {
 	const dispatch = useDispatch();
-	
+	const posts = useSelector(state => state.questions);
+
 	React.useEffect (() => {
 		dispatch(loadQuestions());
+		console.log(posts);
 	}, []);
 
 	return (

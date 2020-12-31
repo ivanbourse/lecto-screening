@@ -100,6 +100,51 @@ const joinWithArrows = {
 					'https://static.wikia.nocookie.net/clubpenguin/images/1/18/Escalera_de_Madera_iconoo.png/revision/latest?cb=20150608001933&path-prefix=es',
 			},
 		],
+		[
+			{
+				id: 'elefante',
+				url:
+					'https://images.vexels.com/media/users/3/140127/isolated/preview/63c85015331e4798842f47ffbe7189f9-dibujos-animados-de-elefantes-by-vexels.png',
+			},
+			{
+				id: 'escalera',
+				url:
+					'https://static.wikia.nocookie.net/clubpenguin/images/1/18/Escalera_de_Madera_iconoo.png/revision/latest?cb=20150608001933&path-prefix=es',
+			},
+		],		[
+			{
+				id: 'elefante',
+				url:
+					'https://images.vexels.com/media/users/3/140127/isolated/preview/63c85015331e4798842f47ffbe7189f9-dibujos-animados-de-elefantes-by-vexels.png',
+			},
+			{
+				id: 'escalera',
+				url:
+					'https://static.wikia.nocookie.net/clubpenguin/images/1/18/Escalera_de_Madera_iconoo.png/revision/latest?cb=20150608001933&path-prefix=es',
+			},
+		],		[
+			{
+				id: 'elefante',
+				url:
+					'https://images.vexels.com/media/users/3/140127/isolated/preview/63c85015331e4798842f47ffbe7189f9-dibujos-animados-de-elefantes-by-vexels.png',
+			},
+			{
+				id: 'escalera',
+				url:
+					'https://static.wikia.nocookie.net/clubpenguin/images/1/18/Escalera_de_Madera_iconoo.png/revision/latest?cb=20150608001933&path-prefix=es',
+			},
+		],		[
+			{
+				id: 'elefante',
+				url:
+					'https://images.vexels.com/media/users/3/140127/isolated/preview/63c85015331e4798842f47ffbe7189f9-dibujos-animados-de-elefantes-by-vexels.png',
+			},
+			{
+				id: 'escalera',
+				url:
+					'https://static.wikia.nocookie.net/clubpenguin/images/1/18/Escalera_de_Madera_iconoo.png/revision/latest?cb=20150608001933&path-prefix=es',
+			},
+		],
 	],
 	generateForTest: () => {
 		const pair = [];
