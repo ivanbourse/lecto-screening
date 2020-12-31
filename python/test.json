@@ -188,6 +188,9 @@
       "name": "Conteo en voz alta",
       "instructions": [
         "Contá desde el 1 hasta el número que vos sepas en voz alta"
+      ],
+      "exercises": [
+        {"seconds": 60}
       ]
     },
     {

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { loadQuestions } from './redux/slices/questions';
+import { useDispatch } from 'react-redux';
 import { generateTest, exercisesInfo } from '../functions/exercises';
 
 import { useHistory } from 'react-router-dom';
@@ -12,6 +14,7 @@ import WriteLetter from '../components/exercises/WriteLetter';
 import DrawWord from '../components/exercises/DrawWord';
 
 const Test = () => {
+	const dispatch = useDispatch();
 	const [loading, setLoading] = useState(true);
 	const [testQuestions, setTestQuestions] = useState([]);
 	const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -30,6 +33,7 @@ const Test = () => {
 	const history = useHistory();
 
 	useEffect(() => {
+		dispatch(loadQuestions());
 		const test = generateTest(2);
 		setTestQuestions(test);
 		setLoading(false);

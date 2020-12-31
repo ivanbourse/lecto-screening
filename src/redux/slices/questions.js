@@ -10,7 +10,7 @@ const initialState = {
 // Aquí comienzan los Thunks
 
 export const loadQuestions = createAsyncThunk("questions/loadQuestions", async () => {
-    const result = await axios.get("https://opentdb.com/api.php?amount=10&category=18");
+    const result = await axios.get("https://run.mocky.io/v3/43953c57-0798-438e-87fb-ee0b9ae120e6");
     return result;
 });
 
