@@ -1,391 +1,260 @@
 {
   "allExercises": [
     {
-      "type": "letter-question",
+      "type": "letters-question",
       "autocorrect": false,
       "name": "Conocimiento alfabético A",
       "instructions": ["Decí el nombre de las letras lo más rápido que puedas"],
-      "exercise": {
-        "letters": [
-          "A",
-          "O",
-          "I",
-          "E",
-          "U",
-          "M",
-          "P",
-          "S",
-          "T",
-          "R",
-          "F",
-          "L",
-          "B",
-          "G",
-          "D",
-          "C",
-          "J",
-          "V",
-          "Q",
-          "Z",
-          "K"
-        ]
-      }
+      "exercises": [
+        {
+          "letters": [
+            "A",
+            "O",
+            "I",
+            "E",
+            "U",
+            "M",
+            "P",
+            "S",
+            "T",
+            "R",
+            "F",
+            "L",
+            "B",
+            "G",
+            "D",
+            "C",
+            "J",
+            "V",
+            "Q",
+            "Z",
+            "K"
+          ]
+        }
+      ]
     },
     {
-      "id": "say-letters-sound",
       "type": "letter-question",
       "autocorrect": false,
       "name": "Conocimiento alfabético B",
       "instructions": ["Decí el sonido de las letras lo más rápido que puedas"],
-      "exercises": {
-        "letters": [
-          "A",
-          "O",
-          "I",
-          "E",
-          "U",
-          "M",
-          "P",
-          "S",
-          "T",
-          "R",
-          "F",
-          "L",
-          "B",
-          "G",
-          "D",
-          "C",
-          "J",
-          "V",
-          "Q",
-          "Z",
-          "K"
-        ]
-      }
+      "exercises": [
+        {
+          "letters": [
+            "A",
+            "O",
+            "I",
+            "E",
+            "U",
+            "M",
+            "P",
+            "S",
+            "T",
+            "R",
+            "F",
+            "L",
+            "B",
+            "G",
+            "D",
+            "C",
+            "J",
+            "V",
+            "Q",
+            "Z",
+            "K"
+          ]
+        }
+      ]
     },
     {
       "type": "matching",
       "autocorrect": true,
       "name": "Conciencia fonológica: sonido inicial",
       "instructions": ["Señalá los dibujos que comiencen con el mismo sonido"],
-      "exercise": {
-        "words": [
-          { "word": "pera", "matchNumber": 0 },
-          { "word": "pelota", "matchNumber": 0 },
-          { "word": "león", "matchNumber": 1 },
-          { "word": "luna", "matchNumber": 1 },
-          { "word": "tijera", "matchNumber": 2 },
-          { "word": "tenedor", "matchNumber": 2 },
-          { "word": "elefante", "matchNumber": 3 },
-          { "word": "escalera", "matchNumber": 3 },
-          { "word": "flor", "matchNumber": 4 },
-          { "word": "foca", "matchNumber": 4 }
-        ]
-      }
-    },
+      "exercises": [
+        {
+          "words": [
+            { "word": "pera", "matchNumber": 0 },
+            { "word": "pelota", "matchNumber": 0 },
+            { "word": "león", "matchNumber": 1 },
+            { "word": "luna", "matchNumber": 1 },
+            { "word": "tijera", "matchNumber": 2 },
+            { "word": "tenedor", "matchNumber": 2 },
+            { "word": "elefante", "matchNumber": 3 },
+            { "word": "escalera", "matchNumber": 3 },
+            { "word": "flor", "matchNumber": 4 },
+            { "word": "foca", "matchNumber": 4 }
+          ]
+        }
+      ]
+    }, 
     {
-      "type": "syllables", 
+      "type": "syllables",
       "autocorrect": true,
       "name": "Conciencia silábica: separar en sílabas",
-      "instructions": [ "Pintá los circulos según la cantidad de sílabas que tenga la palabra"],
-      "exercise": {
-        "word": "Pala",
-        "syllables": 2
-      }
-    },
-    {
-      "type": "syllables", 
-      "autocorrect": true,
-      "name": "Conciencia silábica: separar en sílabas",
-      "instructions": [ "Pintá los circulos según la cantidad de sílabas que tenga la palabra"],
-      "exercise": {
-        "word": "Gato",
-        "syllables": 2
-      }
-    },
-    {
-      "type": "syllables", 
-      "autocorrect": true,
-      "name": "Conciencia silábica: separar en sílabas",
-      "instructions": [ "Pintá los circulos según la cantidad de sílabas que tenga la palabra"],
-      "exercise": {
-        "word": "Pelota",
-        "syllables": 3
-      }
-    },
-    {
-      "type": "syllables", 
-      "autocorrect": true,
-      "name": "Conciencia silábica: separar en sílabas",
-      "instructions": [ "Pintá los circulos según la cantidad de sílabas que tenga la palabra"],
-      "exercise": {
-        "word": "Manzana",
-        "syllables": 3
-      }
-    },
-    {
-      "type": "syllables", 
-      "autocorrect": true,
-      "name": "Conciencia silábica: separar en sílabas",
-      "instructions": [ "Pintá los circulos según la cantidad de sílabas que tenga la palabra"],
-      "exercise": {
-        "word": "Cocodrilo",
-        "syllables": 4
-      }
+      "instructions": [
+        "Pintá los circulos según la cantidad de sílabas que tenga la palabra"
+      ],
+      "exercises": [
+        {
+          "word": "Pala",
+          "syllables": 2
+        },
+        {
+          "word": "Gato",
+          "syllables": 2
+        },
+        {
+          "word": "Pelota",
+          "syllables": 3
+        },
+        {
+          "word": "Manzana",
+          "syllables": 3
+        },
+        {
+          "word": "Cocodrilo",
+          "syllables": 4
+        }
+      ]
     },
     {
       "type": "multiple-choice",
       "autocorrect": true,
       "name": "Vocabulario: adivinanzas",
       "instructions": ["Seleccioná la respuesta correcta"],
-      "exercise": {
-        "question": "¿De qué animal se la produce la leche?",
-        "answers": [
-          { "correct": false, "name": "Cocodrilo" },
-          { "correct": true, "name": "Vaca" },
-          { "correct": false, "name": "Pájaro" }
-        ]
-      }
-    },
-    {
-      "type": "multiple-choice",
-      "autocorrect": true,
-      "name": "Vocabulario: adivinanzas",
-      "instructions": ["Seleccioná la respuesta correcta"],
-      "exercise": {
-        "question": "¿Qué comida es una fruta?",
-        "answers": [
-          { "correct": false, "name": "Zanahoria" },
-          { "correct": false, "name": "Fideos" },
-          { "correct": true, "name": "Banana" }
-        ]
-      }
-    },
-    {
-      "type": "multiple-choice",
-      "autocorrect": true,
-      "name": "Vocabulario: adivinanzas",
-      "instructions": ["Seleccioná la respuesta correcta"],
-      "exercise": {
-        "question": "¿Qué se usa para escribir?",
-        "answers": [
-          { "correct": true, "name": "Lápiz" },
-          { "correct": false, "name": "Sacapuntas" },
-          { "correct": false, "name": "Regla" }
-        ]
-      }
-    },
-    {
-      "type": "multiple-choice",
-      "autocorrect": true,
-      "name": "Vocabulario: adivinanzas",
-      "instructions": ["Seleccioná la respuesta correcta"],
-      "exercise": {
-        "question": "¿De qué puede ser el jugo?",
-        "answers": [
-          { "correct": false, "name": "Torta" },
-          { "correct": false, "name": "Ravioles" },
-          { "correct": true, "name": "Naranja" }
-        ]
-      }
-    },
-    {
-      "type": "multiple-choice",
-      "autocorrect": true,
-      "name": "Vocabulario: adivinanzas",
-      "instructions": ["Seleccioná la respuesta correcta"],
-      "exercise": {
-        "question": "¿Qué hay en el aeropuerto?",
-        "answers": [
-          { "correct": false, "name": "Barco" },
-          { "correct": true, "name": "Avión" },
-          { "correct": false, "name": "Caballo" }
-        ]
-      }
-    },
-    {
-      "type": "multiple-choice",
-      "autocorrect": true,
-      "name": "Vocabulario: adivinanzas",
-      "instructions": ["Seleccioná la respuesta correcta"],
-      "exercise": {
-        "question": "¿Qué animal vive en el desierto?",
-        "answers": [
-          { "correct": true, "name": "Camello" },
-          { "correct": false, "name": "Buho" },
-          { "correct": false, "name": "Toro" }
-        ]
-      }
-    },
-    {
-      "type": "multiple-choice",
-      "autocorrect": true,
-      "name": "Vocabulario: adivinanzas",
-      "instructions": ["Seleccioná la respuesta correcta"],
-      "exercise": {
-        "question": "¿De dónde sale la lava?",
-        "answers": [
-          { "correct": false, "name": "Mar" },
-          { "correct": true, "name": "Volcán" },
-          { "correct": false, "name": "Desierto" }
-        ]
-      }
+      "exercises": [
+        {
+          "question": "¿De qué animal se la produce la leche?",
+          "answers": [
+            { "correct": false, "name": "Cocodrilo" },
+            { "correct": true, "name": "Vaca" },
+            { "correct": false, "name": "Pájaro" }
+          ]
+        },
+        {
+          "question": "¿Qué comida es una fruta?",
+          "answers": [
+            { "correct": false, "name": "Zanahoria" },
+            { "correct": false, "name": "Fideos" },
+            { "correct": true, "name": "Banana" }
+          ]
+        },
+        {
+          "question": "¿Qué se usa para escribir?",
+          "answers": [
+            { "correct": true, "name": "Lápiz" },
+            { "correct": false, "name": "Sacapuntas" },
+            { "correct": false, "name": "Regla" }
+          ]
+        },
+        {
+          "question": "¿De qué puede ser el jugo?",
+          "answers": [
+            { "correct": false, "name": "Torta" },
+            { "correct": false, "name": "Ravioles" },
+            { "correct": true, "name": "Naranja" }
+          ]
+        },
+        {
+          "question": "¿Qué hay en el aeropuerto?",
+          "answers": [
+            { "correct": false, "name": "Barco" },
+            { "correct": true, "name": "Avión" },
+            { "correct": false, "name": "Caballo" }
+          ]
+        },
+        {
+          "question": "¿Qué animal vive en el desierto?",
+          "answers": [
+            { "correct": true, "name": "Camello" },
+            { "correct": false, "name": "Buho" },
+            { "correct": false, "name": "Toro" }
+          ]
+        },
+        {
+          "question": "¿De dónde sale la lava?",
+          "answers": [
+            { "correct": false, "name": "Mar" },
+            { "correct": true, "name": "Volcán" },
+            { "correct": false, "name": "Desierto" }
+          ]
+        }
+      ]
     },
     {
       "type": "gap-question",
       "autocorrect": false,
       "name": "Conteo en voz alta",
-      "instructions": [ "Contá desde el 1 hasta el número que vos sepas en voz alta"]
+      "instructions": [
+        "Contá desde el 1 hasta el número que vos sepas en voz alta"
+      ]
     },
     {
       "type": "counting",
       "autocorrect": true,
       "name": "Conteo término a término: ¿Cuántos hay?",
       "instructions": ["Contá cuántos hay"],
-      "exercise": {
-        "name": "Estrellas",
-        "count": 5,
-        "id": "stars"
-      }
+      "exercises": [
+        {
+          "name": "Estrellas",
+          "count": 5,
+          "id": "stars"
+        },
+        {
+          "name": "Flores",
+          "count": 8,
+          "id": "flowers"
+        },
+        {
+          "name": "Pelotas",
+          "count": 9,
+          "id": "balls"
+        },
+        {
+          "name": "Autos",
+          "count": 6,
+          "id": "cars"
+        },
+        {
+          "name": "Perros",
+          "count": 7,
+          "id": "dogs"
+        }
+      ]
     },
     {
-      "type": "counting",
-      "autocorrect": true,
-      "name": "Conteo término a término: ¿Cuántos hay?",
-      "instructions": ["Contá cuántos hay"],
-      "exercise": {
-        "name": "Flores",
-        "count": 8,
-        "id": "flowers"
-      }
-    },
-    {
-      "type": "counting",
-      "autocorrect": true,
-      "name": "Conteo término a término: ¿Cuántos hay?",
-      "instructions": ["Contá cuántos hay"],
-      "exercise": {
-        "name": "Pelotas",
-        "count": 9,
-        "id": "balls"
-      }
-    },
-    {
-      "type": "counting",
-      "autocorrect": true,
-      "name": "Conteo término a término: ¿Cuántos hay?",
-      "instructions": ["Contá cuántos hay"],
-      "exercise": {
-        "name": "Autos",
-        "count": 6,
-        "id": "cars"
-      }
-    },
-    {
-      "type": "counting",
-      "autocorrect": true,
-      "name": "Conteo término a término: ¿Cuántos hay?",
-      "instructions": ["Contá cuántos hay"],
-      "exercise": {
-        "name": "Pelotas",
-        "count": 9,
-        "id": "balls"
-      }
-    },
-    {
-      "type": "counting",
-      "autocorrect": true,
-      "name": "Conteo término a término: ¿Cuántos hay?",
-      "instructions": ["Contá cuántos hay"],
-      "exercise": {
-        "name": "Perros",
-        "count": 7,
-        "id": "dogs"
-      }
-    },
-    {
-      "type": "gap-question-number",
+      "type": "read-alloud",
       "autocorrect": true,
       "name": "Reconocimiento de número: ¿Qué número es?",
       "instructions": ["Decí qué número es lo más rápido que puedas"],
-      "exercise": { "number": 8 }
-    },
-    {
-      "type": "gap-question-number",
-      "autocorrect": true,
-      "name": "Reconocimiento de número: ¿Qué número es?",
-      "instructions": ["Decí qué número es lo más rápido que puedas"],
-      "exercise": { "number": 2 }
-    },
-    {
-      "type": "gap-question-number",
-      "autocorrect": true,
-      "name": "Reconocimiento de número: ¿Qué número es?",
-      "instructions": ["Decí qué número es lo más rápido que puedas"],
-      "exercise": { "number": 6 }
-    },
-    {
-      "type": "gap-question-number",
-      "autocorrect": true,
-      "name": "Reconocimiento de número: ¿Qué número es?",
-      "instructions": ["Decí qué número es lo más rápido que puedas"],
-      "exercise": { "number": 9 }
-    },
-    {
-      "type": "gap-question-number",
-      "autocorrect": true,
-      "name": "Reconocimiento de número: ¿Qué número es?",
-      "instructions": ["Decí qué número es lo más rápido que puedas"],
-      "exercise": { "number": 3 }
-    },
-    {
-      "type": "gap-question-number",
-      "autocorrect": true,
-      "name": "Reconocimiento de número: ¿Qué número es?",
-      "instructions": ["Decí qué número es lo más rápido que puedas"],
-      "exercise": { "number": 4 }
-    },
-    {
-      "type": "gap-question-number",
-      "autocorrect": true,
-      "name": "Reconocimiento de número: ¿Qué número es?",
-      "instructions": ["Decí qué número es lo más rápido que puedas"],
-      "exercise": { "number": 1 }
-    },
-    {
-      "type": "gap-question-number",
-      "autocorrect": true,
-      "name": "Reconocimiento de número: ¿Qué número es?",
-      "instructions": ["Decí qué número es lo más rápido que puedas"],
-      "exercise": { "number": 5 }
-    },
-    {
-      "type": "gap-question-number",
-      "autocorrect": true,
-      "name": "Reconocimiento de número: ¿Qué número es?",
-      "instructions": ["Decí qué número es lo más rápido que puedas"],
-      "exercise": { "number": 7 }
-    },
-
-
+      "exercises": [
+        { "number": 8 },
+        { "number": 2 },
+        { "number": 6 },
+        { "number": 9 },
+        { "number": 3 },
+        { "number": 4 },
         { "number": 1 },
         { "number": 5 },
         { "number": 7 }
       ]
     },
-    "number-comparison": {
+    {
+      "type": "multiple-choice",
       "autocorrect": true,
       "name": "Comparación numérica: ¿Cuál número es más grande?",
       "instructions": ["Hacé click en el número mayor"],
       "exercises": [
-        [9, 2],
-        [3, 5],
-        [7, 8],
-        [9, 6],
-        [4, 5]
+        {"answers": [{"correct": true, "name": "9"},{"correct":false, "name":"2"}]},
+        {"answers": [{"correct": false, "name": "3"},{"correct":true, "name":"5"}]},
+        {"answers": [{"correct": false, "name": "7"},{"correct":true, "name":"8"}]},
+        {"answers": [{"correct": true, "name": "9"},{"correct":false, "name":"6"}]},
+        {"answers": [{"correct": false, "name": "4"},{"correct":true, "name":"5"}]}
       ]
     },
-    "prev-post-number": {
+    {
+      "type": "prev-next",
       "autocorrect": true,
       "name": "Secuencia numérica: Anterior y Posterior",
       "instructions": ["Completá con el número anterior y posterior"],
@@ -398,7 +267,8 @@
         { "number": 8 }
       ]
     },
-    "count-dots": {
+    {
+      "type": "gap-question",
       "autocorrect": false,
       "name": "Subitización",
       "instructions": ["SIN CONTAR, decí cuantos números hay"],
@@ -408,7 +278,8 @@
         { "number": 4, "image": "id-de-la-imagen" }
       ]
     },
-    "count-dots-with-options": {
+    {
+      "type": "multiple-choice",
       "autocorrect": false,
       "name": "Estimación de cantidad",
       "instructions": [
