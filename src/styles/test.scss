@@ -250,3 +250,40 @@
 		}
 	}
 }
+
+.multiple-choice-container {
+	.options {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2vw;
+		margin: 4vh 0 0 0;
+		.option {
+			@include number;
+			font-size: var(--fs-medium);
+			padding: 2vh 3vw;
+			border-radius: 12px;
+			cursor: pointer;
+			&:hover:not(.selected) {
+				background-color: rgb(209, 209, 209);
+			}
+		}
+		.selected {
+			background-color: var(--clr-yellow);
+		}
+	}
+}
+
+.say-the-letters-container {
+	.letters {
+		display: flex;
+		flex-wrap: wrap;
+		margin: 5vh 0;
+
+		.letter {
+			@include number;
+			width: 100px;
+			height: 100px;
+			margin: 3vh 1vw;
+		}
+	}
+}

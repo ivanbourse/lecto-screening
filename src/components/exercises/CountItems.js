@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useSelector } from 'react-redux';
 
-const CountItems = props => {
-	const { info, setCurrentAnswer } = props;
-	const exercise = props.exercise.exercise;
+const CountItems = () => {
+	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
+
+	console.log(exercise);
+
 	const [selected, setSelected] = useState(null);
 
 	return (
@@ -21,7 +24,7 @@ const CountItems = props => {
 						<img className='count-image' src={exercise.image} alt='' />
 					))}
 			</div>
-			<p className='instruction'>{info.instructions[0]}</p>
+			<p className='instruction'>{exercise}</p>
 			<div className='numbers'>
 				{Array(9)
 					.fill(0)
@@ -31,7 +34,6 @@ const CountItems = props => {
 							className={`number ${selected === i ? 'selected' : ''}`}
 							onClick={() => {
 								setSelected(i);
-								setCurrentAnswer({ ableToContinue: true, answer: i + 1, correct: i + 1 === exercise.randomNumber });
 							}}
 						>
 							{i + 1}

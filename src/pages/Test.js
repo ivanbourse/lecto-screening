@@ -1,42 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { loadQuestions } from './redux/slices/questions';
-import { useDispatch } from 'react-redux';
-import { generateTest, exercisesInfo } from '../functions/exercises';
+import React, { useEffect } from 'react';
+import { loadQuestions, nextQuestion } from '../redux/slices/questions';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useHistory } from 'react-router-dom';
 
 import CountItems from '../components/exercises/CountItems';
-import NumberOnScreen from '../components/exercises/NumberOnScreen';
 import PrevPostNumber from '../components/exercises/PrevPostNumber';
 import JoinWithArrows from '../components/exercises/JoinWithArrows';
 import SplitSyllables from '../components/exercises/SplitSyllables';
-import WriteLetter from '../components/exercises/WriteLetter';
-import DrawWord from '../components/exercises/DrawWord';
+import MultipleChoice from '../components/exercises/MultipleChoice';
+import SayTheLetters from '../components/exercises/SayTheLetters';
+import GapQuestion from '../components/exercises/GapQuestion';
+
+const exercises = {
+	counting: <CountItems />,
+	'gap-question': <GapQuestion />,
+	'multiple-choice': <MultipleChoice />,
+	'prev-next': <PrevPostNumber />,
+	'letters-question': <SayTheLetters />,
+	matching: <JoinWithArrows />,
+	syllables: <SplitSyllables />,
+	'read-alloud': <SayTheLetters />,
+};
 
 const Test = () => {
 	const dispatch = useDispatch();
-	const [loading, setLoading] = useState(true);
-	const [testQuestions, setTestQuestions] = useState([]);
-	const [currentQuestion, setCurrentQuestion] = useState(0);
-	const [results, setResults] = useState({
-		count: [],
-		'number-on-screen': [],
-		'prev-post': [],
-		'join-with-arrows': [],
-		'split-syllables': [],
-		'write-letter': [],
-		'draw-word': [],
-	});
-	const [currentAnswer, setCurrentAnswer] = useState({ ableToContinue: false });
-	const [pressed, setPressed] = useState(false);
-
 	const history = useHistory();
+
+	const questions = useSelector(state => state.questions.questions);
+	const current = useSelector(state => state.questions.current);
+	const finished = useSelector(state => state.questions.finished);
+	const status = useSelector(state => state.questions.status);
 
 	useEffect(() => {
 		dispatch(loadQuestions());
-		const test = generateTest(2);
-		setTestQuestions(test);
-		setLoading(false);
+
+		console.log(questions);
 
 		window.onbeforeunload = confirmExit;
 		function confirmExit() {
@@ -44,114 +43,25 @@ const Test = () => {
 		}
 	}, []);
 
-	const questionId = testQuestions[currentQuestion]?.exerciseId;
-
-	const showExercise = () => {
-		const info = exercisesInfo[questionId];
-		const exercise = testQuestions[currentQuestion];
-
-		// eslint-disable-next-line
-		switch (questionId) {
-			case 'count':
-				return <CountItems setCurrentAnswer={setCurrentAnswer} info={info} exercise={exercise} />;
-			case 'number-on-screen':
-				return (
-					<NumberOnScreen
-						setCurrentAnswer={setCurrentAnswer}
-						info={exercisesInfo[questionId]}
-						exercise={testQuestions[currentQuestion]}
-					/>
-				);
-			case 'prev-post':
-				return (
-					<PrevPostNumber
-						setCurrentAnswer={setCurrentAnswer}
-						info={exercisesInfo[questionId]}
-						exercise={testQuestions[currentQuestion]}
-					/>
-				);
-			case 'join-with-arrows':
-				return (
-					<JoinWithArrows
-						setCurrentAnswer={setCurrentAnswer}
-						info={exercisesInfo[questionId]}
-						exercise={testQuestions[currentQuestion]}
-					/>
-				);
-			case 'split-syllables':
-				return (
-					<SplitSyllables
-						setCurrentAnswer={setCurrentAnswer}
-						info={exercisesInfo[questionId]}
-						exercise={testQuestions[currentQuestion]}
-					/>
-				);
-			case 'write-letter':
-				return (
-					<WriteLetter
-						setCurrentAnswer={setCurrentAnswer}
-						info={exercisesInfo[questionId]}
-						exercise={testQuestions[currentQuestion]}
-					/>
-				);
-			case 'draw-word':
-				return (
-					<DrawWord
-						setCurrentAnswer={setCurrentAnswer}
-						info={exercisesInfo[questionId]}
-						exercise={testQuestions[currentQuestion]}
-					/>
-				);
-		}
-	};
-
-	const nextExercise = (correct = false) => {
-		if (currentAnswer.ableToContinue === true) {
-			setPressed(false);
-			const newExerciseTypeArray = results[questionId];
-			const { correct, answer } = currentAnswer;
-			newExerciseTypeArray.push({ correct, answer });
-			setResults(prev => {
-				const newResults = prev;
-				newResults[questionId] = newExerciseTypeArray;
-				return newResults;
-			});
-			if (currentQuestion < testQuestions.length - 1) {
-				setCurrentQuestion(prev => prev + 1);
-				setCurrentAnswer({ ableToContinue: false });
-			} else {
-				window.onbeforeunload = null;
-
-				history.push('/finished-test');
-			}
-		} else {
-			setPressed(true);
-		}
-	};
-
 	return (
 		<div className='test-container'>
-			{loading ? (
-				<h1>Cargando...</h1>
-			) : (
-				<>
-					<header className='test-header'>
-						<h2 className='title'>
-							{exercisesInfo[questionId].title || testQuestions[currentQuestion].exercise.title}
-						</h2>
-					</header>
+			<>
+				<header className='test-header'>
+					<h2 className='title'>
+						{/*exercisesInfo[questionId].title || testQuestions[currentQuestion].exercise.title*/}
+					</h2>
+				</header>
 
-					{showExercise()}
+				{status === 'succeeded' && exercises[questions[current].type]}
 
-					{pressed && !currentAnswer.ableToContinue && (
-						<p className='warning'>¡Tenés que completar el ejercicio para poder continuar!</p>
-					)}
+				{/*pressed && !currentAnswer.ableToContinue && (
+					<p className='warning'>¡Tenés que completar el ejercicio para poder continuar!</p>
+				)*/}
 
-					<button className='next-button' onClick={nextExercise}>
-						¡Siguiente!
-					</button>
-				</>
-			)}
+				<button className='next-button' onClick={() => dispatch(nextQuestion())}>
+					¡Siguiente!
+				</button>
+			</>
 		</div>
 	);
 };
