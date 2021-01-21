@@ -1,35 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import ExerciseContainer from '../ExerciseContainer';
+import { useSelector } from 'react-redux';
 
 const PrevPostNumber = props => {
-	const { info, setCurrentAnswer } = props;
-	const exercise = props.exercise.exercise;
-	console.log(exercise);
+	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
 
 	const [numbers, setNumbers] = useState({ before: null, after: null });
 
-	useEffect(() => {
+	/* useEffect(() => {
 		if (numbers.before && numbers.after) {
 			const correctPrevAndPost = { ...exercise };
 			delete correctPrevAndPost.number;
 			const correct = Object.entries(exercise).every(([key, value]) => numbers[key] === value);
 			console.log({ correct, exercise, numbers });
-			setCurrentAnswer({ ableToContinue: true, answer: numbers, correct });
 		} else {
 			console.log('nosepuede');
-			setCurrentAnswer({ ableToContinue: false });
 		}
-	}, [numbers]);
+	}, [numbers]); */
 
 	return (
-		<motion.div
-			className='prev-post-container test-exercise-container'
-			exit={{ transform: 'translateX(-100vw)' }}
-			animate={{ transform: 'translateX(0vw)' }}
-			initial={{ transform: 'translateX(100vw)' }}
-			transition={{ easing: 'linear' }}
-		>
-			<p className='instruction'>{info.instructions[0]}</p>
+		<ExerciseContainer classes='prev-post-container'>
+			<p className='instruction'>{exercise.instructions[0]}</p>
 			<div className='numbers'>
 				<div className='number-input'>
 					<div className='number'>
@@ -45,7 +36,7 @@ const PrevPostNumber = props => {
 						Anterior
 					</label>
 				</div>
-				<div className='number'>{exercise.number}</div>
+				<div className='number'>{exercise.exercise.number}</div>
 				<div className='number-input'>
 					<div className='number'>
 						<input
@@ -61,7 +52,7 @@ const PrevPostNumber = props => {
 					</label>
 				</div>
 			</div>
-		</motion.div>
+		</ExerciseContainer>
 	);
 };
 

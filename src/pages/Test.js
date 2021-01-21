@@ -35,21 +35,16 @@ const Test = () => {
 	useEffect(() => {
 		dispatch(loadQuestions());
 
-		console.log(questions);
-
 		window.onbeforeunload = confirmExit;
 		function confirmExit() {
 			return 'show warning';
 		}
 	}, []);
-
 	return (
 		<div className='test-container'>
 			<>
 				<header className='test-header'>
-					<h2 className='title'>
-						{/*exercisesInfo[questionId].title || testQuestions[currentQuestion].exercise.title*/}
-					</h2>
+					<h2 className='title'>{status === 'succeeded' && questions[current].instructions[0]}</h2>
 				</header>
 
 				{status === 'succeeded' && exercises[questions[current].type]}

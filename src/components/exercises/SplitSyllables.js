@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import ExerciseContainer from '../ExerciseContainer';
+import { useSelector } from 'react-redux';
 
 const SplitSyllables = props => {
-	const { info, setCurrentAnswer } = props;
-	const exercise = props.exercise.exercise;
+	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
 
-	const [modifiedWord, setModifiedWord] = useState(exercise.word);
+	const [modifiedWord, setModifiedWord] = useState(exercise.exercise.word);
 
 	const isCorrect = () => {
 		const userSplitted = modifiedWord.toLowerCase().split('-');
@@ -20,31 +20,25 @@ const SplitSyllables = props => {
 	};
 
 	useEffect(() => {
-		const wordWasModified = modifiedWord.toLowerCase() !== exercise.word.toLowerCase();
-		setCurrentAnswer({
+		const wordWasModified = modifiedWord.toLowerCase() !== exercise.exercise.word.toLowerCase();
+		/* setCurrentAnswer({
 			ableToContinue: wordWasModified,
 			correct: isCorrect(),
 			answer: modifiedWord.toLowerCase().split('-'),
-		});
+		}); */
 	}, [modifiedWord]);
 
 	return (
-		<motion.div
-			className='split-syllables-container test-exercise-container'
-			exit={{ transform: 'translateX(-100vw)' }}
-			animate={{ transform: 'translateX(0vw)' }}
-			initial={{ transform: 'translateX(100vw)' }}
-			transition={{ easing: 'linear' }}
-		>
-			<p className='instruction'>{info.instructions[0]}</p>
+		<ExerciseContainer classes='split-syllables-container'>
+			<p className='instruction'>{exercise.instructions[0]}</p>
 			<img src={exercise.image} className='image' alt='Imagen' />
 			<input
 				autoComplete='off'
 				className='word-to-split'
-				defaultValue={exercise.word.toUpperCase()}
+				value={exercise.exercise.word.toUpperCase()}
 				onChange={e => setModifiedWord(e.target.value)}
 			/>
-		</motion.div>
+		</ExerciseContainer>
 	);
 };
 

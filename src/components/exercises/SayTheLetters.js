@@ -1,45 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { setAnswer } from '../../redux/slices/questions';
-import { motion } from 'framer-motion';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import useSetAnswer from '../../functions/setAnswer';
+import ExerciseContainer from '../ExerciseContainer';
 
 const SayTheLetters = () => {
-	const dispatch = useDispatch();
-
-	const current = useSelector(state => state.questions.current);
+	const [answer, setAnswer] = useState('');
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
-	console.log(exercise);
 
-	const [startTime, setStartTime] = useState(0);
-	const [endTime, setEndTime] = useState(0);
+	const nextAnswer = useSetAnswer(answer);
 
 	useEffect(() => {
-		window.addEventListener('keydown', event => {
-			console.log(event);
-			if (event.key === 'ArrowRight') {
-				setEndTime(performance.now());
-				dispatch(setAnswer({ correct: true, time: startTime - endTime, answer: {} }));
-			}
-		});
-	}, []);
+		if (answer) nextAnswer(answer);
+	}, [answer]);
+
+	const arrayToShow = exercise.exercise.letters || [exercise.exercise.number];
 
 	return (
-		<div>
-			<motion.div
-				className='say-the-letters-container test-exercise-container'
-				exit={{ transform: 'translateX(-100vw)' }}
-				animate={{ transform: 'translateX(0vw)' }}
-				initial={{ transform: 'translateX(100vw)' }}
-				transition={{ easing: 'linear' }}
-			>
-				<p className='instruction'>{exercise.instructions[0]}</p>
-				<div className='letters'>
-					{exercise.exercise.letters.map(item => (
-						<div className='letter'>{item}</div>
-					))}
-				</div>
-			</motion.div>
-		</div>
+		<ExerciseContainer classes='say-the-letters-container'>
+			<p className='instruction'>{exercise.instructions[0]}</p>
+			<div className='letters'>
+				{arrayToShow.map(item => (
+					<div className='letter' onClick={() => setAnswer(item)} key={item}>
+						{item}
+					</div>
+				))}
+			</div>
+		</ExerciseContainer>
 	);
 };
 
