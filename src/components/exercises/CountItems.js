@@ -9,21 +9,27 @@ const CountItems = () => {
 
 	const current = useSelector(state => state.questions.current);
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
-	console.log(exercise);
 
 	const [startTime, setStartTime] = useState(0);
-	const [endTime, setEndTime] = useState(0);
-
 	const [selected, setSelected] = useState(null);
 
+	const keydownEvent = (event) => {
+		console.log(startTime);
+		if (event.key === 'ArrowRight') {
+			dispatch(setAnswer({ correct: true, time: Date.now() - startTime, answer: {} }));
+		} else if (event.key === 'ArrowLeft') {
+			dispatch(setAnswer({ correct: false, time: Date.now() - startTime, answer: {} }));
+		}
+	}
+
+	useEffect(() => setStartTime(Date.now()), [current])
+
 	useEffect(() => {
-		window.addEventListener('keydown', event => {
-			console.log(event);
-			if (event.key === 'ArrowRight') {
-				setEndTime(performance.now());
-				dispatch(setAnswer({ correct: true, time: startTime - endTime, answer: {} }));
-			}
-		});
+		setStartTime(Date.now())
+		window.addEventListener('keydown', keydownEvent);
+		return (() => {
+			window.removeEventListener('keydown', keydownEvent);
+		})
 	}, []);
 
 	return (
