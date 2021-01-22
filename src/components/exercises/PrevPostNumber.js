@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import ExerciseContainer from '../ExerciseContainer';
 import { useSelector } from 'react-redux';
+import useSetAnswer from '../../functions/setAnswer';
 
 const PrevPostNumber = props => {
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
 
 	const [numbers, setNumbers] = useState({ before: null, after: null });
 
+	const setAnswer = useSetAnswer();
 	/* useEffect(() => {
 		if (numbers.before && numbers.after) {
 			const correctPrevAndPost = { ...exercise };

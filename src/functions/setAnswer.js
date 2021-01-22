@@ -1,30 +1,37 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAnswer } from '../redux/slices/questions';
 
-const useSetAnswer = answer => {
+const useSetAnswer = () => {
 	const dispatch = useDispatch();
+	const current = useSelector(state => state.questions.current);
 
-	const [startTime, setStartTime] = useState(performance.now());
-	const [endTime, setEndTime] = useState(0);
+	const [userAnswer, setUserAnswer] = useState();
 
-	return () => {
-		window.addEventListener(
-			'keydown',
-			event => {
-				if (event.key === 'ArrowRight') {
-					setEndTime(performance.now());
-					dispatch(setAnswer({ correct: true, time: startTime - endTime, answer }));
-				}
-				if (event.key === 'ArrowRight') {
-					setEndTime(performance.now());
-					dispatch(setAnswer({ correct: false, time: startTime - endTime, answer }));
-				}
-				window.removeEventListener('keydown', () => {});
-			},
-			{ once: true }
-		);
+	const [startTime, setStartTime] = useState(Date.now());
+
+	const keydownEvent = event => {
+		if (event.key === 'ArrowRight') {
+			dispatch(setAnswer({ correct: true, time: Date.now() - startTime, answer: userAnswer }));
+		} else if (event.key === 'ArrowLeft') {
+			dispatch(setAnswer({ correct: false, time: Date.now() - startTime, answer: userAnswer }));
+		}
 	};
+
+	useEffect(() => setStartTime(Date.now()), [current]);
+
+	useEffect(() => {
+		window.addEventListener('keydown', keydownEvent);
+		return () => {
+			window.removeEventListener('keydown', keydownEvent);
+		};
+	}, [userAnswer]);
+
+	useEffect(() => {
+		setStartTime(Date.now());
+	}, [current]);
+
+	return answer => setUserAnswer(answer);
 };
 
 export default useSetAnswer;

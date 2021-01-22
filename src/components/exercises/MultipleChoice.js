@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import useSetAnswer from '../../functions/setAnswer';
 import ExerciseContainer from '../ExerciseContainer';
 
 const MultipleChoice = props => {
@@ -7,6 +8,8 @@ const MultipleChoice = props => {
 
 	const current = useSelector(state => state.questions.current);
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
+
+	const setAnswer = useSetAnswer();
 
 	useEffect(() => {
 		setSelected(null);

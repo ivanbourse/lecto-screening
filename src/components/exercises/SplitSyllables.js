@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import ExerciseContainer from '../ExerciseContainer';
 import { useSelector } from 'react-redux';
+import useSetAnswer from '../../functions/setAnswer';
 
 const SplitSyllables = props => {
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
 
 	const [modifiedWord, setModifiedWord] = useState(exercise.exercise.word);
+
+	const setAnswer = useSetAnswer();
 
 	const isCorrect = () => {
 		const userSplitted = modifiedWord.toLowerCase().split('-');

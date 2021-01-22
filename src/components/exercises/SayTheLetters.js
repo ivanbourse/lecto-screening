@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import useSetAnswer from '../../functions/setAnswer';
 import ExerciseContainer from '../ExerciseContainer';
 
 const SayTheLetters = () => {
-	const [answer, setAnswer] = useState('');
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
-
-	const nextAnswer = useSetAnswer(answer);
-
-	useEffect(() => {
-		if (answer) nextAnswer(answer);
-	}, [answer]);
+	const setAnswer = useSetAnswer();
 
 	const arrayToShow = exercise.exercise.letters || [exercise.exercise.number];
 

@@ -13,14 +13,14 @@ import SayTheLetters from '../components/exercises/SayTheLetters';
 import GapQuestion from '../components/exercises/GapQuestion';
 
 const exercises = {
-	counting: () => <CountItems />,
-	'gap-question': () => <GapQuestion />,
-	'multiple-choice': () => <MultipleChoice />,
-	'prev-next': () => <PrevPostNumber />,
-	'letters-question': () => <SayTheLetters />,
-	matching: () => <JoinWithArrows />,
-	syllables: () => <SplitSyllables />,
-	'read-alloud': () => <SayTheLetters />,
+	counting: <CountItems />,
+	'gap-question': <GapQuestion />,
+	'multiple-choice': <MultipleChoice />,
+	'prev-next': <PrevPostNumber />,
+	'letters-question': <SayTheLetters />,
+	matching: <JoinWithArrows />,
+	syllables: <SplitSyllables />,
+	'read-alloud': <SayTheLetters />,
 };
 
 const Test = () => {
@@ -41,10 +41,6 @@ const Test = () => {
 		}
 	}, []);
 
-	useEffect(() => {
-		console.log(exercises[questions[current].type]);
-	}, [current]);
-
 	return (
 		<div className='test-container'>
 			<>
@@ -52,7 +48,7 @@ const Test = () => {
 					<h2 className='title'>{status === 'succeeded' && questions[current].instructions[0]}</h2>
 				</header>
 
-				{status === 'succeeded' && exercises[questions[current].type]()}
+				{status === 'succeeded' && exercises[questions[current].type]}
 
 				{/*pressed && !currentAnswer.ableToContinue && (
 					<p className='warning'>¡Tenés que completar el ejercicio para poder continuar!</p>

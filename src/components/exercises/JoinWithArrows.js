@@ -10,6 +10,7 @@ let selected = -1,
 const JoinWithArrows = () => {
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
 
+	const answer = useSetAnswer();
 	/* // Creación del estado
 	 const [imageState, setImageState] = React.useState(() => {
 		let list = [];
