@@ -16,6 +16,10 @@ const useSetAnswer = answer => {
 					setEndTime(performance.now());
 					dispatch(setAnswer({ correct: true, time: startTime - endTime, answer }));
 				}
+				if (event.key === 'ArrowRight') {
+					setEndTime(performance.now());
+					dispatch(setAnswer({ correct: false, time: startTime - endTime, answer }));
+				}
 				window.removeEventListener('keydown', () => {});
 			},
 			{ once: true }

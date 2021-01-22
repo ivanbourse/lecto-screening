@@ -5,6 +5,7 @@ import ExerciseContainer from '../ExerciseContainer';
 const MultipleChoice = props => {
 	const [selected, setSelected] = useState(null);
 
+	const current = useSelector(state => state.questions.current);
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
 
 	useEffect(() => {
@@ -16,16 +17,20 @@ const MultipleChoice = props => {
 	};
 
 	return (
-		<ExerciseContainer classes='multiple-choice-container'>
-			<p className='instruction'>Seleccioná la opción correcta</p>
-			<div className='options'>
-				{exercise.exercise.answers.map((item, i) => (
-					<div key='item' className={`option ${selected === i ? 'selected' : ''}`} onClick={() => selectOption(i)}>
-						<p>{item.name}</p>
+		<>
+			{exercise && (
+				<ExerciseContainer classes='multiple-choice-container' change={current}>
+					<p className='instruction'>Seleccioná la opción correcta</p>
+					<div className='options'>
+						{exercise.exercise.answers.map((item, i) => (
+							<div key='item' className={`option ${selected === i ? 'selected' : ''}`} onClick={() => selectOption(i)}>
+								<p>{item.name}</p>
+							</div>
+						))}
 					</div>
-				))}
-			</div>
-		</ExerciseContainer>
+				</ExerciseContainer>
+			)}
+		</>
 	);
 };
 
