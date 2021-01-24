@@ -5,9 +5,8 @@ import useSetAnswer from '../../functions/setAnswer';
 
 const CountItems = () => {
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
-
 	const [selected, setSelected] = useState(null);
-
+	
 	const setAnswer = useSetAnswer();
 
 	return (
