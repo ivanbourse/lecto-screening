@@ -5,7 +5,7 @@ import ExerciseContainer from '../ExerciseContainer';
 
 const SayTheLetters = () => {
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
-	const setAnswer = useSetAnswer();
+	const [, setAnswer] = useSetAnswer();
 
 	const arrayToShow = exercise.exercise.letters || [exercise.exercise.number];
 

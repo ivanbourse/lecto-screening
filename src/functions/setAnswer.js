@@ -31,7 +31,13 @@ const useSetAnswer = () => {
 		setStartTime(Date.now());
 	}, [current]);
 
-	return answer => setUserAnswer(answer);
+	const setAnswerAuto = () => {
+		window.removeEventListener('keydown', keydownEvent);
+		// TODO: SETEAR EL CORRECT PARA VER SI ESTÁ BIEN O MAL (ver el ejercicio y comparar la respuesta)
+		dispatch(setAnswer({ correct: true, time: Date.now() - startTime, answer: userAnswer }));
+	};
+
+	return [userAnswer, answer => setUserAnswer(answer), setAnswerAuto];
 };
 
 export default useSetAnswer;

@@ -6,9 +6,7 @@ import useSetAnswer from '../../functions/setAnswer';
 const PrevPostNumber = props => {
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
 
-	const [numbers, setNumbers] = useState({ before: null, after: null });
-
-	const setAnswer = useSetAnswer();
+	const [answer, setAnswer] = useSetAnswer();
 	/* useEffect(() => {
 		if (numbers.before && numbers.after) {
 			const correctPrevAndPost = { ...exercise };
@@ -31,7 +29,7 @@ const PrevPostNumber = props => {
 							type='number'
 							name='prev'
 							id='prev'
-							onChange={e => setNumbers(value => ({ ...value, before: +e.target.value }))}
+							onChange={e => setAnswer(value => ({ ...value, before: +e.target.value }))}
 						/>
 					</div>
 					<label htmlFor='prev' className='label'>
@@ -46,7 +44,7 @@ const PrevPostNumber = props => {
 							type='number'
 							name='post'
 							id='post'
-							onChange={e => setNumbers(value => ({ ...value, after: +e.target.value }))}
+							onChange={e => setAnswer(value => ({ ...value, after: +e.target.value }))}
 						/>
 					</div>
 					<label htmlFor='post' className='label'>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import useSetAnswer from '../../functions/setAnswer';
 import '../../styles/matching.scss';
@@ -10,7 +10,7 @@ let selected = -1,
 const JoinWithArrows = () => {
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
 
-	const answer = useSetAnswer();
+	const [answer, setAnswer] = useSetAnswer();
 	/* // Creación del estado
 	 const [imageState, setImageState] = React.useState(() => {
 		let list = [];

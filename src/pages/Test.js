@@ -11,6 +11,7 @@ import SplitSyllables from '../components/exercises/SplitSyllables';
 import MultipleChoice from '../components/exercises/MultipleChoice';
 import SayTheLetters from '../components/exercises/SayTheLetters';
 import GapQuestion from '../components/exercises/GapQuestion';
+import useSetAnswer from '../functions/setAnswer';
 
 const exercises = {
 	counting: <CountItems />,
@@ -25,7 +26,8 @@ const exercises = {
 
 const Test = () => {
 	const dispatch = useDispatch();
-	const history = useHistory();
+
+	const [, , setUserAnswer] = useSetAnswer();
 
 	const questions = useSelector(state => state.questions.questions);
 	const current = useSelector(state => state.questions.current);
@@ -54,7 +56,13 @@ const Test = () => {
 					<p className='warning'>¡Tenés que completar el ejercicio para poder continuar!</p>
 				)*/}
 
-				<button className='next-button' onClick={() => dispatch(nextQuestion())}>
+				<button
+					className='next-button'
+					onClick={() => {
+						setUserAnswer();
+						dispatch(nextQuestion());
+					}}
+				>
 					¡Siguiente!
 				</button>
 			</>

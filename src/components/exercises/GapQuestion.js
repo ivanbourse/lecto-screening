@@ -3,7 +3,7 @@ import useSetAnswer from '../../functions/setAnswer';
 import ExerciseContainer from '../ExerciseContainer';
 
 const GapQuestion = () => {
-	const setAnswer = useSetAnswer();
+	const [answer, setAnswer] = useSetAnswer();
 
 	return (
 		<ExerciseContainer classes='gap-question-container'>

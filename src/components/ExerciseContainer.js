@@ -18,7 +18,9 @@ const ExerciseContainer = props => {
 			setChanged(true);
 			return await controls.start({ transform: 'translateX(0vw)' }, { ease: 'linear' });
 		};
-		animation();
+		if (current > 0) {
+			animation();
+		}
 	}, [current]);
 
 	return (

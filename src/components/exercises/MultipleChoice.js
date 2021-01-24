@@ -4,20 +4,10 @@ import useSetAnswer from '../../functions/setAnswer';
 import ExerciseContainer from '../ExerciseContainer';
 
 const MultipleChoice = props => {
-	const [selected, setSelected] = useState(null);
-
 	const current = useSelector(state => state.questions.current);
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
 
-	const setAnswer = useSetAnswer();
-
-	useEffect(() => {
-		setSelected(null);
-	}, [exercise]);
-
-	const selectOption = i => {
-		setSelected(i);
-	};
+	const [answer, setAnswer] = useSetAnswer();
 
 	return (
 		<>
@@ -26,7 +16,7 @@ const MultipleChoice = props => {
 					<p className='instruction'>Seleccioná la opción correcta</p>
 					<div className='options'>
 						{exercise.exercise.answers.map((item, i) => (
-							<div key='item' className={`option ${selected === i ? 'selected' : ''}`} onClick={() => selectOption(i)}>
+							<div key='item' className={`option ${answer === i ? 'selected' : ''}`} onClick={() => setAnswer(i)}>
 								<p>{item.name}</p>
 							</div>
 						))}
