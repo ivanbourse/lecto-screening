@@ -8,7 +8,7 @@ const SplitSyllables = props => {
 
 	const [modifiedWord, setModifiedWord] = useState(exercise.exercise.word);
 
-	const setAnswer = useSetAnswer();
+	const [, setAnswer] = useSetAnswer();
 
 	const isCorrect = () => {
 		const userSplitted = modifiedWord.toLowerCase().split('-');
