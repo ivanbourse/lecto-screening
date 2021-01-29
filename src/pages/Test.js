@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
-import { loadQuestions, nextQuestion } from '../redux/slices/questions';
+import { loadQuestions, resetTest } from '../redux/slices/questions';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { useHistory } from 'react-router-dom';
 
 import CountItems from '../components/exercises/CountItems';
 import PrevPostNumber from '../components/exercises/PrevPostNumber';
@@ -11,7 +9,11 @@ import SplitSyllables from '../components/exercises/SplitSyllables';
 import MultipleChoice from '../components/exercises/MultipleChoice';
 import SayTheLetters from '../components/exercises/SayTheLetters';
 import GapQuestion from '../components/exercises/GapQuestion';
-import useSetAnswer from '../functions/setAnswer';
+
+import MotionAnimation from '../components/MotionAnimation';
+
+import { useHistory } from 'react-router';
+import ManualIcon from '../components/ManualIcon';
 
 const exercises = {
 	counting: <CountItems />,
@@ -27,7 +29,7 @@ const exercises = {
 const Test = () => {
 	const dispatch = useDispatch();
 
-	const [, , setUserAnswer] = useSetAnswer();
+	const history = useHistory();
 
 	const questions = useSelector(state => state.questions.questions);
 	const current = useSelector(state => state.questions.current);
@@ -35,6 +37,7 @@ const Test = () => {
 	const status = useSelector(state => state.questions.status);
 
 	useEffect(() => {
+		dispatch(resetTest());
 		dispatch(loadQuestions());
 
 		window.onbeforeunload = confirmExit;
@@ -43,28 +46,26 @@ const Test = () => {
 		}
 	}, []);
 
+	useEffect(() => {
+		if (finished === true) {
+			window.onbeforeunload = null;
+			history.push('/finished-test');
+		}
+	}, [finished]);
+
 	return (
 		<div className='test-container'>
 			<>
+				<MotionAnimation />
 				<header className='test-header'>
-					<h2 className='title'>{status === 'succeeded' && questions[current].instructions[0]}</h2>
+					<h2 className='title'>{finished !== true && status === 'succeeded' && questions[current].instructions[0]}</h2>
 				</header>
-
-				{status === 'succeeded' && exercises[questions[current].type]}
-
-				{/*pressed && !currentAnswer.ableToContinue && (
-					<p className='warning'>¡Tenés que completar el ejercicio para poder continuar!</p>
-				)*/}
-
-				<button
-					className='next-button'
-					onClick={() => {
-						setUserAnswer();
-						dispatch(nextQuestion());
-					}}
-				>
-					¡Siguiente!
-				</button>
+				{status === 'succeeded' && (
+					<>
+						{exercises[questions[current].type]}
+						<ManualIcon classes='absolute' />
+					</>
+				)}
 			</>
 		</div>
 	);

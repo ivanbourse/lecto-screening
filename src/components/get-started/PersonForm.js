@@ -9,7 +9,7 @@ const PersonForm = props => {
 
 	const history = useHistory();
 	const handleSubmitForm = () => {
-		history.push('/test');
+		history.push('/tutorial');
 	};
 
 	return (

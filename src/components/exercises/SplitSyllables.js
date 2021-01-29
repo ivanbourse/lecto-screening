@@ -1,46 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ExerciseContainer from '../ExerciseContainer';
 import { useSelector } from 'react-redux';
 import useSetAnswer from '../../functions/setAnswer';
+import NextButton from '../NextButton';
 
 const SplitSyllables = props => {
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
 
-	const [modifiedWord, setModifiedWord] = useState(exercise.exercise.word);
-
-	const [, setAnswer] = useSetAnswer();
-
-	const isCorrect = () => {
-		const userSplitted = modifiedWord.toLowerCase().split('-');
-
-		const checkArrayEquality = (arr1, arr2) =>
-			arr1.length === arr2.length &&
-			arr1.every(function (this_i, i) {
-				return this_i === arr2[i];
-			});
-
-		return checkArrayEquality(userSplitted, exercise.splitted);
-	};
-
-	useEffect(() => {
-		const wordWasModified = modifiedWord.toLowerCase() !== exercise.exercise.word.toLowerCase();
-		/* setCurrentAnswer({
-			ableToContinue: wordWasModified,
-			correct: isCorrect(),
-			answer: modifiedWord.toLowerCase().split('-'),
-		}); */
-	}, [modifiedWord]);
+	const [answer, setAnswer, setUserAnswer] = useSetAnswer();
 
 	return (
 		<ExerciseContainer classes='split-syllables-container'>
-			<p className='instruction'>{exercise.instructions[0]}</p>
 			<img src={exercise.image} className='image' alt='Imagen' />
-			<input
-				autoComplete='off'
-				className='word-to-split'
-				value={exercise.exercise.word.toUpperCase()}
-				onChange={e => setModifiedWord(e.target.value)}
-			/>
+
+			<div className='circles'>
+				{Array(6)
+					.fill(0)
+					.map((item, i) => (
+						<div className={`circle ${answer > i ? 'selected' : ''}`} onClick={() => setAnswer(i + 1)}></div>
+					))}
+			</div>
+
+			<NextButton setUserAnswer={setUserAnswer} answered={answer > 0} />
 		</ExerciseContainer>
 	);
 };

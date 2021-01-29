@@ -1,30 +1,61 @@
 @keyframes wrongAnswer {
-    from { background-color: greenyellow; }
-    50% { background-color: red; }
-    to { background-color: white; }
+	from {
+		background-color: greenyellow;
+	}
+	50% {
+		background-color: red;
+	}
+	to {
+		background-color: white;
+	}
 }
 
 @keyframes correctAnswer {
-    from {background-color: greenyellow;}
-    to {background-color: green; }
+	from {
+		background-color: greenyellow;
+	}
+	to {
+		background-color: green;
+	}
 }
 
 .none {
-    background-color: white;
+	background-color: white;
+	cursor: pointer;
 }
 
 .wnone {
-    animation-name: wrongAnswer;
-    animation-duration: 1s;
+	animation-name: wrongAnswer;
+	animation-duration: 1s;
 }
 
 .selected {
-    background-color: greenyellow;
+	background-color: greenyellow;
+	cursor: pointer;
 }
 
-.used { 
-    animation-name: correctAnswer;
-    animation-duration: 1s;
-    background-color: green;
-    visibility: hidden;
+.used {
+	animation-name: correctAnswer;
+	animation-duration: 1s;
+	//visibility: hidden;
+}
+
+.used-1 {
+	background-color: var(--clr-yellow);
+}
+
+.used-2 {
+	background-color: var(--clr-green);
+}
+
+.used-3 {
+	background-color: var(--clr-main);
+}
+
+.used-4 {
+	background-color: var(--clr-red);
+}
+
+.used-5 {
+	background-color: var(--clr-purple);
 }

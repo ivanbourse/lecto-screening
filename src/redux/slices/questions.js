@@ -1,4 +1,4 @@
-import { createSlice, nanoid, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState = {
@@ -7,13 +7,16 @@ const initialState = {
 	status: 'idle', // status: 'idle' | 'loading' | 'succeeded' | 'failed',
 	error: null, // error: string | null
 	current: 0,
+	animate: false,
 	finished: false,
 };
 
 // Aquí comienzan los Thunks
 
 export const loadQuestions = createAsyncThunk('questions/loadQuestions', async () => {
-	const result = await axios.get('https://run.mocky.io/v3/25ed3f7d-f039-4e56-936e-90364bec2188');
+	const result = await axios.get(
+		'https://lectoscreening.azurewebsites.net/api/getTest?code=wi8yWCGCTkSurHTarF0VpyXDCxBeQd6XnSU/zRb3aejjoI8c5Q0aHQ=='
+	);
 	return result;
 });
 
@@ -27,12 +30,25 @@ const slice = createSlice({
 			state = action.payload;
 		},
 		nextQuestion: (state, action) => {
-			if (state.questions.length > state.current) state.current++;
-			else state.finished = true;
+			state.animate = true;
 		},
 		setAnswer: (state, action) => {
 			state.answers[state.current].answered = true;
 			state.answers[state.current].answer = action.payload;
+		},
+		resetTest: (state, action) => {
+			state.current = 0;
+			state.finished = false;
+
+			state.answers.forEach(answer => {
+				answer.answered = false;
+				answer.answer = {};
+			});
+		},
+		afterAnimation: (state, action) => {
+			if (state.questions.length - 1 > state.current) state.current++;
+			else state.finished = true;
+			state.animate = false;
 		},
 	},
 	extraReducers: {
@@ -41,8 +57,8 @@ const slice = createSlice({
 		},
 		[loadQuestions.fulfilled]: (state, action) => {
 			state.status = 'succeeded';
-			state.questions = action.payload.data;
-			state.answers = Array(action.payload.data.length).fill({ answered: false, answer: {} });
+			state.questions = action.payload.data.questions;
+			state.answers = Array(action.payload.data.questions.length).fill({ answered: false, answer: {} });
 		},
 		[loadQuestions.rejected]: (state, action) => {
 			state.status = 'failed';
@@ -51,6 +67,6 @@ const slice = createSlice({
 	},
 });
 
-export const { setQuestions, nextQuestion, setAnswer } = slice.actions;
+export const { setQuestions, nextQuestion, setAnswer, resetTest, afterAnimation } = slice.actions;
 
 export default slice.reducer;

@@ -5,7 +5,7 @@ const SchoolForm = () => {
 	const history = useHistory();
 	const handleSubmit = e => {
 		e.preventDefault();
-		history.push('/test');
+		history.push('/tutorial');
 	};
 
 	return (

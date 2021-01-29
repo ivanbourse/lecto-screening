@@ -3,57 +3,62 @@ import { useSelector } from 'react-redux';
 import useSetAnswer from '../../functions/setAnswer';
 import '../../styles/matching.scss';
 import ExerciseContainer from '../ExerciseContainer';
+import NextButton from '../NextButton';
 
 let selected = -1,
-	cantCorrectos = 0;
+	cantPairs = 0;
 
 const JoinWithArrows = () => {
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
 
-	const [answer, setAnswer] = useSetAnswer();
-	/* // Creación del estado
-	 const [imageState, setImageState] = React.useState(() => {
+	const [answer, setAnswer, setUserAnswer] = useSetAnswer();
+	// Creación del estado
+	const [imageState, setImageState] = React.useState(() => {
 		let list = [];
-		exercise.pair.forEach((item, ind) => {
-			item.forEach(item => {
-				list.push({
-					pair: ind,
-					url: item.url,
-					selectionState: 'none', // none, wnone, selected, used
-				});
+		exercise.exercise.words.forEach((item, ind) => {
+			list.push({
+				word: item.word,
+				matchNumber: item.matchNumber,
+				url: 'https://picsum.photos/200',
+				selectionState: 'none', // none, wnone, selected, used
 			});
 		});
+		console.log(list);
 		return list;
-	}); 
+	});
 
-	// Lógica de la aplicación
-	const imageClicked = (e, num) => {
+	const onImageClick = (e, index) => {
 		let modify = [...imageState];
 
-		if (modify[num].selectionState === 'selected') {
-			modify[num].selectionState = 'none';
+		if (modify[index].selectionState === 'selected') {
+			modify[index].selectionState = 'none';
 			selected = -1;
-		} else if (modify[num].selectionState === 'none' || modify[num].selectionState === 'wnone') {
+		} else if (modify[index].selectionState === 'none' || modify[index].selectionState === 'wnone') {
 			if (selected !== -1) {
-				if (modify[selected].pair === modify[num].pair) {
-					modify[selected].selectionState = 'used';
-					modify[num].selectionState = 'used';
-					cantCorrectos += 2;
-				} else {
-					modify[selected].selectionState = 'wnone';
-					modify[num].selectionState = 'wnone';
-				}
+				const isCorrect = modify[selected].matchNumber === modify[index].matchNumber;
+				const selectedPair = [modify[selected], modify[index]];
+
+				setAnswer(prev => [
+					...(Array.isArray(prev) ? prev : [prev]),
+					{
+						correct: isCorrect,
+						selected: selectedPair,
+					},
+				]);
+				cantPairs += 1;
+				modify[selected].selectionState = `used-${cantPairs}`;
+				modify[index].selectionState = `used-${cantPairs}`;
+
 				selected = -1;
 			} else {
-				modify[num].selectionState = 'selected';
-				selected = num;
+				modify[index].selectionState = 'selected';
+				selected = index;
 			}
 		}
 
-		if (cantCorrectos === imageState.length) setImageState(modify);
+		setImageState(modify);
 	};
 
-	// Control de animaciones
 	const onAnimationEnd = (e, ind) => {
 		console.log(e);
 		if (e.animationName === 'wrongAnswer') {
@@ -61,22 +66,25 @@ const JoinWithArrows = () => {
 			modify[ind].selectionState = 'none';
 			setImageState(modify);
 		}
-	}; */
+	};
 
 	return (
 		<ExerciseContainer classes='join-with-arrows-container'>
 			<p className='instruction'>{exercise.instructions[0]}</p>
 			<div className='images'>
-				{/* {imageState.map((item, ind) => (
+				{imageState.map((item, ind) => (
 					<img
 						src={item.url}
 						alt='Ilustración LectO Screening'
 						className={'image ' + item.selectionState}
-						onClick={e => imageClicked(e, ind)}
+						onClick={e => onImageClick(e, ind)}
+						/* onClick={e => imageClicked(e, ind)}*/
 						onAnimationEnd={e => onAnimationEnd(e, ind)}
 					/>
-				))} */}
+				))}
 			</div>
+
+			<NextButton setUserAnswer={setUserAnswer} answered={cantPairs === 5} />
 		</ExerciseContainer>
 	);
 };

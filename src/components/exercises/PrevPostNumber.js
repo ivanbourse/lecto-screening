@@ -1,22 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import ExerciseContainer from '../ExerciseContainer';
 import { useSelector } from 'react-redux';
 import useSetAnswer from '../../functions/setAnswer';
+import NextButton from '../NextButton';
 
 const PrevPostNumber = props => {
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
+	const current = useSelector(state => state.questions.current);
 
-	const [answer, setAnswer] = useSetAnswer();
-	/* useEffect(() => {
-		if (numbers.before && numbers.after) {
-			const correctPrevAndPost = { ...exercise };
-			delete correctPrevAndPost.number;
-			const correct = Object.entries(exercise).every(([key, value]) => numbers[key] === value);
-			console.log({ correct, exercise, numbers });
-		} else {
-			console.log('nosepuede');
-		}
-	}, [numbers]); */
+	const prevInput = useRef(null);
+	const postInput = useRef(null);
+
+	const [answer, setAnswer, setUserAnswer] = useSetAnswer();
+
+	useEffect(() => {
+		prevInput.current.value = '';
+		postInput.current.value = '';
+	}, [current]);
+
+	useEffect(() => {
+		console.log(answer);
+	}, [answer]);
 
 	return (
 		<ExerciseContainer classes='prev-post-container'>
@@ -25,11 +29,12 @@ const PrevPostNumber = props => {
 				<div className='number-input'>
 					<div className='number'>
 						<input
+							ref={prevInput}
 							autoComplete='off'
 							type='number'
 							name='prev'
 							id='prev'
-							onChange={e => setAnswer(value => ({ ...value, before: +e.target.value }))}
+							onChange={e => setAnswer(value => ({ ...value, previous: +e.target.value }))}
 						/>
 					</div>
 					<label htmlFor='prev' className='label'>
@@ -40,11 +45,12 @@ const PrevPostNumber = props => {
 				<div className='number-input'>
 					<div className='number'>
 						<input
+							ref={postInput}
 							autoComplete='off'
 							type='number'
 							name='post'
 							id='post'
-							onChange={e => setAnswer(value => ({ ...value, after: +e.target.value }))}
+							onChange={e => setAnswer(value => ({ ...value, posterior: +e.target.value }))}
 						/>
 					</div>
 					<label htmlFor='post' className='label'>
@@ -52,6 +58,7 @@ const PrevPostNumber = props => {
 					</label>
 				</div>
 			</div>
+			<NextButton setUserAnswer={setUserAnswer} answered={Object.keys(answer).length === 2} />
 		</ExerciseContainer>
 	);
 };
