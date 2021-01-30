@@ -38,7 +38,7 @@ const CountItems = () => {
 					/>
 				</div>
 			</div>
-			<NextButton setUserAnswer={setUserAnswer} answered={input.current.value !== ''} />
+			<NextButton setUserAnswer={setUserAnswer} answered={input?.current?.value !== ''} />
 		</ExerciseContainer>
 	);
 };

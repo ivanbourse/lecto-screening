@@ -6,7 +6,7 @@ const initialState = {
 	answers: [],
 	status: 'idle', // status: 'idle' | 'loading' | 'succeeded' | 'failed',
 	error: null, // error: string | null
-	current: 0,
+	current: 20,
 	animate: false,
 	finished: false,
 };
@@ -37,7 +37,7 @@ const slice = createSlice({
 			state.answers[state.current].answer = action.payload;
 		},
 		resetTest: (state, action) => {
-			state.current = 0;
+			state.current = 20;
 			state.finished = false;
 
 			state.answers.forEach(answer => {
