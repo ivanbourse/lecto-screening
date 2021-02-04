@@ -6,10 +6,21 @@ export const loadUser = createAsyncThunk('user/signIn', async data => {
 		'https://lectoscreening.azurewebsites.net/api/signIn?code=moDZJeW5hJ82kxHBsCW525y1yeyjl9LWHqhDDqumMukTUe5BPLM0JA==',
 		data
 	);
-	if (user.status === 200) {
-		localStorage.setItem('token', JSON.stringify(user.data.token));
-		return { ...user.data, loggedIn: true };
-	}
+
+	if (user.status !== 200) return;
+	localStorage.setItem('token', JSON.stringify(user.data.token));
+	return { ...user.data, loggedIn: true };
+});
+
+export const signUp = createAsyncThunk('user/signUp', async data => {
+	const user = await axios.post(
+		'https://lectoscreening.azurewebsites.net/api/signUp?code=TOwMm5Fpckye1GeglPi6RHy6k51l3PHAJ2rwhK5aujAYaK9UDZXYpA==', data,
+		{ validateStatus: (status) => status === 400 || status === 200 }
+	);
+	
+	if (user.status === 400) throw new Error(user.data.status);
+	localStorage.setItem('token', JSON.stringify(user.data.token));
+	return { ...user.data, loggedIn: true};
 });
 
 const slice = createSlice({
@@ -37,7 +48,19 @@ const slice = createSlice({
 			state.loading = true;
 		},
 		[loadUser.rejected]: (state, action) => {
-			state.error = { error: true, data: action.payload };
+			state.error = { error: true, data: action.error.message };
+			state.loading = false;
+		},
+		[signUp.fulfilled]: (state, action) => {
+			state.user = action.payload;
+			state.loggedIn = true;
+			state.loading = false;
+		},
+		[signUp.pending]: (state, action) => {
+			state.loading = true;
+		},
+		[signUp.rejected]: (state, action) => {
+			state.error = { error: true, data: action.error.message };
 			state.loading = false;
 		},
 	},
