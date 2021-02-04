@@ -1,0 +1,68 @@
+.login-container,
+.register-container {
+	padding: 5vh 2vw;
+	min-height: 100vh;
+	overflow-x: hidden;
+	background-color: #fafafa;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	@include desktop {
+		overflow: hidden;
+	}
+
+	.title {
+		font-size: var(--fs-large);
+		color: #141414;
+		text-align: center;
+		margin: 0 0 3vh 0;
+	}
+
+	.inputs {
+		margin: 0 auto;
+
+		.input-group {
+			@include input;
+		}
+
+		@include mobile {
+			width: 90%;
+		}
+		@include tablet {
+			width: 70%;
+		}
+		@include desktop {
+			width: 40%;
+		}
+
+		.group {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			@include mobile {
+				display: block;
+			}
+			.input-group {
+				flex: 1;
+			}
+			.tiny {
+				flex: 0;
+				@include tablet {
+					margin-left: 3em;
+				}
+			}
+		}
+		.button {
+			@include button;
+			width: fit-content;
+			margin: 3vh auto;
+		}
+	}
+	.switch {
+		font-size: var(--fs-xsmall);
+		cursor: pointer;
+		color: #282828;
+	}
+}

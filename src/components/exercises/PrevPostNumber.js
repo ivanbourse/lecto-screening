@@ -18,10 +18,6 @@ const PrevPostNumber = props => {
 		postInput.current.value = '';
 	}, [current]);
 
-	useEffect(() => {
-		console.log(answer);
-	}, [answer]);
-
 	return (
 		<ExerciseContainer classes='prev-post-container'>
 			<p className='instruction'>{exercise.instructions[0]}</p>
