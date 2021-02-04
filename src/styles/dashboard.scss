@@ -1,0 +1,35 @@
+.dashboard-container {
+	padding: 10vh 0;
+	display: flex;
+	justify-content: center;
+
+	.title {
+		font-size: var(--fs-large);
+	}
+
+	.buttons {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		flex-wrap: wrap;
+		width: 90%;
+
+		.button {
+			@include number;
+			width: calc(20vh + 8vw);
+			height: calc(20vh + 8vw);
+			flex-direction: column;
+			padding: 3rem;
+			cursor: pointer;
+			&:hover {
+				transform: scale(1.1);
+			}
+
+			.label {
+				font-size: var(--fs-small);
+				margin-top: auto;
+				color: #2e2e2e;
+			}
+		}
+	}
+}

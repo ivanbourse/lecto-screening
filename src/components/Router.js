@@ -8,6 +8,7 @@ import Tutorial from '../pages/Tutorial';
 import VerifyEmail from '../pages/VerifyEmail';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import Dashboard from '../pages/Dashboard';
 
 const RouterComponent = () => {
 	return (
@@ -18,7 +19,7 @@ const RouterComponent = () => {
 				<Route path='/get-started/:type' component={GetStartedForm} /> */}
 				<Route exact path='/login' component={Login} />
 				<Route exact path='/register' component={Register} />
-				<Route exact path='/dashboard' />
+				<Route exact path='/dashboard' component={Dashboard} />
 				<Route exact path='/dashboard/add-student' />
 				<Route exact path='/dashboard/all-students' />
 				<Route exact path='/dashboard/student/:id' />
