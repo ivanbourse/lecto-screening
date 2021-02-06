@@ -13,20 +13,21 @@ export const loadUser = createAsyncThunk('user/signIn', async data => {
 });
 
 export const signUp = createAsyncThunk('user/signUp', async data => {
+	console.log(data);
 	const user = await axios.post(
 		'https://lectoscreening.azurewebsites.net/api/signUp?code=TOwMm5Fpckye1GeglPi6RHy6k51l3PHAJ2rwhK5aujAYaK9UDZXYpA==', data,
 		{ validateStatus: (status) => status === 400 || status === 200 }
 	);
 	
 	if (user.status === 400) throw new Error(user.data.status);
-	localStorage.setItem('token', JSON.stringify(user.data.token));
+	localStorage.setItem('token', user.data.token);
 	return { ...user.data, loggedIn: true};
 });
 
 const slice = createSlice({
 	name: 'user',
 	initialState: {
-		user: {},
+		user: {token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVsaWxvcGV6cGFjaG9AZ21haWwuY29tIiwiaWF0IjoxNjEyNjM0MDQ0LCJleHAiOjE2MTI2NDQ4NDR9.-TXJsUJrymNcCf9RZIyBfZNCT-DPZQ8p-tVxOBkw1xM"},
 		loading: false,
 		loggedIn: false,
 		error: {

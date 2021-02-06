@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { loadQuestions, resetTest } from '../redux/slices/questions';
+import { resetTest, startTest } from '../redux/slices/questions';
 import { useDispatch, useSelector } from 'react-redux';
 
 import CountItems from '../components/exercises/CountItems';
@@ -34,17 +34,18 @@ const Test = () => {
 	const questions = useSelector(state => state.questions.questions);
 	const current = useSelector(state => state.questions.current);
 	const finished = useSelector(state => state.questions.finished);
-	const status = useSelector(state => state.questions.status);
+	const started = useSelector(state => state.questions.started);
 
 	useEffect(() => {
+		const student = "6012f1001b7fab27097e3145";
 		dispatch(resetTest());
-		dispatch(loadQuestions());
+		dispatch(startTest(student));
 
 		window.onbeforeunload = confirmExit;
 		function confirmExit() {
 			return 'show warning';
 		}
-	}, []);
+	}, [])
 
 	useEffect(() => {
 		if (finished === true) {
@@ -58,9 +59,9 @@ const Test = () => {
 			<>
 				<MotionAnimation />
 				<header className='test-header'>
-					<h2 className='title'>{finished !== true && status === 'succeeded' && questions[current].instructions[0]}</h2>
+					<h2 className='title'>{finished !== true && started && questions[current].instructions[0]}</h2>
 				</header>
-				{status === 'succeeded' && (
+				{started && (
 					<>
 						{exercises[questions[current].type]}
 						<ManualIcon classes='absolute' />

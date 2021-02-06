@@ -8,7 +8,6 @@ const useSetAnswer = () => {
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
 
 	const [userAnswer, setUserAnswer] = useState({});
-
 	const [startTime, setStartTime] = useState(Date.now());
 
 	const correctsObject = {
@@ -32,22 +31,27 @@ const useSetAnswer = () => {
 	};
 
 	useEffect(() => {
-		window.addEventListener('keydown', keydownEvent);
-		return () => {
-			window.removeEventListener('keydown', keydownEvent);
-		};
-	}, [userAnswer]);
+		if (exercise.autocorrect === false) {
+			window.addEventListener('keydown', keydownEvent);
+			return () => {
+				window.removeEventListener('keydown', keydownEvent);
+			};
+		}
+	}, [/*userAnswer*/]);
 
 	useEffect(() => {
 		setStartTime(Date.now());
 	}, [current]);
 
 	const setAnswerAuto = () => {
-		window.removeEventListener('keydown', keydownEvent);
+		//window.removeEventListener('keydown', keydownEvent);
 
 		// TODO: SETEAR EL CORRECT PARA VER SI ESTÁ BIEN O MAL (ver el ejercicio y comparar la respuesta)
-		const isCorrect = correctsObject[exercise.type](userAnswer);
-		dispatch(setAnswer({ correct: isCorrect, time: Date.now() - startTime, answer: userAnswer }));
+		
+		if (exercise.autocorrect === true) {
+			const isCorrect = correctsObject[exercise.type](userAnswer);
+			dispatch(setAnswer({ correct: isCorrect, time: Date.now() - startTime, answer: userAnswer }));
+		}
 		setUserAnswer({});
 		dispatch(nextQuestion());
 	};

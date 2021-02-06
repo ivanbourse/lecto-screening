@@ -5,12 +5,13 @@ import { afterAnimation } from '../redux/slices/questions';
 
 const ExerciseContainer = props => {
 	const animate = useSelector(state => state.questions.animate);
-	const status = useSelector(state => state.questions.status);
+	const status =  useSelector(state => state.questions.status);
+	const started = useSelector(state => state.questions.started);
 
 	const dispatch = useDispatch();
 	const controls = useAnimation();
 
-	const isLoading = status === 'loading';
+	const isLoading = (status === 'loading' && !started);
 
 	useEffect(() => {
 		const animation = async () => {
@@ -19,10 +20,10 @@ const ExerciseContainer = props => {
 			return await controls.start({ clipPath: 'circle(0%)' }, { ease: 'easeInOut', duration: 0.4 });
 		};
 
-		if (status === 'succeeded') {
+		if (started) {
 			animation();
 		}
-	}, [animate, status]);
+	}, [animate, started]);
 
 	return (
 		<>

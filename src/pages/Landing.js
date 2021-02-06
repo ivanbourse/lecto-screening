@@ -14,7 +14,7 @@ const Landing = () => {
 						Un <strong>sistema virtual</strong> para diagnosticar posible <strong>dislexia y discalculia</strong>,
 						avalado por científicos.
 					</h1>
-					<Link to='/get-started' className='button'>
+					<Link to='/login' className='button'>
 						¡Empezar test!
 					</Link>
 				</div>
