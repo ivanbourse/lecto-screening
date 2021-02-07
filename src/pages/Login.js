@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import axios from '../functions/axios';
+import { Link, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { getToken } from '../functions/userManager';
 import { loadUser } from '../redux/slices/user';
 
 const Login = () => {
@@ -27,6 +27,8 @@ const Login = () => {
 		}
 		setError(userState.error.error === true);
 	}, [userState]);
+
+	if (getToken) return <Redirect to='/dashboard' />;
 
 	return (
 		<div className='login-container'>
