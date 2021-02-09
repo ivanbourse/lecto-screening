@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { resetTest, startTest } from '../redux/slices/questions';
+import { resetTest } from '../redux/slices/questions';
 import { useDispatch, useSelector } from 'react-redux';
 
 import CountItems from '../components/exercises/CountItems';
@@ -28,7 +28,6 @@ const exercises = {
 
 const Test = () => {
 	const dispatch = useDispatch();
-
 	const history = useHistory();
 
 	const questions = useSelector(state => state.questions.questions);
@@ -39,7 +38,6 @@ const Test = () => {
 	useEffect(() => {
 		const student = "6012f1001b7fab27097e3145";
 		dispatch(resetTest());
-		dispatch(startTest(student));
 
 		window.onbeforeunload = confirmExit;
 		function confirmExit() {

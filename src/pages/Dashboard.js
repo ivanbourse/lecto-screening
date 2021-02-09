@@ -1,29 +1,33 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { Redirect } from 'react-router';
+import { useEffect } from 'react';
+import { Redirect, useHistory } from 'react-router';
 import { getToken } from '../functions/userManager';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { buyTests, getInformation } from '../redux/slices/dashboard'
+import { startTest } from '../redux/slices/questions'
+
 
 import buyIcon from '../assets/buy-icon.png';
 import person from '../assets/person.svg';
+import axios from 'axios';
 
 const Dashboard = () => {
-	const [data, setData] = useState({});
-	useEffect(() => {
-		const fetch = async () => {
-			const user = await axios.post(
-				'https://lectoscreening.azurewebsites.net/api/getProfile?code=ZcpRRm50vj2oZ/9/JWbfUgQh8gtn/DHpkm65XojQY8xNx959B145YQ==',
-				{ token: getToken }
-			);
-			const students = await axios.post(
-				'https://lectoscreening.azurewebsites.net/api/getStudents?code=2/GZhBAtIoCCVg/bi4dOxuhyhbW3WNiEo5qSr3KY1wjmsrXz/3OGXw==',
-				{ token: getToken }
-			);
-			setData({ user: user.data, students: students.data });
-		};
-		fetch();
-	}, []);
+	
+	const data = useSelector((state) => state.dashboard);
+	const history = useHistory();
+	const dispatch = useDispatch();
+
+	useEffect(() => dispatch(getInformation()), []);
 
 	if (!getToken) return <Redirect to='/login' />;
+
+	const btnTestClick = (id) => {
+		if (data?.user?.paidTests <= 0) return;
+		dispatch(startTest(id));
+		history.push('/test');
+	}
+
+	const btnBuyTests = () => dispatch(buyTests());
 
 	return (
 		<>
@@ -40,7 +44,7 @@ const Dashboard = () => {
 						Tests disponibles: <br /> <span className='number'>{data?.user?.paidTests}</span>
 					</h2>
 					<div className='buttons'>
-						<div className='button'>
+						<div className='button' onClick={() => btnBuyTests()}>
 							<img src={buyIcon} alt='Ícono Comprar Tests' />
 							<p className='label'>Comprar tests</p>
 						</div>
@@ -77,7 +81,7 @@ const Dashboard = () => {
 									</div>
 									<div className='student-buttons'>
 										<div className='button view'>Ver más</div>
-										<div className='button start'>Comenzar test</div>
+										<div className='button start' onClick={(e) => btnTestClick(student._id)}>Comenzar test</div>
 									</div>
 								</div>
 							))}

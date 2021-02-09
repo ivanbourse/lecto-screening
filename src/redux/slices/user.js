@@ -5,16 +5,22 @@ import { setToken } from '../../functions/userManager';
 
 const cookies = new Cookies();
 
-export const loadUser = createAsyncThunk('user/signIn', async data => {
+export const signIn = createAsyncThunk('user/signIn', async data => {
 	const user = await axios.post(
 		'https://lectoscreening.azurewebsites.net/api/signIn?code=moDZJeW5hJ82kxHBsCW525y1yeyjl9LWHqhDDqumMukTUe5BPLM0JA==',
 		data
 	);
-
-	if (user.status !== 200) return;
-	//localStorage.setItem('token', JSON.stringify(user.data.token));
 	setToken(user.data.token);
+	return { ...user.data, loggedIn: true };
+});
 
+export const keepAlive = createAsyncThunk('user/keepAlive', async (token, thunkApi) => {
+	thunkApi.dispatch(slice.actions.setUser({token, loggedIn: true}));
+	const user = await axios.post(
+		'https://lectoscreening.azurewebsites.net/api/validateToken?code=6DnaxZbrzz7xlJa513BYkNrQW9q7eg2RUxPi95OGZ8UYFVy29KGa0A==',
+		{ token }
+	);
+	setToken(user.data.token);
 	return { ...user.data, loggedIn: true };
 });
 
@@ -27,7 +33,6 @@ export const signUp = createAsyncThunk('user/signUp', async data => {
 	);
 
 	if (user.status === 400) throw new Error(user.data.status);
-	//localStorage.setItem('token', user.data.token);
 	setToken(user.data.token);
 	return { ...user.data, loggedIn: true };
 });
@@ -35,31 +40,26 @@ export const signUp = createAsyncThunk('user/signUp', async data => {
 const slice = createSlice({
 	name: 'user',
 	initialState: {
-		user: {
-			token:
-				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVsaWxvcGV6cGFjaG9AZ21haWwuY29tIiwiaWF0IjoxNjEyNjM0MDQ0LCJleHAiOjE2MTI2NDQ4NDR9.-TXJsUJrymNcCf9RZIyBfZNCT-DPZQ8p-tVxOBkw1xM',
-		},
+		user: { token: ""},
 		loading: false,
 		loggedIn: false,
-		error: {
-			error: false,
-		},
+		error: { error: false, },
 	},
 	reducers: {
 		setUser: (state, action) => {
-			state = action.payload;
+			state.user = action.payload;
 		},
 	},
 	extraReducers: {
-		[loadUser.fulfilled]: (state, action) => {
+		[signIn.fulfilled]: (state, action) => {
 			state.user = action.payload;
 			state.loggedIn = true;
 			state.loading = false;
 		},
-		[loadUser.pending]: (state, action) => {
+		[signIn.pending]: (state, action) => {
 			state.loading = true;
 		},
-		[loadUser.rejected]: (state, action) => {
+		[signIn.rejected]: (state, action) => {
 			state.error = { error: true, data: action.error.message };
 			state.loading = false;
 		},
@@ -72,6 +72,18 @@ const slice = createSlice({
 			state.loading = true;
 		},
 		[signUp.rejected]: (state, action) => {
+			state.error = { error: true, data: action.error.message };
+			state.loading = false;
+		},
+		[keepAlive.fulfilled]: (state, action) => {
+			state.user = action.payload;
+			state.loggedIn = true;
+			state.loading = false;
+		},
+		[keepAlive.pending]: (state, action) => {
+			state.loading = true;
+		},
+		[keepAlive.rejected]: (state, action) => {
 			state.error = { error: true, data: action.error.message };
 			state.loading = false;
 		},

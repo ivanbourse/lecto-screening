@@ -12,22 +12,11 @@ const initialState = {
 	finished: false,
 };
 
-function isRejectedAction(action) {
-	return action.type.endsWith('rejected')
-}  
-
-export const loadQuestions = createAsyncThunk('questions/loadQuestions', async (params, thunkAPI) => {
-	const result = await axios.get(
-		'https://lectoscreening.azurewebsites.net/api/getTest?code=wi8yWCGCTkSurHTarF0VpyXDCxBeQd6XnSU/zRb3aejjoI8c5Q0aHQ=='
-	);
-	return result;
-});
-
 export const startTest = createAsyncThunk('questions/startTest', async (student, thunkAPI) => {
-	const state = thunkAPI.getState();
+	const token = thunkAPI.getState().user.user.token;
 	const result = await axios.post(
 		'https://lectoscreening.azurewebsites.net/api/startTest?code=xIyaWjheKL6m06IQQ0qaTFvFDXnamRdAemTuaCR7s/zsNubvv50JZA==',
-		{token: state.user.user.token, student },
+		{token, student },
 	);
 	return {data: result.data, student};
 });
@@ -73,13 +62,6 @@ const slice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder.addCase(
-			loadQuestions.fulfilled,
-			(state, action) => {
-				state.status = 'succeeded';
-				state.questions = action.payload.data.questions;
-				state.answers = Array(action.payload.data.questions.length).fill({ answered: false, answer: {} });
-			})
-		.addCase(
 			startTest.fulfilled,
 			(state, action) => {
 				state.status = 'succeeded';
