@@ -5,13 +5,13 @@ import { afterAnimation } from '../redux/slices/questions';
 
 const ExerciseContainer = props => {
 	const animate = useSelector(state => state.questions.animate);
-	const status =  useSelector(state => state.questions.status);
+	const status = useSelector(state => state.questions.status);
 	const started = useSelector(state => state.questions.started);
 
 	const dispatch = useDispatch();
 	const controls = useAnimation();
 
-	const isLoading = (status === 'loading' && !started);
+	const isLoading = status === 'loading' && !started;
 
 	useEffect(() => {
 		const animation = async () => {

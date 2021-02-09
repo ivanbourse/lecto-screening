@@ -1,36 +1,50 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Redirect, useHistory } from 'react-router';
 import { getToken } from '../functions/userManager';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { buyTests, getInformation } from '../redux/slices/dashboard'
-import { startTest } from '../redux/slices/questions'
-
+import { buyTests, getInformation } from '../redux/slices/dashboard';
+import { startTest } from '../redux/slices/questions';
 
 import buyIcon from '../assets/buy-icon.png';
 import person from '../assets/person.svg';
 import axios from 'axios';
+import LoadingScreen from '../components/LoadingScreen';
+import { AnimatePresence } from 'framer-motion';
 
 const Dashboard = () => {
-	
-	const data = useSelector((state) => state.dashboard);
+	const data = useSelector(state => state.dashboard);
+	const status = useSelector(state => state.dashboard.status);
 	const history = useHistory();
 	const dispatch = useDispatch();
+	const [filtered, setFiltered] = useState([]);
 
 	useEffect(() => dispatch(getInformation()), []);
+	useEffect(() => setFiltered(data.students), [data]);
 
 	if (!getToken) return <Redirect to='/login' />;
 
-	const btnTestClick = (id) => {
+	const btnTestClick = id => {
 		if (data?.user?.paidTests <= 0) return;
 		dispatch(startTest(id));
 		history.push('/test');
-	}
+	};
 
 	const btnBuyTests = () => dispatch(buyTests());
 
+	const onSearchBarChange = e => {
+		const searchTerm = e.target.value;
+		setFiltered(
+			data.students.filter(student => {
+				const fullName = student.name + ' ' + student.surname;
+				return fullName.toLowerCase().includes(searchTerm.toLowerCase());
+			})
+		);
+	};
+
 	return (
 		<>
+			<LoadingScreen loading={status === 'loading'} />
 			<header className='dashboard-header'>
 				<h1 className='title'>¡Hola {data?.user?.name}!</h1>
 				<ul>
@@ -57,7 +71,7 @@ const Dashboard = () => {
 				<div className='all-students'>
 					<h2 className='title'>Todos tus estudiantes</h2>
 					<div className='search-bar'>
-						<input type='text' name='search' placeholder='Buscar' />
+						<input type='text' name='search' placeholder='Buscar' onChange={onSearchBarChange} />
 					</div>
 					<div className='students'>
 						{/* <div className='student'>
@@ -70,8 +84,8 @@ const Dashboard = () => {
 								<div className='button start'>Comenzar test</div>
 							</div>
 						</div> */}
-						{data.students &&
-							data.students.map(student => (
+						{filtered &&
+							filtered.map(student => (
 								<div className='student' key={student._id}>
 									<div className='info'>
 										<p className='name'>
@@ -81,7 +95,9 @@ const Dashboard = () => {
 									</div>
 									<div className='student-buttons'>
 										<div className='button view'>Ver más</div>
-										<div className='button start' onClick={(e) => btnTestClick(student._id)}>Comenzar test</div>
+										<div className='button start' onClick={e => btnTestClick(student._id)}>
+											Comenzar test
+										</div>
 									</div>
 								</div>
 							))}

@@ -36,14 +36,14 @@ const Test = () => {
 	const started = useSelector(state => state.questions.started);
 
 	useEffect(() => {
-		const student = "6012f1001b7fab27097e3145";
+		const student = '6012f1001b7fab27097e3145';
 		dispatch(resetTest());
 
 		window.onbeforeunload = confirmExit;
 		function confirmExit() {
 			return 'show warning';
 		}
-	}, [])
+	}, []);
 
 	useEffect(() => {
 		if (finished === true) {
@@ -62,7 +62,7 @@ const Test = () => {
 				{started && (
 					<>
 						{exercises[questions[current].type]}
-						<ManualIcon classes='absolute' />
+						{!questions[current].autocorrect && <ManualIcon classes='absolute' />}
 					</>
 				)}
 			</>

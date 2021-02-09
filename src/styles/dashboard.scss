@@ -174,3 +174,31 @@ $paddingSides: 5vw;
 		}
 	}
 }
+
+.add-student-container {
+	form {
+		padding: calc(5vh + 2vw) 0 0 0;
+		width: 80%;
+		margin: 0 auto;
+
+		@include tablet {
+			width: 60%;
+		}
+		@include desktop {
+			width: 40%;
+		}
+
+		.input-group {
+			@include input;
+		}
+		.button {
+			@include button(var(--clr-yellow));
+			margin: 4vh auto;
+			font-size: var(--fs-small);
+
+			@include mobile {
+				width: 100%;
+			}
+		}
+	}
+}

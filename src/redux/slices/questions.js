@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { getToken } from '../../functions/userManager';
 
 const initialState = {
 	questions: [],
@@ -13,12 +14,12 @@ const initialState = {
 };
 
 export const startTest = createAsyncThunk('questions/startTest', async (student, thunkAPI) => {
-	const token = thunkAPI.getState().user.user.token;
+	const token = thunkAPI.getState().user.user.token || getToken;
 	const result = await axios.post(
 		'https://lectoscreening.azurewebsites.net/api/startTest?code=xIyaWjheKL6m06IQQ0qaTFvFDXnamRdAemTuaCR7s/zsNubvv50JZA==',
-		{token, student },
+		{ token, student }
 	);
-	return {data: result.data, student};
+	return { data: result.data, student };
 });
 
 export const nextQuestion = createAsyncThunk('questions/nextQuestion', async (student, thunkAPI) => {
@@ -27,7 +28,13 @@ export const nextQuestion = createAsyncThunk('questions/nextQuestion', async (st
 	const currentQuestion = state.questions.current;
 	const result = await axios.post(
 		'https://lectoscreening.azurewebsites.net/api/answerQuestion?code=Shl9AafLPYahhsnVAwx/yX3F/a7toZSUjMaIvUC36omghB9TXLJDZw==',
-		{token: state.user.user.token, student: state.questions.student, resultId: state.questions.resultId, question: currentQuestion, answer: state.questions.answers[currentQuestion].answer }
+		{
+			token: state.user.user.token || getToken,
+			student: state.questions.student,
+			resultId: state.questions.resultId,
+			question: currentQuestion,
+			answer: state.questions.answers[currentQuestion].answer,
+		}
 	);
 });
 
@@ -60,10 +67,9 @@ const slice = createSlice({
 			state.animate = false;
 		},
 	},
-	extraReducers: (builder) => {
-		builder.addCase(
-			startTest.fulfilled,
-			(state, action) => {
+	extraReducers: builder => {
+		builder
+			.addCase(startTest.fulfilled, (state, action) => {
 				state.status = 'succeeded';
 				state.student = action.payload.student;
 				state.questions = action.payload.data.questions;
@@ -72,17 +78,19 @@ const slice = createSlice({
 				state.resultId = action.payload.data.resultId;
 				state.started = true;
 			})
-		.addMatcher(
-			(action) => action.type.endsWith('rejected'), 
-			(state, action) => {
-				state.status = 'failed';
-				state.error = action.error.message;
-			})
-		.addMatcher(
-			(action) => action.type.endsWith('pending'),
-			(state, action) => {
-				state.status = 'loading';
-			})
+			.addMatcher(
+				action => action.type.endsWith('rejected'),
+				(state, action) => {
+					state.status = 'failed';
+					state.error = action.error.message;
+				}
+			)
+			.addMatcher(
+				action => action.type.endsWith('pending'),
+				(state, action) => {
+					state.status = 'loading';
+				}
+			);
 	},
 });
 

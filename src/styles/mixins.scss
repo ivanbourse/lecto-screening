@@ -78,9 +78,9 @@
 	}
 }
 
-@mixin button {
+@mixin button($clr: var(--clr-main)) {
 	color: #fff;
-	background-color: var(--clr-main);
+	background-color: $clr;
 	font-weight: bold;
 	font-size: var(--fs-medium);
 	padding: 0.6em 1.8em;
@@ -92,7 +92,7 @@
 	transition: 0.2s;
 	&:focus {
 		outline: none;
-		box-shadow: inset 0 0 0 2px #fff, 0 0 0px 5px var(--clr-main);
+		box-shadow: inset 0 0 0 2px #fff, 0 0 0px 5px $clr;
 	}
 }
 
