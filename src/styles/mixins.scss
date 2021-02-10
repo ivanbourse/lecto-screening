@@ -78,7 +78,7 @@
 	}
 }
 
-@mixin button($clr: var(--clr-main)) {
+@mixin button($clr: var(--clr-main), $bgClr: #fff) {
 	color: #fff;
 	background-color: $clr;
 	font-weight: bold;
@@ -92,7 +92,7 @@
 	transition: 0.2s;
 	&:focus {
 		outline: none;
-		box-shadow: inset 0 0 0 2px #fff, 0 0 0px 5px $clr;
+		box-shadow: inset 0 0 0 3px $bgClr, 0 0 0px 5px $clr;
 	}
 }
 

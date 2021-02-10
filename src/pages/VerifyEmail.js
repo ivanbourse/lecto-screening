@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 const VerifyEmail = props => {
 	return (
 		<div className='verify-email-container'>
-			<h1>¡Tu cuenta fue verificada correctamente!</h1>
-			<p>Ya podés iniciar sesión para ver y agregar estudiantes o solicitar tests</p>
-			<Link to='/login' className='button'>
-				Iniciar sesión
+			<h1 className='title'>¡Tu cuenta fue verificada correctamente!</h1>
+			<h2 className='subtitle'>Ya podés iniciar sesión para ver y agregar estudiantes o solicitar tests</h2>
+			<Link to='/dashboard' className='button'>
+				Ir al panel
 			</Link>
 		</div>
 	);
