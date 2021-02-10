@@ -31,6 +31,7 @@ const Dashboard = () => {
 	};
 
 	const btnBuyTests = () => dispatch(buyTests());
+	const btnAddStudent = () => history.push('/dashboard/add-student');
 
 	const onSearchBarChange = e => {
 		const searchTerm = e.target.value;
@@ -62,7 +63,7 @@ const Dashboard = () => {
 							<img src={buyIcon} alt='Ícono Comprar Tests' />
 							<p className='label'>Comprar tests</p>
 						</div>
-						<div className='button'>
+						<div className='button' onClick={() => btnAddStudent()}>
 							<img src={person} alt='Ícono Persona' />
 							<p className='label'>Agregar estudiante</p>
 						</div>
@@ -91,7 +92,7 @@ const Dashboard = () => {
 										<p className='name'>
 											{student.surname}, {student.name}
 										</p>
-										<span className='date'>13/03/2004</span>
+										<span className='date'>{student?.birthdate}</span>
 									</div>
 									<div className='student-buttons'>
 										<div className='button view'>Ver más</div>
