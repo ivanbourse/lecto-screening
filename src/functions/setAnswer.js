@@ -37,7 +37,7 @@ const useSetAnswer = () => {
 				window.removeEventListener('keydown', keydownEvent);
 			};
 		}
-	}, [/*userAnswer*/]);
+	}, []);
 
 	useEffect(() => {
 		setStartTime(Date.now());
@@ -46,8 +46,6 @@ const useSetAnswer = () => {
 	const setAnswerAuto = () => {
 		//window.removeEventListener('keydown', keydownEvent);
 
-		// TODO: SETEAR EL CORRECT PARA VER SI ESTÁ BIEN O MAL (ver el ejercicio y comparar la respuesta)
-		
 		if (exercise.autocorrect === true) {
 			const isCorrect = correctsObject[exercise.type](userAnswer);
 			dispatch(setAnswer({ correct: isCorrect, time: Date.now() - startTime, answer: userAnswer }));

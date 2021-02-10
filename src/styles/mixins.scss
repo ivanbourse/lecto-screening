@@ -96,6 +96,43 @@
 	}
 }
 
+@mixin loading-button {
+	@include button;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.loading {
+		position: absolute;
+		width: 90%;
+		height: 90%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: var(--clr-main);
+		border-radius: inherit;
+
+		.loader {
+			border-radius: 50%;
+			width: 40px;
+			height: 40px;
+			border: 6px solid #fff;
+			border-top: 6px solid var(--clr-main);
+			animation: spin 1s infinite;
+
+			@keyframes spin {
+				from {
+					transform: rotate(0deg);
+				}
+				to {
+					transform: rotate(360deg);
+				}
+			}
+		}
+	}
+}
+
 @mixin number {
 	box-shadow: 20px 20px 60px 0 rgba(217, 217, 217, 0.5), -20px -20px 60px 0 rgba(227, 227, 227, 0.3);
 	font-size: var(--fs-large);
@@ -148,5 +185,22 @@
 	transition: 0.2s;
 	&:hover {
 		transform: scale(1.1);
+	}
+}
+
+@mixin error($bgClr: var(--clr-red)) {
+	width: 100%;
+	background-color: $bgClr;
+	color: #fff;
+	padding: 1.4rem 1rem;
+	border-radius: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: var(--fs-xsmall);
+	font-weight: 600;
+	svg {
+		font-size: var(--fs-medium);
+		margin: 0 0.5rem 0 0;
 	}
 }

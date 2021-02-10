@@ -1,15 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from '../../functions/axios';
 import Cookies from 'universal-cookie';
-import { isLoggedIn, setToken } from '../../functions/userManager';
-
-const cookies = new Cookies();
+import { isLoggedIn, logOut, setToken } from '../../functions/userManager';
 
 export const signIn = createAsyncThunk('user/signIn', async data => {
 	const user = await axios.post(
 		'https://lectoscreening.azurewebsites.net/api/signIn?code=moDZJeW5hJ82kxHBsCW525y1yeyjl9LWHqhDDqumMukTUe5BPLM0JA==',
 		data
 	);
+	//if (user.status === 400) throw new Error(user.data.status);
 	setToken(user.data.token);
 	return { ...user.data, loggedIn: true };
 });
@@ -25,7 +24,6 @@ export const keepAlive = createAsyncThunk('user/keepAlive', async (token, thunkA
 });
 
 export const signUp = createAsyncThunk('user/signUp', async data => {
-	console.log(data);
 	const user = await axios.post(
 		'https://lectoscreening.azurewebsites.net/api/signUp?code=TOwMm5Fpckye1GeglPi6RHy6k51l3PHAJ2rwhK5aujAYaK9UDZXYpA==',
 		data,
@@ -35,6 +33,11 @@ export const signUp = createAsyncThunk('user/signUp', async data => {
 	if (user.status === 400) throw new Error(user.data.status);
 	setToken(user.data.token);
 	return { ...user.data, loggedIn: true };
+});
+
+export const signOut = createAsyncThunk('user/signOut', (data, thunkApi) => {
+	logOut();
+	thunkApi.dispatch(slice.actions.clearUser());
 });
 
 const slice = createSlice({
@@ -48,6 +51,12 @@ const slice = createSlice({
 	reducers: {
 		setUser: (state, action) => {
 			state.user = action.payload;
+		},
+		clearUser: (state, action) => {
+			state.user = { token: '' };
+			state.loading = false;
+			state.loggedIn = false;
+			state.error = { error: false };
 		},
 	},
 	extraReducers: {
@@ -67,6 +76,7 @@ const slice = createSlice({
 			state.user = action.payload;
 			state.loggedIn = true;
 			state.loading = false;
+			state.error = { error: false };
 		},
 		[signUp.pending]: (state, action) => {
 			state.loading = true;

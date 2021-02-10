@@ -30,6 +30,13 @@ $paddingSides: 5vw;
 .dashboard-container {
 	padding: 6vh $paddingSides;
 
+	.warning {
+		@include error(var(--clr-yellow));
+		padding-left: 2rem;
+		margin: 0 0 3vh 0;
+		justify-content: flex-start;
+	}
+
 	.title {
 		color: #121212;
 		font-size: var(--fs-large);

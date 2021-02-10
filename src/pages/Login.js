@@ -6,10 +6,12 @@ import { useHistory } from 'react-router-dom';
 import { getToken } from '../functions/userManager';
 import { signIn, keepAlive } from '../redux/slices/user';
 
+import { VscError } from 'react-icons/vsc';
+import { motion } from 'framer-motion';
+
 const Login = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const [error, setError] = useState(false);
 	const { register, handleSubmit, errors } = useForm();
 
 	const emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
@@ -36,7 +38,16 @@ const Login = () => {
 		<div className='login-container'>
 			<h1 className='title'>Iniciar sesión</h1>
 			<form className='inputs' onSubmit={handleSubmit(onSubmit)}>
-				{error && <div className='error-message'>El correo electrónico y la contraseña no coinciden</div>}
+				{userState.error.error && (
+					<motion.div
+						className='error-message'
+						initial={{ transform: 'scale(0)', opacity: 0 }}
+						animate={{ transform: 'scale(1)', opacity: 1 }}
+					>
+						<VscError />
+						El correo electrónico y la contraseña no coinciden
+					</motion.div>
+				)}
 				<div className='input-group'>
 					<label className='label' htmlFor='email'>
 						Correo electrónico
@@ -67,6 +78,11 @@ const Login = () => {
 					)}
 				</div>
 				<button className='button' type='submit'>
+					{userState.loading && (
+						<div className='loading'>
+							<div className='loader'></div>
+						</div>
+					)}
 					Iniciar sesión
 				</button>
 			</form>

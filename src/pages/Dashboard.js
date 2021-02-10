@@ -3,6 +3,7 @@ import { Redirect, useHistory } from 'react-router';
 import { getToken } from '../functions/userManager';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { signOut } from '../redux/slices/user';
 import { buyTests, getInformation } from '../redux/slices/dashboard';
 import { startTest } from '../redux/slices/questions';
 
@@ -10,7 +11,7 @@ import buyIcon from '../assets/buy-icon.png';
 import person from '../assets/person.svg';
 import axios from 'axios';
 import LoadingScreen from '../components/LoadingScreen';
-import { AnimatePresence } from 'framer-motion';
+import { VscError } from 'react-icons/vsc';
 
 const Dashboard = () => {
 	const data = useSelector(state => state.dashboard);
@@ -42,7 +43,18 @@ const Dashboard = () => {
 		);
 	};
 
+	const logOut = () => {
+		dispatch(signOut());
+		history.push('/');
+	};
+
 	if (userState.loggedIn === false) return <Redirect to='/login' />;
+
+	const formatDate = date => {
+		const string = new Date(Date.parse(date)).toISOString().split('-');
+
+		return `${string[2].split('T')[0]}/${string[1]}/${string[0]}`;
+	};
 
 	return (
 		<>
@@ -51,10 +63,16 @@ const Dashboard = () => {
 				<h1 className='title'>¡Hola {data?.user?.name}!</h1>
 				<ul>
 					{/* <li>Editar perfil</li> */}
-					<li>Cerrar sesión</li>
+					<li onClick={logOut}>Cerrar sesión</li>
 				</ul>
 			</header>
 			<div className='dashboard-container'>
+				{!data?.user?.verified && (
+					<div className='warning'>
+						<VscError />
+						Por favor, verifique su correo electrónico para poder empezar a usar todos los servicios de LectO Screening
+					</div>
+				)}
 				<div className='top-section'>
 					<h2 className='available-tests'>
 						Tests disponibles: <br /> <span className='number'>{data?.user?.paidTests}</span>
@@ -93,7 +111,7 @@ const Dashboard = () => {
 										<p className='name'>
 											{student.surname}, {student.name}
 										</p>
-										<span className='date'>{student?.birthdate}</span>
+										<span className='date'>{formatDate(student?.birthdate)}</span>
 									</div>
 									<div className='student-buttons'>
 										<div className='button view'>Ver más</div>

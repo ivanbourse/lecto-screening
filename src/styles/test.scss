@@ -392,15 +392,26 @@
 }
 
 .manual-icon-container {
-	width: 80px;
-	height: 80px;
+	@include shadows;
+	padding: 0.7rem 1rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: var(--clr-yellow);
-	border-radius: 50%;
+	background-color: #fff;
+	border-radius: 10px;
+
+	.dot {
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background-color: var(--clr-green);
+		margin-right: 14px;
+	}
+	.text {
+		color: #464646;
+		font-weight: 600;
+	}
 	position: relative;
-	cursor: pointer;
 
 	&.absolute {
 		position: fixed;
@@ -419,10 +430,10 @@
 		position: absolute;
 		background-color: rgb(40, 40, 40);
 		z-index: 1;
-		left: 0%;
-		top: 50%;
+		left: 50%;
+		top: 0%;
 		width: 15vw;
-		transform: translate(-105%, -50%);
+		transform: translate(-50%, -105%);
 	}
 
 	&:hover {
