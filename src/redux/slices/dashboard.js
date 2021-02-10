@@ -5,7 +5,6 @@ import { getToken } from '../../functions/userManager';
 
 export const getInformation = createAsyncThunk('dashboard/getInformation', async (student, thunkAPI) => {
 	const token = thunkAPI.getState().user.user.token || getToken;
-	console.log(token);
 	const user = await axios.post(
 		'https://lectoscreening.azurewebsites.net/api/getProfile?code=ZcpRRm50vj2oZ/9/JWbfUgQh8gtn/DHpkm65XojQY8xNx959B145YQ==',
 		{ token }
@@ -19,7 +18,6 @@ export const getInformation = createAsyncThunk('dashboard/getInformation', async
 
 export const buyTests = createAsyncThunk('dashboard/buyTests', async (props, thunkAPI) => {
 	const token = thunkAPI.getState().user.user.token || getToken;
-	console.log(token);
 	const request = await axios.post(
 		'https://lectoscreening.azurewebsites.net/api/buyTests?code=88lz0dux/0Z2qq6zaKaV6pMSzoMsiAriPToGK7Ktwa9ptu6zHxSimA==',
 		{ token, amount: 10 }

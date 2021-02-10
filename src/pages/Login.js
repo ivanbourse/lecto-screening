@@ -17,19 +17,20 @@ const Login = () => {
 	const userState = useSelector(state => state.user);
 
 	// Esta es la función que tiene que correrse una vez al empezar la aplicación en cualquier punto.
-	useEffect(() => {
+	/* useEffect(() => {
 		if (getToken) {
 			dispatch(keepAlive(getToken));
-			history.replace('/dashboard');
 		}
-	}, []);
+	}, []); */
 
-	useEffect(() => {
+	/* useEffect(() => {
 		if (userState.loggedIn === true) {
 			history.push('/dashboard');
 		}
 		setError(userState.error.error === true);
-	}, [userState]);
+	}, [userState]); */
+
+	if (userState.loggedIn === true) return <Redirect to='/dashboard' />;
 
 	return (
 		<div className='login-container'>

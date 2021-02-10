@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from '../../functions/axios';
 import Cookies from 'universal-cookie';
-import { setToken } from '../../functions/userManager';
+import { isLoggedIn, setToken } from '../../functions/userManager';
 
 const cookies = new Cookies();
 
@@ -15,7 +15,7 @@ export const signIn = createAsyncThunk('user/signIn', async data => {
 });
 
 export const keepAlive = createAsyncThunk('user/keepAlive', async (token, thunkApi) => {
-	thunkApi.dispatch(slice.actions.setUser({token, loggedIn: true}));
+	thunkApi.dispatch(slice.actions.setUser({ token, loggedIn: true }));
 	const user = await axios.post(
 		'https://lectoscreening.azurewebsites.net/api/validateToken?code=6DnaxZbrzz7xlJa513BYkNrQW9q7eg2RUxPi95OGZ8UYFVy29KGa0A==',
 		{ token }
@@ -40,10 +40,10 @@ export const signUp = createAsyncThunk('user/signUp', async data => {
 const slice = createSlice({
 	name: 'user',
 	initialState: {
-		user: { token: ""},
+		user: { token: '' },
 		loading: false,
-		loggedIn: false,
-		error: { error: false, },
+		loggedIn: isLoggedIn,
+		error: { error: false },
 	},
 	reducers: {
 		setUser: (state, action) => {

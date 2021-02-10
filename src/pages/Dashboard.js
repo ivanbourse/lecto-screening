@@ -15,14 +15,13 @@ import { AnimatePresence } from 'framer-motion';
 const Dashboard = () => {
 	const data = useSelector(state => state.dashboard);
 	const status = useSelector(state => state.dashboard.status);
+	const userState = useSelector(state => state.user);
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const [filtered, setFiltered] = useState([]);
 
 	useEffect(() => dispatch(getInformation()), []);
 	useEffect(() => setFiltered(data.students), [data]);
-
-	if (!getToken) return <Redirect to='/login' />;
 
 	const btnTestClick = id => {
 		if (data?.user?.paidTests <= 0) return;
@@ -42,6 +41,8 @@ const Dashboard = () => {
 			})
 		);
 	};
+
+	if (userState.loggedIn === false) return <Redirect to='/login' />;
 
 	return (
 		<>

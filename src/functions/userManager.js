@@ -9,4 +9,6 @@ export const setToken = token => {
 	cookies.set('token', token, { expires: expireDate });
 };
 
+export const isLoggedIn = !!cookies.get('token');
+
 export const logOut = () => cookies.remove('token');
