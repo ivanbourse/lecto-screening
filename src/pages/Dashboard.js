@@ -51,9 +51,12 @@ const Dashboard = () => {
 	if (userState.loggedIn === false) return <Redirect to='/login' />;
 
 	const formatDate = date => {
-		const string = new Date(Date.parse(date)).toISOString().split('-');
-
-		return `${string[2].split('T')[0]}/${string[1]}/${string[0]}`;
+		try {
+			const string = new Date(Date.parse(date)).toISOString().split('-');
+			return `${string[2].split('T')[0]}/${string[1]}/${string[0]}`;
+		} catch (err) {
+			return '';
+		}
 	};
 
 	return (
