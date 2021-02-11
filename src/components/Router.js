@@ -25,8 +25,6 @@ const RouterComponent = () => {
 				<Route exact path='/register' component={Register} />
 				<Route exact path='/dashboard' component={Dashboard} />
 				<Route exact path='/dashboard/add-student' component={AddStudent} />
-				<Route exact path='/dashboard/all-students' />
-				<Route exact path='/dashboard/student/:id' />
 				<Route path='/tutorial' component={Tutorial} />
 				<Route path='/test' component={Test} />
 				<Route path='/finished-test' component={FinishedTest} />

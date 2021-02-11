@@ -1,6 +1,19 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const VerifyEmail = props => {
+	const { token } = useParams();
+	const [loading, setLoading] = useState();
+
+	useEffect(() => {
+		const verify = async () => {
+			const res = await axios.get(`https://lectoscreening.azurewebsites.net/api/verifyEmail/${token}`);
+		};
+		verify();
+	}, []);
+
 	return (
 		<div className='verify-email-container'>
 			<h1 className='title'>¡Tu cuenta fue verificada correctamente!</h1>
