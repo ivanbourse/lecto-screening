@@ -12,15 +12,6 @@ const AddStudent = () => {
 	const onSubmit = async data => {
 		const dataToSend = { ...data, birthdate: Date.parse(data.date) };
 		dispatch(addStudent(dataToSend));
-		/* const res = await axios.post(
-			'https://lectoscreening.azurewebsites.net/api/modifyStudent?code=mkuDShfl/lWoUNAVVb/MgKGD6EGx1spRKlkBjD6ZMRyQKvp3rjbIYQ==',
-			{
-				token: getToken,
-				action: 'create',
-				student: data,
-			}
-		);
-		if (res.status === 200) history.replace('/dashboard'); */
 	};
 
 	return (

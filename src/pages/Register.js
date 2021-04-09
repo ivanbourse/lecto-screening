@@ -24,7 +24,7 @@ const Register = () => {
 				title: '¡Listo!',
 				text:
 					'Ya puedes iniciar sesión en tu cuenta, aunque para poder empezar a usar LectO Screening deberás verificar tu cuenta mediante el correo electrónico que te enviamos.',
-				confirmButtonText: 'Iniciar sesión',
+				confirmButtonText: 'Ir al panel',
 				confirmButtonColor: '#0db3d4',
 			}).then(() => {
 				history.push('/login');

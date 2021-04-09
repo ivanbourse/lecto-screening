@@ -5,7 +5,7 @@ import { isLoggedIn, logOut, setToken } from '../../functions/userManager';
 
 export const signIn = createAsyncThunk('user/signIn', async data => {
 	const user = await axios.post(
-		'https://lectoscreening.azurewebsites.net/api/signIn?code=moDZJeW5hJ82kxHBsCW525y1yeyjl9LWHqhDDqumMukTUe5BPLM0JA==',
+		'https://screeninglecto.azurewebsites.net/api/signIn?code=FkhKKvC7Xluhv8gFJx/svk4ATZKwAN5y1GialwXpsYWBf9opmsV7OA==',
 		data
 	);
 	//if (user.status === 400) throw new Error(user.data.status);
@@ -16,7 +16,7 @@ export const signIn = createAsyncThunk('user/signIn', async data => {
 export const keepAlive = createAsyncThunk('user/keepAlive', async (token, thunkApi) => {
 	thunkApi.dispatch(slice.actions.setUser({ token, loggedIn: true }));
 	const user = await axios.post(
-		'https://lectoscreening.azurewebsites.net/api/validateToken?code=6DnaxZbrzz7xlJa513BYkNrQW9q7eg2RUxPi95OGZ8UYFVy29KGa0A==',
+		'https://screeninglecto.azurewebsites.net/api/validateToken?code=N3PoglF6AL/28aGPsSaYIOvSVpcti0BMfGGbGpZ5NJcW7X4SKAkCLA==',
 		{ token }
 	);
 	setToken(user.data.token);
@@ -25,7 +25,7 @@ export const keepAlive = createAsyncThunk('user/keepAlive', async (token, thunkA
 
 export const signUp = createAsyncThunk('user/signUp', async data => {
 	const user = await axios.post(
-		'https://lectoscreening.azurewebsites.net/api/signUp?code=TOwMm5Fpckye1GeglPi6RHy6k51l3PHAJ2rwhK5aujAYaK9UDZXYpA==',
+		'https://screeninglecto.azurewebsites.net/api/signUp?code=qH6D0Qm1ncEj1X4pr/Vq3pNBdL8xqbS0u7FdmNVwLWTdXlBAhX0YVg==',
 		data,
 		{ validateStatus: status => status === 400 || status === 200 }
 	);
