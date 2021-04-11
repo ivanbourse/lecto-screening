@@ -2,55 +2,128 @@
 	background-color: #fff;
 }
 .landing-page {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 85vh;
-	@include mobile {
-		flex-direction: column;
-	}
-	.container {
+	section {
+		padding: 6vh var(--padding-sides) 10vh var(--padding-sides);
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		padding: 5vh 0 5vh 6vw;
-		height: 100%;
-	}
-	.title-container {
-		display: flex;
-		justify-content: center;
 		flex-direction: column;
+	}
+
+	.main-section {
 		.title {
 			font-weight: 300;
-			font-size: var(--fs-xlarge);
+			font-size: var(--fs-large);
 			color: #242424;
-			@include mobile {
-				text-align: center;
+			text-align: center;
+			margin: 0 0 4vh 0;
+			z-index: 1;
+		}
+
+		.steps-container {
+			@include shadows;
+			padding: 1em 1.5em;
+			border-radius: 16px;
+			max-width: 100%;
+			transition: 0.3s;
+
+			.step {
+				display: flex;
+				align-items: center;
+				margin: 2.5vh 0;
+				animation: appear 0.3s forwards;
+				animation-delay: attr(data-delay);
+				.number-container {
+					margin: 0 1em 0 0;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					font-size: var(--fs-small);
+					color: #242424;
+
+					.number {
+						position: absolute;
+					}
+				}
+				.label {
+					font-size: var(--fs-small);
+					color: #121212;
+				}
+			}
+
+			@keyframes appear {
+				from {
+					opacity: 0;
+					display: none;
+				}
+				to {
+					display: block;
+					opacity: 1;
+				}
 			}
 		}
 		.button {
 			@include button;
-			background-color: #e428a4;
 			margin: 4vh 0 0 0;
-			@include tablet {
-				align-self: flex-start;
-			}
 		}
 	}
-	.illustration-container {
-		position: relative;
-		width: 100%;
-		overflow: hidden;
-		-moz-user-select: none;
 
-		@include mobile {
-			display: none;
-		}
+	.about-section {
+		.item-container {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			margin: 0 0 10vh 0;
+			@include tablet {
+				text-align: center;
+			}
+			.title {
+				font-size: var(--fs-small);
+				font-weight: 600;
+				color: #242424;
+				margin: 0 0 3vh 0;
+			}
 
-		.illustration {
-			width: 40vw;
-			position: absolute;
-			right: -10vw;
+			.text {
+				font-size: var(--fs-small);
+				line-height: 1.6;
+				font-weight: 300;
+				color: #272727;
+				@include tablet {
+					padding: 0 var(--padding-sides);
+				}
+			}
+			.carousel-container {
+				width: 100%;
+			}
+			.carousel {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				.slider-item {
+					background-color: rgb(187, 187, 187);
+				}
+
+				.arrow {
+					$size: 5px;
+					border: solid #303030;
+					border-width: 0 $size $size 0;
+					display: inline-block;
+					padding: $size;
+					margin: 0 1rem;
+					cursor: pointer;
+
+					&.left {
+						transform: rotate(135deg);
+					}
+					&.right {
+						transform: rotate(-45deg);
+					}
+				}
+			}
 		}
 	}
 }

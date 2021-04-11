@@ -1,3 +1,12 @@
 header {
 	@include header;
+
+	.donate {
+		color: var(--clr-green);
+		font-weight: bold;
+		font-size: var(--fs-small);
+		text-decoration: underline;
+		padding: 0.3em;
+		cursor: pointer;
+	}
 }

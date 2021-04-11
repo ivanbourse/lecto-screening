@@ -10,4 +10,13 @@
 	--clr-yellow: #f6bd2a;
 	--clr-purple: #82368a;
 	--clr-green: #3ca936;
+
+	--padding-sides: 12vw;
+
+	@media screen and (max-width: 800px) {
+		--padding-sides: 5vw;
+	}
+	@media screen and (max-width: 1200px) {
+		--padding-sides: 8vw;
+	}
 }

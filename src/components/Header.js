@@ -6,6 +6,7 @@ const Header = () => {
 	return (
 		<header>
 			<img src={screeningLogo} alt='Logo LectO Screening' className='logo' />
+			<p className='donate'>¡Apóyanos!</p>
 		</header>
 	);
 };
