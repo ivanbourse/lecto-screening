@@ -4,6 +4,15 @@ import { Link } from 'react-router-dom';
 import dot1 from '../assets/dots/dot-1.svg';
 import dot2 from '../assets/dots/dot-2.svg';
 import dot3 from '../assets/dots/dot-3.svg';
+
+import brush from '../assets/landing-icons/brush.svg';
+import bulb from '../assets/landing-icons/bulb.svg';
+import clock from '../assets/landing-icons/clock.svg';
+import eraser from '../assets/landing-icons/eraser.svg';
+import pencil from '../assets/landing-icons/pencil.svg';
+import search from '../assets/landing-icons/search.svg';
+import star from '../assets/landing-icons/star.svg';
+
 import Header from '../components/Header';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
@@ -31,26 +40,40 @@ const Landing = () => {
 					</h1>
 
 					<div className='steps-container'>
-						<div className='step' data-delay={100}>
-							<div className='number-container'>
-								<img src={dot1} alt='' />
-								<span className='number'>✅</span>
-							</div>
-							<span className='label'>Regístrate y agrega a tus pacientes</span>
+						<div className='icons'>
+							<img className='icon icon-1' src={eraser} alt='Ícono de borrador' />
+							<img className='icon icon-2' src={star} alt='Ícono de estrella' />
+							<img className='icon icon-3' src={pencil} alt='Ícono de lápiz' />
+							<img className='icon icon-4' src={clock} alt='Ícono de reloj' />
 						</div>
-						<div className='step' data-delay='300'>
-							<div className='number-container'>
-								<img src={dot2} alt='' />
-								<span className='number'>📝</span>
+						<div className='steps'>
+							<div className='step' data-delay={100}>
+								<div className='number-container'>
+									<img src={dot1} alt='' />
+									<span className='number'>✅</span>
+								</div>
+								<span className='label'>Regístrate y agrega a tus pacientes</span>
 							</div>
-							<span className='label'>Realiza el test</span>
+							<div className='step' data-delay='300'>
+								<div className='number-container'>
+									<img src={dot2} alt='' />
+									<span className='number'>📝</span>
+								</div>
+								<span className='label'>Realiza el test</span>
+							</div>
+							<div className='step' data-delay='500'>
+								<div className='number-container'>
+									<img src={dot3} alt='' />
+									<span className='number'>💯</span>
+								</div>
+								<span className='label'>¡Visualiza los resultados y el diagnóstico!</span>
+							</div>
 						</div>
-						<div className='step' data-delay='500'>
-							<div className='number-container'>
-								<img src={dot3} alt='' />
-								<span className='number'>💯</span>
-							</div>
-							<span className='label'>¡Visualiza los resultados y el diagnóstico!</span>
+						<div className='icons'>
+							<img className='icon icon-5' src={bulb} alt='Ícono de lámpara' left='100px' />
+							<img className='icon icon-6' src={search} alt='Ícono de lupa' />
+							<img className='icon icon-7' src={brush} alt='Ícono de pincel' />
+							<img className='icon icon-8' src={eraser} alt='Ícono de borrador' />
 						</div>
 					</div>
 					<Link to='/login' className='button'>
@@ -89,12 +112,6 @@ const Landing = () => {
 										url='https://www.youtube.com/watch?v=u9QJYweVceY&ab_channel=SaludEmocionalMedicinaTV'
 									/>
 								</div>
-								{/* <div>
-									<img src='https://picsum.photos/300/200' />
-								</div>
-								<div>
-									<img src='https://picsum.photos/300/200' />
-								</div> */}
 							</Carousel>
 						</div>
 					</div>

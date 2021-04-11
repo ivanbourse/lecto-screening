@@ -21,11 +21,74 @@
 		}
 
 		.steps-container {
-			@include shadows;
-			padding: 1em 1.5em;
-			border-radius: 16px;
-			max-width: 100%;
-			transition: 0.3s;
+			width: 100%;
+			display: flex;
+			& > * {
+				flex: 1;
+			}
+			.steps {
+				@include shadows;
+				padding: 1em 1.5em;
+				border-radius: 16px;
+			}
+
+			.icons {
+				position: relative;
+				@include mobile {
+					display: none;
+				}
+				.icon {
+					position: absolute;
+					animation: fade-in 1s forwards;
+					transform: scale(0);
+					&.icon-1 {
+						left: 1vmin;
+						top: 1vmin;
+					}
+					&.icon-2 {
+						right: 6vw;
+						top: 5vh;
+					}
+					&.icon-3 {
+						top: 40%;
+						right: 50%;
+						animation-delay: 120ms;
+					}
+					&.icon-4 {
+						right: 3vw;
+						bottom: 4vh;
+						animation-delay: 180ms;
+					}
+					&.icon-5 {
+						left: 4vw;
+						top: 4vh;
+						animation-delay: 250ms;
+					}
+					&.icon-6 {
+						right: 5vw;
+						top: 8vh;
+						animation-delay: 230ms;
+					}
+					&.icon-7 {
+						right: 40%;
+						bottom: 30%;
+						animation-delay: 320ms;
+					}
+					&.icon-8 {
+						bottom: 2vh;
+						left: 30%;
+						animation-delay: 340ms;
+					}
+					@keyframes fade-in {
+						from {
+							transform: scale(0);
+						}
+						to {
+							transform: scale(1);
+						}
+					}
+				}
+			}
 
 			.step {
 				display: flex;
