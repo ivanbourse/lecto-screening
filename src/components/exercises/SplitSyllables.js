@@ -3,6 +3,7 @@ import ExerciseContainer from '../ExerciseContainer';
 import { useSelector } from 'react-redux';
 import useSetAnswer from '../../functions/setAnswer';
 import NextButton from '../NextButton';
+import { getImage } from '../../functions/getImage';
 
 const SplitSyllables = props => {
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
@@ -11,7 +12,7 @@ const SplitSyllables = props => {
 
 	return (
 		<ExerciseContainer classes='split-syllables-container'>
-			<img src={exercise.image} className='image' alt='Imagen' />
+			<img src={getImage(exercise.exercise.word)} className='image' alt={`Imagen de ${exercise.exercise.word}`} />
 
 			<div className='circles'>
 				{Array(6)

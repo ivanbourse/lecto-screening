@@ -13,6 +13,8 @@ import pencil from '../assets/landing-icons/pencil.svg';
 import search from '../assets/landing-icons/search.svg';
 import star from '../assets/landing-icons/star.svg';
 
+import logoLectO from '../assets/logo-lecto.png';
+
 import Header from '../components/Header';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
@@ -88,6 +90,39 @@ const Landing = () => {
 							eos? Eligendi laborum velit rerum aliquid iusto distinctio architecto explicabo, quasi enim cumque fugit?
 							Facilis, deserunt!
 						</p>
+					</div>
+					<div className='item-container'>
+						<h2 className='title'>¿Quiénes somos?</h2>
+						<p className='text'>
+							Este sistema de Screening de Dislexia es resultado de una colaboración entre los equipos de Neuroeduca y
+							LectO.
+						</p>
+						<p className='text'>
+							Neuroeduca es un gran equipo de profesionales trabajando en neurociencia aplicada a la educación. Posee
+							una indiscutible experiencia en el diagnóstico y trato de la dislexia, la cual permitió realizar este
+							sistema de forma correcta y acorde a los estándares científicos.
+						</p>
+						<p className='text'>
+							Por parte de LectO, consta de un grupo de jóvenes desarrolladores de software creando distintos recursos
+							para ayudar a personas con dislexia. Previo a esto desarrollaron LectO App, un editor de texto pensado
+							especialmente para personas con dislexia.
+						</p>
+						<p className='text'>
+							Participaron en el desarrollo de este Screening de Dislexia las siguientes personas: Dra. Silvia Renata
+							Figiacone, Lic. Florencia Micheloud, Lic. Consuelo Rodríguez Egaña, Lic. Pablo Díaz, Dr. Andrés Rieznik,
+							Lisandro Elías Acuña, Gonzalo Díaz de Vivar, Ulises López Pacholczak y Fausto Fang.
+						</p>
+						<div className='logos'>
+							<a href='https://www.neuroeduca.com' className='logo' target='_blank' rel='noopener noreferrer'>
+								<img
+									src='https://lh5.googleusercontent.com/LXEx-7Gnp4-nu-AwUlZRiK7OqMZU_he_eHeZDHq1cj_yoVRQuBOhYi_5nbAW0iFI=w16383'
+									alt='Logo Neuroeduca'
+								/>
+							</a>
+							<a href='https://lecto.app' className='logo' target='_blank' rel='noopener noreferrer'>
+								<img src={logoLectO} alt='Logo LectO' />
+							</a>
+						</div>
 					</div>
 					<div className='item-container'>
 						<h2 className='title'>Respaldo científico</h2>

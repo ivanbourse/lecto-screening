@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import ExerciseContainer from '../ExerciseContainer';
 import useSetAnswer from '../../functions/setAnswer';
 import NextButton from '../NextButton';
+import { getImage } from '../../functions/getImage';
 
 const CountItems = () => {
 	const current = useSelector(state => state.questions.current);
@@ -22,7 +23,7 @@ const CountItems = () => {
 				{Array(exercise.exercise.count)
 					.fill(0)
 					.map((item, i) => (
-						<img className='count-image' src='https://picsum.photos/500' alt='' />
+						<img className='count-image' src={getImage(item.word)} alt={`Pictograma de ${item.word}`} />
 					))}
 			</div>
 			<p className='instruction'>Ingresá el número de elementos que contó</p>

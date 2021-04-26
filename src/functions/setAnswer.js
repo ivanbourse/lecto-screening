@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAnswer, nextQuestion } from '../redux/slices/questions';
 
-const useSetAnswer = () => {
+const useSetAnswer = (registerKeydown = true) => {
 	const dispatch = useDispatch();
 	const current = useSelector(state => state.questions.current);
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
@@ -31,7 +31,7 @@ const useSetAnswer = () => {
 	};
 
 	useEffect(() => {
-		if (exercise.autocorrect === false) {
+		if (exercise.autocorrect === false && registerKeydown) {
 			window.addEventListener('keydown', keydownEvent);
 			return () => {
 				window.removeEventListener('keydown', keydownEvent);
@@ -46,10 +46,8 @@ const useSetAnswer = () => {
 	const setAnswerAuto = () => {
 		//window.removeEventListener('keydown', keydownEvent);
 
-		if (exercise.autocorrect === true) {
-			const isCorrect = correctsObject[exercise.type](userAnswer);
-			dispatch(setAnswer({ correct: isCorrect, time: Date.now() - startTime, answer: userAnswer }));
-		}
+		const isCorrect = correctsObject[exercise.type](userAnswer);
+		dispatch(setAnswer({ correct: isCorrect, time: Date.now() - startTime, answer: userAnswer }));
 		setUserAnswer({});
 		dispatch(nextQuestion());
 	};

@@ -154,10 +154,26 @@
 				line-height: 1.6;
 				font-weight: 300;
 				color: #272727;
+				margin: 0 0 2vh 0;
 				@include tablet {
 					padding: 0 var(--padding-sides);
 				}
 			}
+
+			.logos {
+				margin: 3vh 0;
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				.logo {
+					margin: 0 3vw;
+					img {
+						width: clamp(200px, 30vw, 400px);
+					}
+				}
+			}
+
 			.carousel-container {
 				width: 100%;
 			}

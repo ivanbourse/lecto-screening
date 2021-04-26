@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { getImage } from '../../functions/getImage';
 import useSetAnswer from '../../functions/setAnswer';
 import '../../styles/matching.scss';
 import ExerciseContainer from '../ExerciseContainer';
@@ -74,8 +75,8 @@ const JoinWithArrows = () => {
 			<div className='images'>
 				{imageState.map((item, ind) => (
 					<img
-						src={item.url}
-						alt='Ilustración LectO Screening'
+						src={getImage(item.word)}
+						alt={`Pictograma de ${item.word}`}
 						className={'image ' + item.selectionState}
 						onClick={e => onImageClick(e, ind)}
 						/* onClick={e => imageClicked(e, ind)}*/
