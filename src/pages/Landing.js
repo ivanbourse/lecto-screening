@@ -14,6 +14,7 @@ import search from '../assets/landing-icons/search.svg';
 import star from '../assets/landing-icons/star.svg';
 
 import logoLectO from '../assets/logo-lecto.png';
+import logoNeuroeduca from '../assets/logo-neuroeduca.png';
 
 import Header from '../components/Header';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
@@ -37,8 +38,8 @@ const Landing = () => {
 			<main className='landing-page'>
 				<section className='main-section'>
 					<h1 className='title'>
-						Un <strong>sistema virtual</strong> para diagnosticar posible <strong>dislexia y discalculia</strong>,
-						avalado por científicos.
+						Un <strong>sistema virtual</strong> de detección de precursores de riesgo para{' '}
+						<strong>dislexia y discalculia</strong>
 					</h1>
 
 					<div className='steps-container'>
@@ -114,10 +115,7 @@ const Landing = () => {
 						</p>
 						<div className='logos'>
 							<a href='https://www.neuroeduca.com' className='logo' target='_blank' rel='noopener noreferrer'>
-								<img
-									src='https://lh5.googleusercontent.com/LXEx-7Gnp4-nu-AwUlZRiK7OqMZU_he_eHeZDHq1cj_yoVRQuBOhYi_5nbAW0iFI=w16383'
-									alt='Logo Neuroeduca'
-								/>
+								<img src={logoNeuroeduca} alt='Logo Neuroeduca' />
 							</a>
 							<a href='https://lecto.app' className='logo' target='_blank' rel='noopener noreferrer'>
 								<img src={logoLectO} alt='Logo LectO' />
