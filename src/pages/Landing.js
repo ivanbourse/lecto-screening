@@ -87,9 +87,19 @@ const Landing = () => {
 					<div className='item-container'>
 						<h2 className='title'>¿Cómo funciona?</h2>
 						<p className='text'>
-							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, consequuntur esse saepe laudantium alias
-							eos? Eligendi laborum velit rerum aliquid iusto distinctio architecto explicabo, quasi enim cumque fugit?
-							Facilis, deserunt!
+						Los Trastornos Específicos de Aprendizaje afectan al menos al 10% de la población infantojuvenil, e impactan directamente sobre la calidad de vida de quienes lo sufren, sus posibilidades de rendimiento académico y su inserción académica futura. 
+						</p>
+						<p className='text'>
+Tienen precursores que pueden documentarse en niños de edad preescolar y, aunque estos precursores no son una señal de diagnóstico, si son indicadores de riesgo que sugieren necesidad de intervención. Los modelos de RTI (response to intervention) han demostrado eficacia en los últimos años y sugieren que, la detección precoz de precursores de trastornos específicos de aprendizaje, y la estimulación del desarrollo de estos precursores en edades tempranas, son un factor de protección en relación con el desarrollo de habilidades académicas funcionales. 
+
+						</p>
+						<p className='text'>
+El TFB se ha desarrollado con el objetivo de detectar nivel de desarrollo de precursores asociados al aprendizaje de la lectura y la escritura (conciencia fonológica, conciencia silábica) y de habilidades de lectura y escritura fundacionales (conocimiento de grafemas, lectura de sílabas y palabras). 
+
+						</p>
+						<p className='text'>
+Está destinado a niños de 5, 6 y 7 años, se administra de manera sencilla en un sitio web y otorga un informe de resultados que permite percentilar a los niños en el marco de una población de niños de su edad y contextos culturales similares.
+
 						</p>
 					</div>
 					<div className='item-container'>
