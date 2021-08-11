@@ -95,8 +95,12 @@ const Landing = () => {
 					<div className='item-container'>
 						<h2 className='title'>¿Quiénes somos?</h2>
 						<p className='text'>
-							Este sistema de Screening de Dislexia es resultado de una colaboración entre los equipos de Neuroeduca y
-							LectO.
+							LectO Screening es un sistema de screening de nivel desarrollo de precursores de la adquisición de la
+							lectura, la escritura y el cálculo que permite establecer un perfil de fortalezas y vulnerabilidades en
+							relación a ello.
+						</p>
+						<p className='text'>
+							Este sistema es resultado de una colaboración entre los equipos de Neuroeduca y LectO.
 						</p>
 						<p className='text'>
 							Neuroeduca es un gran equipo de profesionales trabajando en neurociencia aplicada a la educación. Posee

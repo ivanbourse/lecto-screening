@@ -27,12 +27,25 @@ export const buyTests = createAsyncThunk('dashboard/buyTests', async (props, thu
 
 export const addStudent = createAsyncThunk('dashboard/addStudent', async (student, thunkAPI) => {
 	const token = thunkAPI.getState().user.user.token || getToken;
+
 	const request = await axios.post(
-		'https://screeninglecto.azurewebsites.net/api/modifyStudent?code=NAehyIjiG4mXnfywzerMJYpTbcL1sU0gX6DhMxOTOnqOEaOKPzDAjA==',
+		//'https://screeninglecto.azurewebsites.net/api/modifyStudent?code=NAehyIjiG4mXnfywzerMJYpTbcL1sU0gX6DhMxOTOnqOEaOKPzDAjA==',
+		'http://localhost:7071/api/modifyStudent',
 		{ token, action: 'create', student }
 	);
 	history.replace('/dashboard');
 	return request.data;
+});
+
+export const getStudent = createAsyncThunk('dashboard/getStudent', async (id, thunkAPI) => {
+	const token = thunkAPI.getState().user.user.token || getToken;
+	const { data: students } = await axios.post(
+		'https://screeninglecto.azurewebsites.net/api/getStudents?code=L4IAbrbsuwNUkh768symXUZI2HUks1RryK3jgcRnAD/Jabm4Q2xQyQ==',
+		{ token }
+	);
+
+	const [currentStudent] = students.filter(student => student._id === id);
+	return currentStudent;
 });
 
 const slice = createSlice({
@@ -41,6 +54,7 @@ const slice = createSlice({
 		status: 'idle',
 		user: {},
 		students: [],
+		currentStudent: {},
 	},
 	reducers: {},
 	extraReducers: builder => {
@@ -52,6 +66,10 @@ const slice = createSlice({
 			})
 			.addCase(buyTests.fulfilled, (state, action) => {
 				state.user.paidTests = action.payload;
+				state.status = 'succeeded';
+			})
+			.addCase(getStudent.fulfilled, (state, action) => {
+				state.currentStudent = action.payload;
 				state.status = 'succeeded';
 			})
 			.addMatcher(

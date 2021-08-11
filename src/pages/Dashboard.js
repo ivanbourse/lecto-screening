@@ -12,6 +12,7 @@ import person from '../assets/person.svg';
 import axios from 'axios';
 import LoadingScreen from '../components/LoadingScreen';
 import { VscError } from 'react-icons/vsc';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
 	const data = useSelector(state => state.dashboard);
@@ -21,7 +22,9 @@ const Dashboard = () => {
 	const dispatch = useDispatch();
 	const [filtered, setFiltered] = useState([]);
 
-	useEffect(() => dispatch(getInformation()), []);
+	useEffect(() => {
+		dispatch(getInformation());
+	}, []);
 	useEffect(() => setFiltered(data.students), [data]);
 
 	const btnTestClick = id => {
@@ -37,8 +40,7 @@ const Dashboard = () => {
 		const searchTerm = e.target.value;
 		setFiltered(
 			data.students.filter(student => {
-				const fullName = student.name + ' ' + student.surname;
-				return fullName.toLowerCase().includes(searchTerm.toLowerCase());
+				return student.alias.toLowerCase().includes(searchTerm.toLowerCase());
 			})
 		);
 	};
@@ -111,13 +113,13 @@ const Dashboard = () => {
 							filtered.map(student => (
 								<div className='student' key={student._id}>
 									<div className='info'>
-										<p className='name'>
-											{student.surname}, {student.name}
-										</p>
-										<span className='date'>{formatDate(student?.birthdate)}</span>
+										<p className='name'>{student.alias}</p>
+										{/* <span className='date'>{formatDate(student?.birthdate)}</span> */}
 									</div>
 									<div className='student-buttons'>
-										<div className='button view'>Ver más</div>
+										<Link to={`/dashboard/student/${student._id}`} className='button view'>
+											Ver más
+										</Link>
 										<div className='button start' onClick={e => btnTestClick(student._id)}>
 											Comenzar test
 										</div>

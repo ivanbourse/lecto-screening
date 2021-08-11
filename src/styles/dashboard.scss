@@ -207,5 +207,149 @@ $paddingSides: 5vw;
 				width: 100%;
 			}
 		}
+
+		.radio-container {
+			position: relative;
+			padding-left: 35px;
+			cursor: pointer;
+			font-size: var(--fs-xsmall);
+			user-select: none;
+			display: flex;
+			align-items: center;
+			margin: 5px 0;
+		}
+
+		/* Hide the browser's default radio button */
+		.radio-container input {
+			position: absolute;
+			opacity: 0;
+			cursor: pointer;
+			height: 0;
+			width: 0;
+		}
+
+		/* Create a custom radio button */
+		.radio {
+			position: absolute;
+			left: 0;
+			height: 25px;
+			width: 25px;
+			background-color: #fff;
+			box-shadow: 0 0 0 2px #ccc;
+			border-radius: 50%;
+			transition: 0.2s;
+		}
+
+		/* On mouse-over, add a grey background color */
+		.radio-container:hover input ~ .radio {
+			background-color: #ccc;
+		}
+
+		/* When the radio button is checked, add a blue background */
+		.radio-container input:checked ~ .radio {
+			background-color: var(--clr-main);
+		}
+
+		/* Create the indicator (the dot/circle - hidden when not checked) */
+		.radio:after {
+			content: '';
+			position: absolute;
+			display: none;
+		}
+
+		/* Show the indicator (dot/circle) when checked */
+		.radio-container input:checked ~ .radio:after {
+			display: block;
+		}
+
+		/* Style the indicator (dot/circle) */
+		.radio-container .radio:after {
+			top: 9px;
+			left: 9px;
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background: white;
+		}
+	}
+}
+
+.student-info-container {
+	.container {
+		margin: 0 0 5vh 0;
+	}
+
+	.subtitle {
+		color: #1f1d20;
+		font-size: var(--fs-small);
+		margin: 0 0 1rem 0;
+	}
+
+	.info-container {
+		@include shadows;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		border-radius: 18px;
+		padding: 4vh 2vw;
+
+		.col {
+			flex: 1;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			gap: 1rem;
+			padding: 0 2vmin;
+		}
+
+		.item {
+			font-size: var(--fs-xsmall);
+			color: #4d4950;
+			.label {
+				font-weight: bold;
+			}
+		}
+
+		.divider {
+			width: 2px;
+			background: red;
+		}
+	}
+	.result-container {
+		display: flex;
+		flex-direction: column;
+		gap: 5vh;
+		@include tablet {
+			width: 80%;
+			justify-self: start;
+		}
+
+		h3 {
+			font-size: var(--fs-xsmall);
+		}
+
+		.result-paragraph {
+			display: flex;
+			flex-direction: column;
+			gap: 1.5vh;
+			h5 {
+				font-size: var(--fs-xsmall);
+			}
+		}
+
+		.text {
+			line-height: 1.7;
+			font-size: var(--fs-xsmall);
+		}
+
+		ul {
+			padding: 0 3rem;
+			li {
+				margin: 1.5rem 0;
+				h5 {
+					margin: 0 0 10px 0;
+				}
+			}
+		}
 	}
 }
