@@ -28,7 +28,7 @@ const Dashboard = () => {
 	useEffect(() => setFiltered(data.students), [data]);
 
 	const btnTestClick = id => {
-		if (data?.user?.paidTests <= 0) return;
+		if (data?.user?.paidTests < 0) return;
 		dispatch(startTest(id));
 		history.push('/test');
 	};

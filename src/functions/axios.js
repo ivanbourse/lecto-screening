@@ -1,7 +1,7 @@
 import axiosDefault from 'axios';
 
 const axios = axiosDefault.create({
-	baseURL: 'https://screeninglecto.azurewebsites.net',
+	baseURL: 'http://localhost:3030',
 });
 
 const token = localStorage.getItem('user')?.token || '';

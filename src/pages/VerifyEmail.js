@@ -9,7 +9,7 @@ const VerifyEmail = props => {
 
 	useEffect(() => {
 		const verify = async () => {
-			const res = await axios.get(`https://screeninglecto.azurewebsites.net/api/verifyEmail/${token}`);
+			const res = await axios.post(`http://localhost:3030/users/verifyEmail/`, {token});
 		};
 		verify();
 	}, []);

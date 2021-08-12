@@ -18,7 +18,7 @@ export const startTest = createAsyncThunk('questions/startTest', async (student,
 	console.log({ token, student });
 	const result = await axios.post(
 		/* 'https://screeninglecto.azurewebsites.net/api/startTest?code=/up1GX9SrCEmxuPwR1ujqJY2LCAO6xH5PfxGsy8wfQFKLf541evXag==', */
-		'http://localhost:7071/api/startTest',
+		'http://localhost:3030/test/start',
 		{ token, student }
 	);
 	return { data: result.data, student };
@@ -30,7 +30,7 @@ export const nextQuestion = createAsyncThunk('questions/nextQuestion', async (st
 	const currentQuestion = state.questions.current;
 	const result = await axios.post(
 		/* 'https://screeninglecto.azurewebsites.net/api/answerQuestion?code=JPT1vV0C3gftaEdKI00fMB7Z6pKYlsDS3MRsKjfh1mqIAcOMfjm4dQ==', */
-		'http://localhost:7071/api/answerQuestion',
+		'http://localhost:3030/test/answerQuestion',
 		{
 			token: state.user.user.token || getToken,
 			student: state.questions.student,

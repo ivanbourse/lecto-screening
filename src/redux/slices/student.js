@@ -5,7 +5,7 @@ import { getToken } from '../../functions/userManager';
 
 export const getStudentInfo = createAsyncThunk('student/getStudentInfo', async (props, thunkAPI) => {
 	const token = thunkAPI.getState().user.user.token || getToken;
-	const { data } = await axios.post('http://localhost:7071/api/getStudent', { token, id: props });
+	const { data } = await axios.post('http://localhost:3030/students/getById', { token, id: props });
 	console.log(data);
 
 	return data;
