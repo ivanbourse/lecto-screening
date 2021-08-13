@@ -80,13 +80,9 @@ const Dashboard = () => {
 				)}
 				<div className='top-section'>
 					<h2 className='available-tests'>
-						Tests disponibles: <br /> <span className='number'>{data?.user?.paidTests}</span>
+						Tests tomados: <br /> <span className='number'>{data?.user?.paidTests}</span>
 					</h2>
 					<div className='buttons'>
-						<div className='button' onClick={() => btnBuyTests()}>
-							<img src={buyIcon} alt='Ícono Comprar Tests' />
-							<p className='label'>Comprar tests</p>
-						</div>
 						<div className='button' onClick={() => btnAddStudent()}>
 							<img src={person} alt='Ícono Persona' />
 							<p className='label'>Agregar estudiante</p>

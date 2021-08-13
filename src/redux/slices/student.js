@@ -2,11 +2,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from '../../functions/axios';
 import Cookies from 'universal-cookie';
 import { getToken } from '../../functions/userManager';
+import { baseUrl } from '../../variables';
 
 export const getStudentInfo = createAsyncThunk('student/getStudentInfo', async (props, thunkAPI) => {
 	const token = thunkAPI.getState().user.user.token || getToken;
-	const { data } = await axios.post('http://localhost:3030/students/getById', { token, id: props });
-	console.log(data);
+	const { data } = await axios.post(baseUrl + 'students/getById', { token, studentId: props });
 
 	return data;
 });

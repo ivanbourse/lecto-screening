@@ -2,15 +2,16 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { history } from '../../components/Router';
 import { getToken } from '../../functions/userManager';
+import { baseUrl } from '../../variables';
 
 export const getInformation = createAsyncThunk('dashboard/getInformation', async (student, thunkAPI) => {
 	const token = thunkAPI.getState().user.user.token || getToken;
 	const user = await axios.post(
-		'http://localhost:3030/users/get',
+		baseUrl + 'users/get',
 		{ token }
 	);
 	const students = await axios.post(
-		'http://localhost:3030/students/get',
+		baseUrl + 'students/get',
 		{ token }
 	);
 	return { user: user.data, students: students.data };
@@ -19,7 +20,7 @@ export const getInformation = createAsyncThunk('dashboard/getInformation', async
 export const buyTests = createAsyncThunk('dashboard/buyTests', async (props, thunkAPI) => {
 	const token = thunkAPI.getState().user.user.token || getToken;
 	const request = await axios.post(
-		'http://localhost:3030/users/buyTests',
+		baseUrl + 'users/buyTests',
 		{ token, amount: 10 }
 	);
 	return request.data.paidTests;
@@ -29,7 +30,7 @@ export const addStudent = createAsyncThunk('dashboard/addStudent', async (studen
 	const token = thunkAPI.getState().user.user.token || getToken;
 
 	const request = await axios.post(
-		'http://localhost:3030/students/create',
+		baseUrl + 'students/create',
 		{ token, student }
 	);
 
@@ -40,7 +41,7 @@ export const addStudent = createAsyncThunk('dashboard/addStudent', async (studen
 export const getStudent = createAsyncThunk('dashboard/getStudent', async (id, thunkAPI) => {
 	const token = thunkAPI.getState().user.user.token || getToken;
 	const { data: students } = await axios.post(
-		'http://localhost:3030/students/get',
+		baseUrl + 'students/get',
 		{ token }
 	);
 

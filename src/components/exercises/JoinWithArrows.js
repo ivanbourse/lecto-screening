@@ -24,7 +24,6 @@ const JoinWithArrows = () => {
 				selectionState: 'none', // none, wnone, selected, used
 			});
 		});
-		console.log(list);
 		return list;
 	});
 
@@ -61,7 +60,6 @@ const JoinWithArrows = () => {
 	};
 
 	const onAnimationEnd = (e, ind) => {
-		console.log(e);
 		if (e.animationName === 'wrongAnswer') {
 			let modify = [...imageState];
 			modify[ind].selectionState = 'none';

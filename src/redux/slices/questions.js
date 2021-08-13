@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { getToken } from '../../functions/userManager';
+import { baseUrl } from '../../variables';
 
 const initialState = {
 	questions: [],
@@ -15,10 +16,9 @@ const initialState = {
 
 export const startTest = createAsyncThunk('questions/startTest', async (student, thunkAPI) => {
 	const token = thunkAPI.getState().user.user.token || getToken;
-	console.log({ token, student });
 	const result = await axios.post(
 		/* 'https://screeninglecto.azurewebsites.net/api/startTest?code=/up1GX9SrCEmxuPwR1ujqJY2LCAO6xH5PfxGsy8wfQFKLf541evXag==', */
-		'http://localhost:3030/test/start',
+		baseUrl + 'results/start',
 		{ token, student }
 	);
 	return { data: result.data, student };
@@ -30,7 +30,7 @@ export const nextQuestion = createAsyncThunk('questions/nextQuestion', async (st
 	const currentQuestion = state.questions.current;
 	const result = await axios.post(
 		/* 'https://screeninglecto.azurewebsites.net/api/answerQuestion?code=JPT1vV0C3gftaEdKI00fMB7Z6pKYlsDS3MRsKjfh1mqIAcOMfjm4dQ==', */
-		'http://localhost:3030/test/answerQuestion',
+		baseUrl + 'results/answerQuestion',
 		{
 			token: state.user.user.token || getToken,
 			student: state.questions.student,

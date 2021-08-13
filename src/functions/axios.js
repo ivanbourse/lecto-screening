@@ -1,7 +1,8 @@
 import axiosDefault from 'axios';
+import { baseUrl } from '../variables'
 
 const axios = axiosDefault.create({
-	baseURL: 'http://localhost:3030',
+	baseURL: baseUrl,
 });
 
 const token = localStorage.getItem('user')?.token || '';

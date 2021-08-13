@@ -2,10 +2,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from '../../functions/axios';
 import Cookies from 'universal-cookie';
 import { isLoggedIn, logOut, setToken } from '../../functions/userManager';
+import { baseUrl } from '../../variables';
 
 export const signIn = createAsyncThunk('user/signIn', async data => {
 	const user = await axios.post(
-		'http://localhost:3030/users/signIn',
+		baseUrl + 'users/signIn',
 		data
 	);
 	//if (user.status === 400) throw new Error(user.data.status);
@@ -16,7 +17,7 @@ export const signIn = createAsyncThunk('user/signIn', async data => {
 export const keepAlive = createAsyncThunk('user/keepAlive', async (token, thunkApi) => {
 	thunkApi.dispatch(slice.actions.setUser({ token, loggedIn: true }));
 	const user = await axios.post(
-		'http://localhost:3030/users/validateToken',
+		baseUrl + 'users/validateToken',
 		{ token }
 	);
 	setToken(user.data.token);
@@ -25,7 +26,7 @@ export const keepAlive = createAsyncThunk('user/keepAlive', async (token, thunkA
 
 export const signUp = createAsyncThunk('user/signUp', async data => {
 	const user = await axios.post(
-		'http://localhost:3030/users/signUp',
+		baseUrl + 'users/signUp',
 		data,
 		{ validateStatus: status => status === 400 || status === 200 }
 	);
