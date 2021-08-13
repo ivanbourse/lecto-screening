@@ -7,10 +7,16 @@ export const stateToWords = {
 export const textForTypeOfExercise = {
 	'letters-question': {
 		text: ({ name, answerResult }) => {
+			console.log({answerResult});
 			const [letterNames, letterSounds] = answerResult.incorrect;
 
-			const correctLetterNames = letterNames.answer.filter(letter => letter.correct === true).length;
-			const correctLetterSounds = letterSounds.answer.filter(letter => letter.correct === true).length;
+			let correctLetterNames = [];
+			let correctLetterSounds = [];
+
+			if (Object.keys(letterNames.answer).length !== 0)
+				correctLetterNames = letterNames.answer.filter(letter => letter.correct === true).length;
+			if (Object.keys(letterSounds.answer).length !== 0)
+				correctLetterSounds = letterSounds.answer.filter(letter => letter.correct === true).length;
 
 			return (
 				<li>
