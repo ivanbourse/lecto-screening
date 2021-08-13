@@ -151,12 +151,12 @@
 
 			.text {
 				font-size: var(--fs-small);
-				line-height: 1.6;
+				line-height: 1.7 ;
 				font-weight: 300;
 				color: #272727;
-				margin: 0 0 2vh 0;
+				margin: 0 0 6vh 0;
 				@include tablet {
-					padding: 0 var(--padding-sides);
+					padding: 0 5vw;
 				}
 			}
 
