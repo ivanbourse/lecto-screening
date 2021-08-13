@@ -11,6 +11,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Dashboard from '../pages/Dashboard';
 import AddStudent from '../pages/AddStudent';
+import StudentInfo from '../pages/StudentInfo';
 
 export const history = createBrowserHistory();
 
@@ -25,6 +26,7 @@ const RouterComponent = () => {
 				<Route exact path='/register' component={Register} />
 				<Route exact path='/dashboard' component={Dashboard} />
 				<Route exact path='/dashboard/add-student' component={AddStudent} />
+				<Route exact path='/dashboard/student/:studentId' component={StudentInfo} />
 				<Route path='/tutorial' component={Tutorial} />
 				<Route path='/test' component={Test} />
 				<Route path='/finished-test' component={FinishedTest} />

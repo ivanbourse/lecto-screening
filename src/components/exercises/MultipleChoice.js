@@ -12,10 +12,6 @@ const MultipleChoice = props => {
 
 	const [answer, setAnswer, setUserAnswer] = useSetAnswer();
 
-	useEffect(() => {
-		console.log();
-	}, [current, answer]);
-
 	return (
 		<>
 			{exercise && (

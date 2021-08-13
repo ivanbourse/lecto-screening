@@ -12,6 +12,7 @@ import person from '../assets/person.svg';
 import axios from 'axios';
 import LoadingScreen from '../components/LoadingScreen';
 import { VscError } from 'react-icons/vsc';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
 	const data = useSelector(state => state.dashboard);
@@ -21,11 +22,13 @@ const Dashboard = () => {
 	const dispatch = useDispatch();
 	const [filtered, setFiltered] = useState([]);
 
-	useEffect(() => dispatch(getInformation()), []);
+	useEffect(() => {
+		dispatch(getInformation());
+	}, []);
 	useEffect(() => setFiltered(data.students), [data]);
 
 	const btnTestClick = id => {
-		if (data?.user?.paidTests <= 0) return;
+		if (data?.user?.paidTests < 0) return;
 		dispatch(startTest(id));
 		history.push('/test');
 	};
@@ -37,8 +40,7 @@ const Dashboard = () => {
 		const searchTerm = e.target.value;
 		setFiltered(
 			data.students.filter(student => {
-				const fullName = student.name + ' ' + student.surname;
-				return fullName.toLowerCase().includes(searchTerm.toLowerCase());
+				return student.alias.toLowerCase().includes(searchTerm.toLowerCase());
 			})
 		);
 	};
@@ -78,13 +80,9 @@ const Dashboard = () => {
 				)}
 				<div className='top-section'>
 					<h2 className='available-tests'>
-						Tests disponibles: <br /> <span className='number'>{data?.user?.paidTests}</span>
+						Tests tomados: <br /> <span className='number'>{data?.user?.paidTests}</span>
 					</h2>
 					<div className='buttons'>
-						<div className='button' onClick={() => btnBuyTests()}>
-							<img src={buyIcon} alt='Ícono Comprar Tests' />
-							<p className='label'>Comprar tests</p>
-						</div>
 						<div className='button' onClick={() => btnAddStudent()}>
 							<img src={person} alt='Ícono Persona' />
 							<p className='label'>Agregar estudiante</p>
@@ -111,13 +109,13 @@ const Dashboard = () => {
 							filtered.map(student => (
 								<div className='student' key={student._id}>
 									<div className='info'>
-										<p className='name'>
-											{student.surname}, {student.name}
-										</p>
-										<span className='date'>{formatDate(student?.birthdate)}</span>
+										<p className='name'>{student.alias}</p>
+										{/* <span className='date'>{formatDate(student?.birthdate)}</span> */}
 									</div>
 									<div className='student-buttons'>
-										<div className='button view'>Ver más</div>
+										<Link to={`/dashboard/student/${student._id}`} className='button view'>
+											Ver más
+										</Link>
 										<div className='button start' onClick={e => btnTestClick(student._id)}>
 											Comenzar test
 										</div>

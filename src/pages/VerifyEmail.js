@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { baseUrl } from '../variables';
 
 const VerifyEmail = props => {
 	const { token } = useParams();
@@ -9,7 +10,8 @@ const VerifyEmail = props => {
 
 	useEffect(() => {
 		const verify = async () => {
-			const res = await axios.get(`https://screeninglecto.azurewebsites.net/api/verifyEmail/${token}`);
+			
+			const res = await axios.post(baseUrl + `users/verifyEmail/`, {token});
 		};
 		verify();
 	}, []);

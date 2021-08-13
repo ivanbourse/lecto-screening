@@ -39,7 +39,6 @@ export const exercisesInfo = {
 
 export const generateTest = (exercisesPerType = 2) => {
 	const finalTest = [];
-	console.log(test);
 	/* for (let i = 0; i < exercisesPerType; i++) {
 		//* PRIMER EJERCICIO: GET COUNT
 		finalTest.push(getCount.generateForTest());

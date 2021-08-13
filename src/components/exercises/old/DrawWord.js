@@ -8,8 +8,7 @@ import eraser from '../../assets/eraser.svg';
 const DrawWord = props => {
 	const { setCurrentAnswer } = props;
 	const exercise = props.exercise.exercise;
-	console.log(exercise);
-
+	
 	const [color, setColor] = useState('#121212');
 
 	const defaultWidth = 3;
