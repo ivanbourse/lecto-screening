@@ -1,14 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from '../../functions/axios';
+import axios from 'functions/axios';
 import Cookies from 'universal-cookie';
-import { isLoggedIn, logOut, setToken } from '../../functions/userManager';
+import { isLoggedIn, logOut, setToken } from 'functions/userManager';
 import { baseUrl } from '../../variables';
 
 export const signIn = createAsyncThunk('user/signIn', async data => {
-	const user = await axios.post(
-		baseUrl + 'users/signIn',
-		data
-	);
+	const user = await axios.post(baseUrl + 'users/signIn', data);
 	//if (user.status === 400) throw new Error(user.data.status);
 	setToken(user.data.token);
 	return { ...user.data, loggedIn: true };
@@ -16,20 +13,15 @@ export const signIn = createAsyncThunk('user/signIn', async data => {
 
 export const keepAlive = createAsyncThunk('user/keepAlive', async (token, thunkApi) => {
 	thunkApi.dispatch(slice.actions.setUser({ token, loggedIn: true }));
-	const user = await axios.post(
-		baseUrl + 'users/validateToken',
-		{ token }
-	);
+	const user = await axios.post(baseUrl + 'users/validateToken', { token });
 	setToken(user.data.token);
 	return { ...user.data, loggedIn: true };
 });
 
 export const signUp = createAsyncThunk('user/signUp', async data => {
-	const user = await axios.post(
-		baseUrl + 'users/signUp',
-		data,
-		{ validateStatus: status => status === 400 || status === 200 }
-	);
+	const user = await axios.post(baseUrl + 'users/signUp', data, {
+		validateStatus: status => status === 400 || status === 200,
+	});
 
 	if (user.status === 400) throw new Error(user.data.status);
 	setToken(user.data.token);

@@ -204,3 +204,10 @@
 		margin: 0 0.5rem 0 0;
 	}
 }
+
+@mixin dot($size) {
+	width: $size;
+	height: $size;
+	background: #121212;
+	border-radius: 50%;
+}

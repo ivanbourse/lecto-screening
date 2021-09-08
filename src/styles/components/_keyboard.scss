@@ -1,0 +1,30 @@
+.keyboard {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	gap: 1.5rem;
+	margin: 10vh 0;
+
+	.key {
+		$fontSize: var(--fs-large);
+		$size: calc(#{$fontSize} * 2);
+		width: $size;
+		height: $size;
+		background: #fff;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: $fontSize;
+		border-radius: 12px;
+		cursor: pointer;
+		font-weight: 600;
+		color: #121212;
+		transition: 0.3s;
+
+		box-shadow: -20px -20px 60px rgba(227, 227, 227, 0.3), 20px 20px 60px rgba(217, 217, 217, 0.5);
+		z-index: 2;
+
+		&:hover {
+			background: #e4e4e4;
+		}
+	}
+}

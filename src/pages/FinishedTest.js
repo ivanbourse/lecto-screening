@@ -14,7 +14,7 @@ const FinishedTest = () => {
 			<h1 className='title'>¡LISTO!</h1>
 			<h3 className='subtitle'>Muchas gracias por completar esta prueba, los resultados ya han sido enviados</h3>
 			{/* <div className='emoji'>😁</div> */}
-			<Link to='/' className='button' onClick={resetTestState}>
+			<Link to='/dashboard' className='button' onClick={resetTestState}>
 				Volver al inicio
 			</Link>
 		</div>

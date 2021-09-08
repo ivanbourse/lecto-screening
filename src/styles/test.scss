@@ -18,13 +18,103 @@
 	}
 }
 
-.test-exercise-container {
+.exercise-instructions-container {
+	padding: 10vh 12vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 5vh;
+
+	&.practice-finish-container {
+		min-height: 100vh;
+	}
+
+	.title {
+		font-size: var(--fs-large);
+		color: var(--clr-main);
+		text-align: center;
+	}
+
+	.line {
+		width: calc(100px + 5vw);
+		height: 6px;
+		background-color: var(--clr-main);
+	}
+
+	.texts {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		gap: 3vh;
+		font-size: var(--fs-medium);
+		color: #242424;
+		line-height: 150%;
+		text-align: center;
+	}
+
+	.btn {
+		@include button;
+		font-size: var(--fs-medium);
+		margin: 8vh 0 0 0;
+	}
+}
+
+.exercise-container {
 	background-color: #f8f8f8;
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 	padding: 4vh 5vw;
+	min-height: 100vh;
+
+	.panel {
+		height: calc(150px + 15vmax);
+		width: calc(150px + 15vmax);
+		box-shadow: -1.2rem -1.2rem 2.8rem rgba(227, 227, 227, 0.3), 1.2rem 1.2rem 2.8rem rgba(217, 217, 217, 0.5);
+		background-color: #fff;
+		border-radius: 40px;
+		z-index: 2;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		border: 3px solid var(--clr-dark-400);
+	}
+
+	.number {
+		font-size: calc(36px + (80 - 36) * ((100vw - 300px) / (1600 - 300)));
+		font-weight: 500;
+		color: #121212;
+	}
+}
+.exercise {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+}
+
+.exercise-screen {
+	.exercise {
+		pointer-events: none;
+		* {
+			pointer-events: none;
+		}
+	}
+}
+
+.test-exercise-container {
+	background-color: #f8f8f8;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding: 4vh 5vw;
+	min-height: 100vh;
 
 	.icon {
 		@include icon-button;
@@ -321,8 +411,7 @@
 
 		.letter {
 			@include number;
-			width: 100px;
-			height: 100px;
+			padding: 2vmin;
 			margin: 3vh 1vw;
 
 			&.answered {
@@ -344,6 +433,9 @@
 			height: 130px;
 			font-weight: 300;
 		}
+	}
+	.btn {
+		@include button;
 	}
 	.number-input {
 		@include number-input;

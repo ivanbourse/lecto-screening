@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import ExerciseContainer from '../ExerciseContainer';
+import ExerciseContainer from 'components/ExerciseContainer';
 import { useSelector } from 'react-redux';
-import useSetAnswer from '../../functions/setAnswer';
-import NextButton from '../NextButton';
+import useSetAnswer from 'functions/setAnswer';
+import NextButton from 'components/NextButton';
 
 const PrevPostNumber = props => {
 	const exercise = useSelector(state => state.questions.questions[state.questions.current]);

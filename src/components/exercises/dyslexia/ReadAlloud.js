@@ -1,7 +1,7 @@
 import React from 'react';
-import useSetAnswer from '../../functions/setAnswer';
-import ExerciseContainer from '../ExerciseContainer';
-import NextButton from '../NextButton';
+import useSetAnswer from 'functions/setAnswer';
+import ExerciseContainer from 'components/ExerciseContainer';
+import NextButton from 'components/NextButton';
 
 const ReadAlloud = () => {
 	const [, setAnswer, setUserAnswer] = useSetAnswer();

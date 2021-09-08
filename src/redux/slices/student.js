@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from '../../functions/axios';
+import axios from 'functions/axios';
 import Cookies from 'universal-cookie';
-import { getToken } from '../../functions/userManager';
+import { getToken } from 'functions/userManager';
 import { baseUrl } from '../../variables';
 
 export const getStudentInfo = createAsyncThunk('student/getStudentInfo', async (props, thunkAPI) => {

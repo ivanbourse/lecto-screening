@@ -29,11 +29,10 @@ const Dashboard = () => {
 
 	const btnTestClick = id => {
 		if (data?.user?.paidTests < 0) return;
-		dispatch(startTest(id));
+		dispatch(startTest({ student: id, type: 'dyscalculia' }));
 		history.push('/test');
 	};
 
-	const btnBuyTests = () => dispatch(buyTests());
 	const btnAddStudent = () => history.push('/dashboard/add-student');
 
 	const onSearchBarChange = e => {

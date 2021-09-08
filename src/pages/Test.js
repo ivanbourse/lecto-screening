@@ -2,41 +2,22 @@ import React, { useEffect } from 'react';
 import { resetTest } from '../redux/slices/questions';
 import { useDispatch, useSelector } from 'react-redux';
 
-import CountItems from '../components/exercises/CountItems';
-import PrevPostNumber from '../components/exercises/PrevPostNumber';
-import JoinWithArrows from '../components/exercises/JoinWithArrows';
-import SplitSyllables from '../components/exercises/SplitSyllables';
-import MultipleChoice from '../components/exercises/MultipleChoice';
-import SayTheLetters from '../components/exercises/SayTheLetters';
-import GapQuestion from '../components/exercises/GapQuestion';
-
 import MotionAnimation from '../components/MotionAnimation';
 
 import { useHistory } from 'react-router';
-import ManualIcon from '../components/ManualIcon';
-
-const exercises = {
-	counting: <CountItems />,
-	'gap-question': <GapQuestion />,
-	'multiple-choice': <MultipleChoice />,
-	'prev-next': <PrevPostNumber />,
-	'letters-question': <SayTheLetters />,
-	matching: <JoinWithArrows />,
-	syllables: <SplitSyllables />,
-	'read-alloud': <SayTheLetters />,
-};
+import { screenTypesComponentsMap, testTypesComponentsMap } from 'utils/testMaps';
 
 const Test = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
 	const questions = useSelector(state => state.questions.questions);
+	const testType = useSelector(state => state.questions.type);
 	const current = useSelector(state => state.questions.current);
 	const finished = useSelector(state => state.questions.finished);
 	const started = useSelector(state => state.questions.started);
 
 	useEffect(() => {
-		const student = '6012f1001b7fab27097e3145';
 		dispatch(resetTest());
 
 		window.onbeforeunload = confirmExit;
@@ -44,6 +25,10 @@ const Test = () => {
 			return 'show warning';
 		}
 	}, []);
+
+	useEffect(() => {
+		console.log(current);
+	}, [questions]);
 
 	useEffect(() => {
 		if (finished === true) {
@@ -56,7 +41,7 @@ const Test = () => {
 		<div className='test-container'>
 			<>
 				<MotionAnimation />
-				<header className='test-header'>
+				{/* <header className='test-header'>
 					<h2 className='title'>{finished !== true && started && questions[current].instructions[0]}</h2>
 				</header>
 				{started && (
@@ -64,8 +49,9 @@ const Test = () => {
 						{exercises[questions[current].type]}
 						{!questions[current].autocorrect && <ManualIcon classes='absolute' />}
 					</>
-				)}
+				)} */}
 			</>
+			{questions[current] && screenTypesComponentsMap[questions[current].screenType]()}
 		</div>
 	);
 };

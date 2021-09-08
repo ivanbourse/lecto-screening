@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import ExerciseContainer from '../ExerciseContainer';
-import useSetAnswer from '../../functions/setAnswer';
-import NextButton from '../NextButton';
-import { getImage } from '../../functions/getImage';
+import ExerciseContainer from 'components/ExerciseContainer';
+import useSetAnswer from 'functions/setAnswer';
+import NextButton from 'components/NextButton';
+import { getImage } from 'functions/getImage';
 
 const CountItems = () => {
 	const current = useSelector(state => state.questions.current);

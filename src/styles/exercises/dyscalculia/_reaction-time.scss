@@ -1,0 +1,20 @@
+.reaction-time-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
+	.dot-container {
+		width: 70%;
+		height: 80%;
+		position: relative;
+	}
+
+	.dot {
+		@include dot(80px);
+		cursor: pointer;
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+}

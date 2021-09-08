@@ -1,33 +1,39 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { getImage } from '../../functions/getImage';
-import useSetAnswer from '../../functions/setAnswer';
-import '../../styles/matching.scss';
-import ExerciseContainer from '../ExerciseContainer';
-import NextButton from '../NextButton';
+import React, { useState, useEffect } from 'react';
+import { getImage } from 'functions/getImage';
+import useSetAnswer from 'functions/setAnswer';
+import 'styles/matching.scss';
+import ExerciseContainer from 'components/ExerciseContainer';
+import NextButton from 'components/NextButton';
 
-let selected = -1,
-	cantPairs = 0;
+let selected = -1;
 
 const JoinWithArrows = () => {
-	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
-
-	const [answer, setAnswer, setUserAnswer] = useSetAnswer();
+	const { exercise, setUserAnswer, submitAnswer } = useSetAnswer();
 	// Creación del estado
-	const [imageState, setImageState] = React.useState(() => {
-		let list = [];
-		exercise.exercise.words.forEach((item, ind) => {
-			list.push({
-				word: item.word,
-				matchNumber: item.matchNumber,
-				url: 'https://picsum.photos/200',
-				selectionState: 'none', // none, wnone, selected, used
-			});
-		});
-		return list;
-	});
+	const [imageState, setImageState] = useState([]);
 
-	const onImageClick = (e, index) => {
+	const [cantPairs, setCantPairs] = useState(0);
+
+	useEffect(() => {
+		setCantPairs(0);
+		setImageState(() => {
+			let list = [];
+			exercise.words.forEach((item, ind) => {
+				list.push({
+					word: item.word,
+					matchNumber: item.matchNumber,
+					url: 'https://picsum.photos/200',
+					selectionState: 'none', // none, wnone, selected, used
+				});
+			});
+			// shuffle the array inline
+			const shuffled = list.sort((a, b) => 0.5 - Math.random());
+
+			return shuffled;
+		});
+	}, [exercise]);
+
+	const onImageClick = async (e, index) => {
 		let modify = [...imageState];
 
 		if (modify[index].selectionState === 'selected') {
@@ -38,16 +44,16 @@ const JoinWithArrows = () => {
 				const isCorrect = modify[selected].matchNumber === modify[index].matchNumber;
 				const selectedPair = [modify[selected], modify[index]];
 
-				setAnswer(prev => [
+				setUserAnswer(prev => [
 					...(Array.isArray(prev) ? prev : [prev]),
 					{
 						correct: isCorrect,
 						selected: selectedPair,
 					},
 				]);
-				cantPairs += 1;
-				modify[selected].selectionState = `used-${cantPairs}`;
-				modify[index].selectionState = `used-${cantPairs}`;
+				setCantPairs(prev => prev + 1);
+				modify[selected].selectionState = `used-${cantPairs + 1}`;
+				modify[index].selectionState = `used-${cantPairs + 1}`;
 
 				selected = -1;
 			} else {
@@ -69,7 +75,6 @@ const JoinWithArrows = () => {
 
 	return (
 		<ExerciseContainer classes='join-with-arrows-container'>
-			<p className='instruction'>{exercise.instructions[0]}</p>
 			<div className='images'>
 				{imageState.map((item, ind) => (
 					<img
@@ -83,7 +88,7 @@ const JoinWithArrows = () => {
 				))}
 			</div>
 
-			<NextButton setUserAnswer={setUserAnswer} answered={cantPairs === 5} />
+			<NextButton setUserAnswer={submitAnswer} answered={cantPairs >= Math.floor(exercise.words.length / 2)} />
 		</ExerciseContainer>
 	);
 };

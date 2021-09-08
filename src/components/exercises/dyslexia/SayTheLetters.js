@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import useSetAnswer from '../../functions/setAnswer';
-import ExerciseContainer from '../ExerciseContainer';
-import NextButton from '../NextButton';
+import useSetAnswer from 'functions/setAnswer';
+import ExerciseContainer from 'components/ExerciseContainer';
+import NextButton from 'components/NextButton';
 
 const SayTheLetters = () => {
-	const exercise = useSelector(state => state.questions.questions[state.questions.current]);
-	const [currAnswer, setAnswer, setUserAnswer] = useSetAnswer(false);
+	const { exercise, setUserAnswer, submitAnswer } = useSetAnswer(false);
 
-	const arrayToShow = exercise.exercise.letters || [exercise.exercise.number];
+	const arrayToShow = exercise.letters || exercise.words;
 	const [answers, setAnswers] = useState([]);
 	const currentItem = answers.length;
 
 	const addAnswer = answer => {
 		if (arrayToShow.length > answers.length) {
 			setAnswers(prev => {
-				setAnswer([...prev, answer]);
+				setUserAnswer([...prev, answer]);
 				return [...prev, answer];
 			});
 		}
@@ -30,7 +29,7 @@ const SayTheLetters = () => {
 	};
 
 	const nextExercise = () => {
-		setUserAnswer(answers);
+		submitAnswer(answers);
 		setAnswers([]);
 	};
 

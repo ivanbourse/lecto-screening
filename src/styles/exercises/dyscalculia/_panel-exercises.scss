@@ -1,0 +1,53 @@
+.exercise {
+	.panel {
+		height: calc(150px + 15vmax);
+		width: calc(150px + 15vmax);
+		box-shadow: -1.2rem -1.2rem 2.8rem rgba(227, 227, 227, 0.3), 1.2rem 1.2rem 2.8rem rgba(217, 217, 217, 0.5);
+		background-color: #fff;
+		border-radius: 40px;
+		z-index: 2;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		border: 3px solid var(--clr-dark-400);
+	}
+	.number {
+		font-size: calc(80px + (160 - 80) * ((100vw - 300px) / (1600 - 300)));
+		font-weight: 500;
+		color: var(--clr-dark-100);
+	}
+	.panel-dots {
+		display: flex;
+		flex-direction: column;
+		.dot-row {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+			width: 100%;
+			.dot {
+				@include dot(40px);
+				margin: 0 5px;
+				position: absolute;
+			}
+		}
+	}
+
+	.panel-hover {
+		cursor: pointer;
+		transition: 0.2s;
+		&:hover {
+			transform: scale(1.05);
+		}
+	}
+}
+
+.panel-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	gap: 5vw;
+	flex-wrap: wrap;
+}

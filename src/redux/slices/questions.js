@@ -1,10 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { getToken } from '../../functions/userManager';
+import { generateTest } from 'functions/generateTest';
+import { getToken } from 'functions/userManager';
 import { baseUrl } from '../../variables';
+
+import discalculiaJSON from 'functions/test-discalculia.json';
+import dislexiaJSON from 'functions/test-dislexia.json';
 
 const initialState = {
 	questions: [],
+	testType: '',
 	answers: [],
 	status: 'idle', // status: 'idle' | 'loading' | 'succeeded' | 'failed',
 	error: null, // error: string | null
@@ -14,14 +19,19 @@ const initialState = {
 	finished: false,
 };
 
-export const startTest = createAsyncThunk('questions/startTest', async (student, thunkAPI) => {
+export const startTest = createAsyncThunk('questions/startTest', async ({ student, type }, thunkAPI) => {
 	const token = thunkAPI.getState().user.user.token || getToken;
-	const result = await axios.post(
-		/* 'https://screeninglecto.azurewebsites.net/api/startTest?code=/up1GX9SrCEmxuPwR1ujqJY2LCAO6xH5PfxGsy8wfQFKLf541evXag==', */
+	/* const result = await axios.post(
+		'https://screeninglecto.azurewebsites.net/api/startTest?code=/up1GX9SrCEmxuPwR1ujqJY2LCAO6xH5PfxGsy8wfQFKLf541evXag==',
 		baseUrl + 'results/start',
 		{ token, student }
-	);
-	return { data: result.data, student };
+	); */
+
+	const test = await generateTest(type === 'dyslexia' ? dislexiaJSON : discalculiaJSON);
+
+	console.log(test);
+
+	return { data: test, testType: type, student };
 });
 
 export const nextQuestion = createAsyncThunk('questions/nextQuestion', async (student, thunkAPI) => {
@@ -52,8 +62,22 @@ const slice = createSlice({
 			state.animate = true;
 		},
 		setAnswer: (state, action) => {
-			state.answers[state.current].answered = true;
-			state.answers[state.current].answer = action.payload;
+			const { screenType, ...currentQuestion } = state.questions[state.current];
+			const isExercise = screenType === 'exercise';
+
+			state.answers[state.current] = {};
+
+			if (isExercise) {
+				const isCorrect = true;
+				state.answers[state.current].answered = true;
+				state.answers[state.current].saveValue = true;
+				state.answers[state.current].type = currentQuestion.type;
+				state.answers[state.current].answer = { correct: isCorrect, ...action.payload };
+			}
+
+			if (state.questions.length - 1 > state.current) state.current++;
+			else state.finished = true;
+			state.animate = false;
 		},
 		resetTest: (state, action) => {
 			state.current = 0;
@@ -75,8 +99,9 @@ const slice = createSlice({
 			.addCase(startTest.fulfilled, (state, action) => {
 				state.status = 'succeeded';
 				state.student = action.payload.student;
-				state.questions = action.payload.data.questions;
-				state.answers = Array(action.payload.data.questions.length).fill({ answered: false, answer: {} });
+				state.questions = action.payload.data;
+				state.testType = action.payload.testType;
+				state.answers = Array(action.payload.data.length).fill({ answered: false, answer: {} });
 				state.testId = action.payload.data.testId;
 				state.resultId = action.payload.data.resultId;
 				state.started = true;

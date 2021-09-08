@@ -1,0 +1,12 @@
+.simple-arithmetic-container {
+	.panel {
+		width: unset;
+		height: unset;
+		padding: 2rem 5rem;
+		border-radius: 20px;
+
+		.number {
+			font-size: calc(36px + (80 - 36) * ((100vw - 300px) / (1600 - 300)));
+		}
+	}
+}
