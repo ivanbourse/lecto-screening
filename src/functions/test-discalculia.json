@@ -8,9 +8,9 @@
 			"description": "Descripción",
 			"type": "reaction-time",
 			"instructions": [
-				"En la pantalla aparecerán puntos violetas.",
-				"Apenas aparezcan, deberás presionar cualquier tecla lo más rápido posible.",
-				"Los primeros 4 ejercicios serán de prueba para que aprendas a hacerlo."
+				"En la pantalla aparecerá un punto negro.",
+				"Apenas aparezca, deberás presionar cualquier tecla lo más rápido posible.",
+				"Los primeros 4 ejercicios serán de prueba para que veas cómo funciona."
 			],
 			"min": 1.5,
 			"max": 3
@@ -22,7 +22,7 @@
 			"instructions": [
 				"En la pantalla aparecerán dos grupos de puntos.",
 				"Deberás hacer click en el grupo que tenga mayor cantidad de puntos.",
-				"Recuerda que los primeros 4 ejercicios serán de prueba para que aprendas a hacerlo."
+				"Recuerda que los primeros 4 ejercicios serán de prueba para que veas cómo funciona."
 			],
 			"min": 2,
 			"max": 10
@@ -32,9 +32,9 @@
 			"description": "Descripción",
 			"type": "match-sample",
 			"instructions": [
-				"En la pantalla aparecerán dos grupos de puntos.",
-				"Deberás hacer click en el grupo que tenga mayor cantidad de puntos.",
-				"Recuerda que los primeros 4 ejercicios serán de prueba para que aprendas a hacerlo."
+				"En la pantalla aparecerá un grupo de puntos y luego otro.",
+				"Deberás indicar si ambos grupos tienen la misma cantidad de puntos.",
+				"Recuerda que los primeros 4 ejercicios serán de prueba para que veas cómo funciona."
 			],
 			"min": 1,
 			"max": 8
@@ -44,9 +44,9 @@
 			"description": "Descripción",
 			"type": "match-sample-rotate",
 			"instructions": [
-				"En la pantalla aparecerán dos grupos de puntos.",
-				"Deberás hacer click en el grupo que tenga mayor cantidad de puntos.",
-				"Recuerda que los primeros 4 ejercicios serán de prueba para que aprendas a hacerlo."
+				"En la pantalla aparecerá un grupo de puntos y luego otro, esta vez rotado.",
+				"Deberás indicar si ambos grupos tienen la misma cantidad de puntos.",
+				"Recuerda que los primeros 4 ejercicios serán de prueba para que veas cómo funciona."
 			],
 			"min": 1,
 			"max": 8
@@ -59,7 +59,7 @@
 				"Deberás indicar si la cantidad de puntos coincide con el número que aparece al costado.",
 				"En caso de que sea correcto, presiona el tick verde.",
 				"En caso de que sea incorrecto, presiona la cruz roja.",
-				"Recuerda que los primeros 4 ejercicios serán de prueba para que aprendas a hacerlo"
+				"Recuerda que los primeros 4 ejercicios serán de prueba para que veas cómo funciona"
 			],
 			"min": 2,
 			"max": 10
@@ -71,7 +71,7 @@
 			"instructions": [
 				"Deberás indicar cual de los dos números que aparecen en pantalla es el más grande.",
 				"Deberás hacer click en el número que sea mayor.",
-				"Recuerda que los primeros 4 ejercicios serán de prueba para que aprendas a hacerlo."
+				"Recuerda que los primeros 4 ejercicios serán de prueba para que veas cómo funciona."
 			],
 			"min": 2,
 			"max": 10
@@ -83,7 +83,7 @@
 			"instructions": [
 				"Deberás posicionar el punto en la recta numérica para que se acerque lo más posible a la posición del número que está en la pantalla.",
 				"Una vez que estés seguro, deberás hacer click en aceptar.",
-				"Recuerda que los primeros 4 ejercicios serán de prueba, para que puedas aprender cómo resolverlo."
+				"Recuerda que los primeros 4 ejercicios serán de prueba para que veas cómo funciona."
 			],
 			"min": 1,
 			"max": 10
@@ -93,8 +93,8 @@
 			"description": "Descripción",
 			"type": "counting",
 			"instructions": [
-				"En la pantalla aparecerán dos números consecutivos, deberás escribir cual es el número que le sigue.",
-				"Recuerda que los primeros 4 ejercicios serán de prueba para que aprendas a hacerlo."
+				"En la pantalla aparecerán dos números consecutivos, deberás escribir cual es el número siguiente.",
+				"Recuerda que los primeros 4 ejercicios serán de prueba para que veas cómo funciona."
 			],
 			"min": 4,
 			"max": 8,
@@ -105,8 +105,8 @@
 			"description": "Descripción",
 			"type": "counting",
 			"instructions": [
-				"En la pantalla aparecerán dos números consecutivos, deberás escribir cual es el número que le sigue.",
-				"Recuerda que los primeros 4 ejercicios serán de prueba para que aprendas a hacerlo."
+				"En la pantalla aparecerán dos números consecutivos, deberás escribir cual es el número anterior.",
+				"Recuerda que los primeros 4 ejercicios serán de prueba para que veas cómo funciona."
 			],
 			"min": 4,
 			"max": 8,
@@ -117,8 +117,8 @@
 			"description": "Descripción",
 			"type": "simple-arithmetic",
 			"instructions": [
-				"En la pantalla aparecerán cuentas de suma y resta. Deberás escribir el resultado correcto.",
-				"Recuerda que los primeros 4 ejercicios serán de prueba, para que puedas aprender cómo resolverlo."
+				"En la pantalla aparecerán cuentas de suma. Deberás escribir el resultado correcto.",
+				"Recuerda que los primeros 4 ejercicios serán de prueba para que veas cómo funciona."
 			],
 			"operand": "+"
 		},
@@ -127,8 +127,8 @@
 			"description": "Descripción",
 			"type": "simple-arithmetic",
 			"instructions": [
-				"En la pantalla aparecerán cuentas de suma y resta. Deberás escribir el resultado correcto.",
-				"Recuerda que los primeros 4 ejercicios serán de prueba, para que puedas aprender cómo resolverlo."
+				"En la pantalla aparecerán cuentas de resta. Deberás escribir el resultado correcto.",
+				"Recuerda que los primeros 4 ejercicios serán de prueba para que veas cómo funciona."
 			],
 			"operand": "-"
 		}
