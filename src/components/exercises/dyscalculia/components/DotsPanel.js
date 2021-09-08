@@ -1,8 +1,8 @@
 import { randomValueBetweenTwoNumbers } from 'functions/generateTest';
 
-const DotsPanel = ({ dots, onClick, className }) => {
+const DotsPanel = ({ dots, onClick, className, style }) => {
 	return (
-		<div className={'panel panel-dots ' + className} onClick={onClick}>
+		<div className={'panel panel-dots ' + className} onClick={onClick} style={style}>
 			{Array(dots)
 				.fill(0)
 				.map((dot, index) => {

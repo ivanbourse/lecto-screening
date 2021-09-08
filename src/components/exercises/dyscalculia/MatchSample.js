@@ -1,12 +1,13 @@
+import { randomValueBetweenTwoNumbers } from 'functions/generateTest';
 import { useEffect, useState } from 'react';
 import useTest from 'utils/hooks/useTest';
 import CorrectButtons from './components/CorrectButtons';
 import DotsPanel from './components/DotsPanel';
 
-const MatchSample = ({ isResult }) => {
+const MatchSample = ({ isResult, rotate }) => {
 	const { exercise, submitAnswer } = useTest({ customTime: true, isResult });
 
-	const { number1, number2 } = exercise.value;
+	const { number1, number2, rotation } = exercise.value;
 
 	const [firstPanelVisible, setFirstPanelVisible] = useState(true);
 	const [secondPanelVisible, setSecondPanelVisible] = useState(false);
@@ -26,10 +27,6 @@ const MatchSample = ({ isResult }) => {
 				}, 1000);
 			}, 1000);
 		}
-		/* return () => {
-			clearTimeout(firstTimeout);
-			clearTimeout(secondTimeout);
-		}; */
 	}, [exercise]);
 
 	const reset = () => {
@@ -42,7 +39,7 @@ const MatchSample = ({ isResult }) => {
 			{(firstPanelVisible || isResult === true) && <DotsPanel dots={number1} />}
 			{(secondPanelVisible || isResult === true) && (
 				<>
-					<DotsPanel dots={number2} />
+					<DotsPanel dots={number2} style={{ transform: `rotate(${rotation || 0}deg)` }} />
 
 					<CorrectButtons
 						onCorrect={() => {

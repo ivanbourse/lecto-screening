@@ -15,6 +15,10 @@ const dyscalculiaCheckCorrectMap = {
 	'simple-arithmetic': (exercise, answer) => ({ isCorrect: exercise.correct === answer, answer: exercise.correct }),
 	counting: (exercise, answer) => ({ isCorrect: exercise.correct === answer, answer: exercise.correct }),
 	'match-sample': (exercise, answer) => ({ isCorrect: exercise.correct === answer.answer, answer: exercise.correct }),
+	'match-sample-rotate': (exercise, answer) => ({
+		isCorrect: exercise.correct === answer.answer,
+		answer: exercise.correct,
+	}),
 };
 
 const dyslexiaCheckCorrectMap = {

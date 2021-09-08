@@ -108,6 +108,28 @@ const randomGenerators = {
 
 		return { correct: isTheSame, value: { number1: randomNumber1, number2: randomNumber2 } };
 	},
+	'match-sample-rotate': ({ min, max, minRotation, maxRotation }) => {
+		const isTheSame = getRandomOption(true, false);
+
+		const randomNumber1 = randomValueBetweenTwoNumbers(min, max);
+		let randomNumber2;
+		if (isTheSame) {
+			randomNumber2 = randomNumber1;
+		} else {
+			if (randomNumber1 === min) {
+				randomNumber2 = randomNumber1 + 1;
+			} else if (randomNumber1 === max) {
+				randomNumber2 = randomNumber1 - 1;
+			} else {
+				const plusOne = getRandomOption(true, false);
+				randomNumber2 = plusOne ? randomNumber1 + 1 : randomNumber1 - 1;
+			}
+		}
+
+		const rotation = randomValueBetweenTwoNumbers(minRotation, maxRotation);
+
+		return { correct: isTheSame, value: { number1: randomNumber1, number2: randomNumber2, rotation } };
+	},
 };
 
 export async function generateTest(testInfo) {

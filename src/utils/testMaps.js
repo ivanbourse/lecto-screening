@@ -33,7 +33,8 @@ export const screenTypesComponentsMap = {
 export const dyscalculiaExercisesComponentsMap = {
 	counting: (isResult = false) => <Counting isResult={isResult} />,
 	'dots-comparison': (isResult = false) => <DotsComparison isResult={isResult} />,
-	'match-sample': (isResult = false) => <MatchSample isResult={isResult} />,
+	'match-sample': (isResult = false) => <MatchSample isResult={isResult} rotate={false} />,
+	'match-sample-rotate': (isResult = false) => <MatchSample isResult={isResult} rotate />,
 	'match-points-number': (isResult = false) => <MatchPointsNumber isResult={isResult} />,
 	'numeric-line': (isResult = false) => <NumericLine isResult={isResult} />,
 	'reaction-time': (isResult = false) => <ReactionTime isResult={isResult} />,

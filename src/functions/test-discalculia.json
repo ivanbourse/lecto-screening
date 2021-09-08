@@ -49,7 +49,9 @@
 				"Recuerda que los primeros 4 ejercicios serán de prueba para que aprendas a hacerlo."
 			],
 			"min": 1,
-			"max": 8
+			"max": 8,
+			"minRotation": 0,
+			"maxRotation": 360
 		},
 		{
 			"title": "Comparar puntos con números",
