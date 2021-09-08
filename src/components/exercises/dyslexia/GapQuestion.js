@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import useSetAnswer from 'functions/setAnswer';
 import ExerciseContainer from 'components/ExerciseContainer';
 
-import images from 'functions/imagesObject';
 import NextButton from 'components/NextButton';
 
 const GapQuestion = () => {
@@ -28,7 +27,6 @@ const GapQuestion = () => {
 
 	return (
 		<ExerciseContainer classes='gap-question-container'>
-			{exercise.image && <img src={images[exercise.image]} alt='' />}
 			<div className='timer'>
 				<p className='instruction'>Segundos restantes</p>
 				<div className='number'>{remainingTime}</div>

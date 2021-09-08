@@ -1,51 +1,91 @@
-import auto from '../assets/exercises-images/auto.png';
-import cocodrilo from '../assets/exercises-images/cocodrilo.png';
-import elefante from '../assets/exercises-images/elefante.png';
-import escalera from '../assets/exercises-images/escalera.png';
-import estrella from '../assets/exercises-images/estrella.png';
-import foca from '../assets/exercises-images/foca.png';
-import gato from '../assets/exercises-images/gato.png';
-import leon from '../assets/exercises-images/leon.png';
-import luna from '../assets/exercises-images/luna.png';
-import manzana from '../assets/exercises-images/manzana.png';
-import pala from '../assets/exercises-images/pala.png';
-import pelota from '../assets/exercises-images/pelota.png';
-import pera from '../assets/exercises-images/pera.png';
-import perro from '../assets/exercises-images/perro.png';
-import flor from '../assets/exercises-images/flor.png';
-import tenedor from '../assets/exercises-images/tenedor.png';
-import tijera from '../assets/exercises-images/tijera.png';
-import dots1 from '../assets/exercises-images/dots-1.png';
-import dots2 from '../assets/exercises-images/dots-2.png';
-import dots3 from '../assets/exercises-images/dots-3.png';
-import dots4 from '../assets/exercises-images/dots-4.png';
-import dots5 from '../assets/exercises-images/dots-5.png';
-import dots6 from '../assets/exercises-images/dots-6.png';
+import blanco from 'assets/exercises-images/blanco.png';
+import moneda from 'assets/exercises-images/moneda.png';
+import rojo from 'assets/exercises-images/rojo.png';
 
 export const images = {
-	auto,
-	cocodrilo,
-	elefante,
-	escalera,
-	estrella,
-	foca,
-	gato,
-	leon,
-	luna,
-	manzana,
-	pala,
-	pelota,
-	pera,
-	perro,
-	flor,
-	tenedor,
-	tijera,
-	'dots-1': dots1,
-	'dots-2': dots2,
-	'dots-3': dots3,
-	'dots-4': dots4,
-	'dots-5': dots5,
-	'dots-6': dots6,
+	arbol: 3057,
+	ardilla: 2257,
+	auto: 2339,
+	avion: 2264,
+	banco: 36830,
+	blanco,
+	bloque: 2951,
+	boca: 2663,
+	bote: 8714,
+	camisa: 13640,
+	canasta: 3012,
+	cara: 2684,
+	caracol: 8061,
+	casa: 6964,
+	cocodrilo: 2343,
+	corazon: 4613,
+	delfin: 2732,
+	durazno: 2468,
+	elefante: 2372,
+	empanada: 8310,
+	escalera: 2379,
+	flor: 11395,
+	foca: 2397,
+	gato: 2406,
+	leon: 25187,
+	luna: 2933,
+	mano: 2928,
+	manzana: 2462,
+	mariposa: 26200,
+	masa: 32476,
+	mate: 31036,
+	mesa: 4944,
+	moneda,
+	mono: 2477,
+	moño: 2946,
+	moto: 2480,
+	ojo: 6573,
+	oreja: 2871,
+	pala: 2867,
+	pan: 2494,
+	pantalon: 24222,
+	pasta: 8652,
+	pasto: 3113,
+	pato: 2563,
+	pelota: 3241,
+	pera: 2561,
+	perro: 2517,
+	pierna: 8666,
+	plata: 6183,
+	plaza: 6184,
+	postre: 35769,
+	raton: 2546,
+	remedio: 3006,
+	remera: 2309,
+	remo: 6206,
+	rojo,
+	rosa: 3151,
+	sal: 25576,
+	sandia: 2557,
+	sapo: 3384,
+	sol: 7252,
+	sopa: 2573,
+	te: 29802,
+	tenedor: 2588,
+	tijera: 6664,
+	tomate: 2594,
+	toro: 2595,
+	tostada: 2787,
+	tren: 2603,
+	tres: 35681,
+	trompeta: 2607,
 };
 
-export const getImage = word => images[word];
+const removeTildes = word =>
+	word
+		.normalize('NFD')
+		.replace(/[\u0300-\u036f]/g, '')
+		.toLowerCase();
+
+export const getImage = word => {
+	const imageOrCode = images[removeTildes(word)];
+	if (typeof imageOrCode === 'number') {
+		return `https://static.arasaac.org/pictograms/${imageOrCode}/${imageOrCode}_300.png`;
+	}
+	return imageOrCode;
+};

@@ -19,11 +19,13 @@ import SayTheLetters from 'components/exercises/dyslexia/SayTheLetters';
 import SplitSyllables from 'components/exercises/dyslexia/SplitSyllables';
 import ContainsLetter from 'components/exercises/dyslexia/ContainsLetter';
 import MatchWordsToImage from 'components/exercises/dyslexia/MatchWordsToImage';
+import PracticeFeedback from 'components/exercises/PracticeFeedback';
 
 export const screenTypesComponentsMap = {
 	instructions: () => <ExerciseInstructions />,
 	practice: () => <Exercise />,
 	exercise: () => <Exercise />,
+	'practice-feedback': () => <PracticeFeedback />,
 	'practice-finish': () => <ExerciseInstructions practiceFinish />,
 	empty: () => <></>,
 };
@@ -40,14 +42,10 @@ export const dyscalculiaExercisesComponentsMap = {
 };
 
 export const dyslexiaExercisesComponentsMap = {
-	counting: () => <CountItems />,
-	'gap-question': () => <GapQuestion />,
 	'multiple-choice': () => <MultipleChoice />,
-	'prev-next': () => <PrevPostNumber />,
 	'letters-question': () => <SayTheLetters />,
 	matching: () => <JoinWithArrows />,
 	syllables: () => <SplitSyllables />,
-	'read-alloud': () => <SayTheLetters />,
 	'contains-letter': () => <ContainsLetter />,
 	'say-items': () => <GapQuestion />,
 	'match-words': () => <MatchWordsToImage />,

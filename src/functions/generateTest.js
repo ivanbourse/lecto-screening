@@ -128,6 +128,7 @@ export async function generateTest(testInfo) {
 			for (let i = 0; i < practicesPerType; i++) {
 				const randomValue = randomGenerators[exerciseInfo.type](exerciseInfo);
 				testArray.push({ screenType: 'practice', ...exerciseInfo, ...randomValue });
+				testArray.push({ screenType: 'practice-feedback', ...exerciseInfo, ...randomValue });
 			}
 
 			testArray.push({ screenType: 'practice-finish', ...exerciseInfo });
@@ -139,14 +140,19 @@ export async function generateTest(testInfo) {
 			}
 		}
 	} else {
-		const { exercises, exercisesPerType, practicesPerType } = testInfo;
+		const { exercises } = testInfo;
 
 		for (let exerciseInfo of exercises) {
 			const { exercises, ...info } = exerciseInfo;
 			testArray.push({ screenType: 'instructions', ...info });
 
 			exercises.forEach(realExercise => {
-				testArray.push({ ...realExercise, type: exerciseInfo.type });
+				if (realExercise.screenType === 'practice') {
+					testArray.push({ screenType: 'practice', ...info, ...realExercise });
+					testArray.push({ ...info, ...realExercise, screenType: 'practice-feedback' });
+				} else {
+					testArray.push({ ...realExercise, type: exerciseInfo.type });
+				}
 			});
 		}
 	}

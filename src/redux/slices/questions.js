@@ -6,6 +6,7 @@ import { baseUrl } from '../../variables';
 
 import discalculiaJSON from 'functions/test-discalculia.json';
 import dislexiaJSON from 'functions/test-dislexia.json';
+import { checkIfIsCorrect } from 'utils/checkCorrect';
 
 const initialState = {
 	questions: [],
@@ -62,22 +63,21 @@ const slice = createSlice({
 			state.animate = true;
 		},
 		setAnswer: (state, action) => {
+			state.animate = true;
 			const { screenType, ...currentQuestion } = state.questions[state.current];
 			const isExercise = screenType === 'exercise';
+			const isPractice = screenType === 'practice';
 
 			state.answers[state.current] = {};
 
-			if (isExercise) {
-				const isCorrect = true;
-				state.answers[state.current].answered = true;
-				state.answers[state.current].saveValue = true;
+			if (isExercise || isPractice) {
+				const isCorrect = checkIfIsCorrect(state.testType, currentQuestion, action.payload);
 				state.answers[state.current].type = currentQuestion.type;
 				state.answers[state.current].answer = { correct: isCorrect, ...action.payload };
-			}
 
-			if (state.questions.length - 1 > state.current) state.current++;
-			else state.finished = true;
-			state.animate = false;
+				state.answers[state.current].answered = isExercise;
+				state.answers[state.current].saveValue = isExercise;
+			}
 		},
 		resetTest: (state, action) => {
 			state.current = 0;

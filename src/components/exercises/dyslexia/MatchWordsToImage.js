@@ -8,10 +8,6 @@ const MatchWordsToImage = () => {
 	const { exercise, userAnswer, setUserAnswer, submitAnswer } = useSetAnswer();
 	const [correctWord] = exercise.images.filter(({ correct }) => !!correct);
 
-	useEffect(() => {
-		console.log(correctWord, exercise.images);
-	}, []);
-
 	return (
 		<ExerciseContainer classes='multiple-choice-container'>
 			<p className='instruction'>{correctWord.image}</p>

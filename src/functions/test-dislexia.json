@@ -496,7 +496,7 @@
 			"instructions": ["LEÉ LA PALABRA Y SEÑALÁ LA IMAGEN CORRECTA."],
 			"exercises": [
 				{
-					"screenType": "exercise",
+					"screenType": "practice",
 					"images": [
 						{ "image": "mano", "correct": false },
 						{ "image": "mesa", "correct": true },

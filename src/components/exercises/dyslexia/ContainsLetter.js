@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import ExerciseContainer from 'components/ExerciseContainer';
 import NextButton from 'components/NextButton';
 import useSetAnswer from 'functions/setAnswer';
+import { getImage } from 'functions/getImage';
 
 const ContainsLetter = () => {
 	const { exercise, userAnswer, setUserAnswer, submitAnswer } = useSetAnswer();
@@ -18,7 +19,7 @@ const ContainsLetter = () => {
 							className={`option ${userAnswer.i === i ? 'selected' : ''}`}
 							onClick={() => setUserAnswer({ i, word: word.word })}
 						>
-							<img src={word.word} alt={`Pictogram for ${word.word}`} />
+							<img className='image-option' src={getImage(word.word)} alt={`Pictograma de ${word.word}`} />
 						</div>
 					))}
 				</div>

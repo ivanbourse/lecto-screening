@@ -15,7 +15,6 @@ const NextButton = props => {
 			<button
 				className='next-button'
 				onClick={e => {
-					console.log(props.answered);
 					if (props.answered === true) {
 						document.activeElement.blur();
 						props.setUserAnswer();

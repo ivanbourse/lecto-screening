@@ -16,6 +16,7 @@ const JoinWithArrows = () => {
 
 	useEffect(() => {
 		setCantPairs(0);
+		selected = -1;
 		setImageState(() => {
 			let list = [];
 			exercise.words.forEach((item, ind) => {

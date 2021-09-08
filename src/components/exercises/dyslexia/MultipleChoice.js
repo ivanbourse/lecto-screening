@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import useSetAnswer from 'functions/setAnswer';
 import ExerciseContainer from 'components/ExerciseContainer';
 
-import images from 'functions/imagesObject';
 import NextButton from 'components/NextButton';
 
 const MultipleChoice = props => {
@@ -14,7 +13,6 @@ const MultipleChoice = props => {
 			{exercise && (
 				<ExerciseContainer classes='multiple-choice-container'>
 					<p className='instruction'>{exercise.question}</p>
-					{exercise.image && <img src={images[exercise.image]} alt='' />}
 					<div className='options'>
 						{exercise.answers.map((item, i) => (
 							<div

@@ -4,62 +4,6 @@
 	"exercisesPerType": 10,
 	"exercises": [
 		{
-			"title": "Aritmética - suma",
-			"description": "Descripción",
-			"type": "simple-arithmetic",
-			"instructions": [
-				"En la pantalla aparecerán cuentas de suma y resta. Deberás escribir el resultado correcto.",
-				"Recuerda que los primeros 4 ejercicios serán de prueba, para que puedas aprender cómo resolverlo."
-			],
-			"operand": "+"
-		},
-		{
-			"title": "Aritmética - resta",
-			"description": "Descripción",
-			"type": "simple-arithmetic",
-			"instructions": [
-				"En la pantalla aparecerán cuentas de suma y resta. Deberás escribir el resultado correcto.",
-				"Recuerda que los primeros 4 ejercicios serán de prueba, para que puedas aprender cómo resolverlo."
-			],
-			"operand": "-"
-		},
-		{
-			"title": "Conteo directo",
-			"description": "Descripción",
-			"type": "counting",
-			"instructions": [
-				"En la pantalla aparecerán dos números consecutivos, deberás escribir cual es el número que le sigue.",
-				"Recuerda que los primeros 4 ejercicios serán de prueba para que aprendas a hacerlo."
-			],
-			"min": 4,
-			"max": 8,
-			"reverse": false
-		},
-		{
-			"title": "Conteo inverso",
-			"description": "Descripción",
-			"type": "counting",
-			"instructions": [
-				"En la pantalla aparecerán dos números consecutivos, deberás escribir cual es el número que le sigue.",
-				"Recuerda que los primeros 4 ejercicios serán de prueba para que aprendas a hacerlo."
-			],
-			"min": 4,
-			"max": 8,
-			"reverse": true
-		},
-		{
-			"title": "Matchear ejemplo",
-			"description": "Descripción",
-			"type": "match-sample",
-			"instructions": [
-				"En la pantalla aparecerán dos grupos de puntos.",
-				"Deberás hacer click en el grupo que tenga mayor cantidad de puntos.",
-				"Recuerda que los primeros 4 ejercicios serán de prueba para que aprendas a hacerlo."
-			],
-			"min": 1,
-			"max": 8
-		},
-		{
 			"title": "Tiempo de reacción",
 			"description": "Descripción",
 			"type": "reaction-time",
@@ -72,7 +16,7 @@
 			"max": 3
 		},
 		{
-			"title": "Comparación de puntos",
+			"title": "Comparar puntos",
 			"description": "Descripción",
 			"type": "dots-comparison",
 			"instructions": [
@@ -84,7 +28,31 @@
 			"max": 10
 		},
 		{
-			"title": "Matchear Patron de puntos - números simbolicos",
+			"title": "Comparar con el ejemplo",
+			"description": "Descripción",
+			"type": "match-sample",
+			"instructions": [
+				"En la pantalla aparecerán dos grupos de puntos.",
+				"Deberás hacer click en el grupo que tenga mayor cantidad de puntos.",
+				"Recuerda que los primeros 4 ejercicios serán de prueba para que aprendas a hacerlo."
+			],
+			"min": 1,
+			"max": 8
+		},
+		{
+			"title": "Comparar con el ejemplo - Rotación",
+			"description": "Descripción",
+			"type": "match-sample-rotate",
+			"instructions": [
+				"En la pantalla aparecerán dos grupos de puntos.",
+				"Deberás hacer click en el grupo que tenga mayor cantidad de puntos.",
+				"Recuerda que los primeros 4 ejercicios serán de prueba para que aprendas a hacerlo."
+			],
+			"min": 1,
+			"max": 8
+		},
+		{
+			"title": "Comparar puntos con números",
 			"description": "Descripción",
 			"type": "match-points-number",
 			"instructions": [
@@ -97,7 +65,7 @@
 			"max": 10
 		},
 		{
-			"title": "Magnitud simbolica",
+			"title": "Comparar números",
 			"description": "Descripción",
 			"type": "symbolic-magnitude",
 			"instructions": [
@@ -119,6 +87,50 @@
 			],
 			"min": 1,
 			"max": 10
+		},
+		{
+			"title": "Contar para adelante",
+			"description": "Descripción",
+			"type": "counting",
+			"instructions": [
+				"En la pantalla aparecerán dos números consecutivos, deberás escribir cual es el número que le sigue.",
+				"Recuerda que los primeros 4 ejercicios serán de prueba para que aprendas a hacerlo."
+			],
+			"min": 4,
+			"max": 8,
+			"reverse": false
+		},
+		{
+			"title": "Contar para atrás",
+			"description": "Descripción",
+			"type": "counting",
+			"instructions": [
+				"En la pantalla aparecerán dos números consecutivos, deberás escribir cual es el número que le sigue.",
+				"Recuerda que los primeros 4 ejercicios serán de prueba para que aprendas a hacerlo."
+			],
+			"min": 4,
+			"max": 8,
+			"reverse": true
+		},
+		{
+			"title": "Suma",
+			"description": "Descripción",
+			"type": "simple-arithmetic",
+			"instructions": [
+				"En la pantalla aparecerán cuentas de suma y resta. Deberás escribir el resultado correcto.",
+				"Recuerda que los primeros 4 ejercicios serán de prueba, para que puedas aprender cómo resolverlo."
+			],
+			"operand": "+"
+		},
+		{
+			"title": "Resta",
+			"description": "Descripción",
+			"type": "simple-arithmetic",
+			"instructions": [
+				"En la pantalla aparecerán cuentas de suma y resta. Deberás escribir el resultado correcto.",
+				"Recuerda que los primeros 4 ejercicios serán de prueba, para que puedas aprender cómo resolverlo."
+			],
+			"operand": "-"
 		}
 	]
 }

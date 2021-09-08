@@ -26,6 +26,10 @@
 	flex-direction: column;
 	gap: 5vh;
 
+	.emoji {
+		width: clamp(130px, 90vw, 300px);
+	}
+
 	&.practice-finish-container {
 		min-height: 100vh;
 	}
@@ -465,6 +469,10 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	pointer-events: none;
+	* {
+		pointer-events: none;
+	}
 
 	.loading-container {
 		display: flex;
