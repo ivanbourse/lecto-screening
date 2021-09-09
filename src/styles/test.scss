@@ -26,6 +26,16 @@
 	flex-direction: column;
 	gap: 5vh;
 
+	.play-icon {
+		background: var(--clr-main);
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0.6rem;
+		cursor: pointer;
+	}
+
 	.emoji {
 		width: clamp(130px, 90vw, 300px);
 	}

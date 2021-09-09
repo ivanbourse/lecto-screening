@@ -22,6 +22,7 @@
 		"react-slick": "^0.28.1",
 		"react-speech-kit": "^3.0.1",
 		"react-speech-recognition": "^3.3.0",
+		"react-tooltip": "^4.2.21",
 		"react-xarrows": "^1.5.2",
 		"recharts": "^2.0.9",
 		"redux": "^4.0.5",

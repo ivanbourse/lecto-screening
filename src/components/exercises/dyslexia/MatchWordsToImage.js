@@ -10,16 +10,16 @@ const MatchWordsToImage = () => {
 
 	return (
 		<ExerciseContainer classes='multiple-choice-container'>
-			<p className='instruction'>{correctWord.image}</p>
+			<p className='instruction'>{correctWord.image.toUpperCase()}</p>
 			<div className='options'>
 				{exercise.images &&
 					exercise.images.map((item, i) => (
 						<div
 							key={item.answer}
-							className={`option ${userAnswer.i === i ? 'selected' : ''}`}
+							className={`image-option option ${userAnswer.i === i ? 'selected' : ''}`}
 							onClick={() => setUserAnswer({ i, item })}
 						>
-							<img src={getImage} alt={`Pictogram for ${item.image}`} />
+							<img src={getImage(item.image)} alt={`Pictogram for ${item.image}`} />
 							<p>{item.answer}</p>
 						</div>
 					))}

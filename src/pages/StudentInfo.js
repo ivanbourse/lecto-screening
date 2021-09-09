@@ -1,10 +1,123 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import ReactTooltip from 'react-tooltip';
+import { testTypesComponentsMap } from 'utils/testMaps';
 import LoadingScreen from '../components/LoadingScreen';
 import { history } from '../components/Router';
 import { stateToWords, textForTypeOfExercise } from '../functions/answerResults';
 import { getStudentInfo } from '../redux/slices/student';
 import { signOut } from '../redux/slices/user';
+
+import incorrectIcon from 'assets/icons/incorrect.svg';
+import correctIcon from 'assets/icons/correct.svg';
+
+import { addExerciseToResults, setExercise, setExerciseResults, setPopupOpen } from 'redux/slices/dashboard';
+import Accordion from 'components/global/Accordion';
+
+const getAverageAnswerTime = exercises => {
+	const allAnswerTimes = exercises.map(item => item.time || item.answer.time);
+
+	const average = allAnswerTimes.reduce(function (avg, value, _, { length }) {
+		return avg + value / length;
+	}, 0);
+
+	const averageInSeconds = average / 1000;
+
+	return averageInSeconds.toFixed(2);
+};
+
+const ExerciseResultsComponent = ({ type }) => {
+	const dispatch = useDispatch();
+
+	const { questions, testType } = useSelector(state => state.questions);
+
+	const { exerciseResults } = useSelector(state => state.dashboard);
+
+	console.log({ testType, exerciseResults });
+	const exercises = exerciseResults[testType][type];
+
+	const exercisesAmounts = {
+		total: exercises.length,
+		correct: exercises.filter(item => item.correct.isCorrect).length,
+		incorrect: exercises.filter(item => !item.correct.isCorrect).length,
+	};
+
+	const percentages = {
+		correct: (exercisesAmounts.correct / exercisesAmounts.total) * 100 + '%',
+		incorrect: (exercisesAmounts.incorrect / exercisesAmounts.total) * 100 + '%',
+	};
+
+	const averageAnswerTime = getAverageAnswerTime(exercises);
+
+	const openPopup = index => {
+		const exercise = questions.filter(item => item.type === type && item.screenType === 'exercise')[index];
+		dispatch(setPopupOpen(true));
+		dispatch(setExercise(exercise));
+	};
+
+	return (
+		<div className='exercise-result-container'>
+			<div className='labels'>
+				<p className='total-label'>
+					Total: <span>{exercisesAmounts.total}</span>
+				</p>
+				<p className='correct-label'>
+					Correctas:{' '}
+					<span>
+						<b>{exercisesAmounts.correct}</b> ({percentages.correct})
+					</span>
+				</p>
+				<p className='incorrect-label'>
+					Incorrectas:{' '}
+					<span>
+						<b>{exercisesAmounts.incorrect}</b> ({percentages.incorrect})
+					</span>
+				</p>
+				<p className='average-time-label'>
+					Tiempo de respuesta promedio: <span>{averageAnswerTime}s</span>
+				</p>
+			</div>
+			<div className='result-icons-container'>
+				{exercises.map((item, i) => {
+					return (
+						<div className='result-icon' onClick={() => openPopup(i)} key={item.type + ' ' + i}>
+							<img
+								src={item.correct.isCorrect ? correctIcon : incorrectIcon}
+								data-tip
+								data-for={`${type} ${Date.now} ${i}`}
+								alt='icon'
+							/>
+							<ReactTooltip id={`${type} ${Date.now} ${i}`} type='dark' effect='solid' className='tooltip'>
+								{type === 'match-points-number' ? (
+									<>
+										<p>Respuesta ingresada: {item.answer === true ? 'verdadero' : 'falso'}</p>
+										<p>Respuesta correcta: {item.correct.value === true ? 'verdadero' : 'falso'}</p>
+									</>
+								) : (
+									<>
+										{type !== 'reaction-time' && (
+											<>
+												<p>Respuesta ingresada: {item.answer}</p>
+												<p>Respuesta correcta: {item.correct.value}</p>
+											</>
+										)}
+									</>
+								)}
+								<p>Tiempo tardado: {item.time / 1000} segundos</p>
+							</ReactTooltip>
+						</div>
+					);
+				})}
+			</div>
+		</div>
+	);
+};
+
+const Exercise = () => {
+	const { exercise, testType } = useSelector(state => state.questions);
+
+	return <div className='exercise-screen'>{exercise && testTypesComponentsMap[testType][exercise.type](true)}</div>;
+};
 
 const StudentInfo = props => {
 	const { user } = useSelector(state => state.dashboard);
@@ -19,6 +132,34 @@ const StudentInfo = props => {
 	const logOut = () => {
 		dispatch(signOut());
 		history.push('/');
+	};
+
+	const { answers, testType } = useSelector(state => state.questions);
+
+	const { popupOpen, exerciseResults } = useSelector(state => state.dashboard);
+
+	const updateResults = () => {
+		const allAnswers = answers && answers.filter(answer => answer.saveValue === true);
+		const temp = { ...exerciseResults };
+
+		console.log({ temp, answers });
+
+		for (let i = 0; i < allAnswers.length; i++) {
+			const exercise = allAnswers[i];
+			/* temp[exercise.exerciseType] = [...temp[exercise.exerciseType], exercise.answer]; */
+			dispatch(
+				addExerciseToResults({ type: exercise?.exerciseType || exercise?.type, result: exercise.answer, testType })
+			);
+		}
+	};
+
+	useEffect(() => {
+		updateResults();
+	}, [answers]);
+
+	const closePopup = () => {
+		dispatch(setPopupOpen(false));
+		dispatch(setExercise({}));
 	};
 
 	return (
@@ -83,49 +224,42 @@ const StudentInfo = props => {
 						<div className='container'>
 							<h2 className='subtitle'>Resultados de {student.alias}:</h2>
 							<div className='info-container'>
-								{results.map(item => (
-									<div className='result-container'>
-										<h2>Ver resultado del {new Date(item.result.date).toLocaleDateString()}:</h2>
-										{/* <div className='item'>
-											<h3>Gráfico de las pruebas: Inicio de año</h3>
-											<div style={{ height: 300, width: 650, backgroundColor: '#ccc' }}></div>
-										</div> */}
-										<div className='result-paragraph'>
-											<h3>Rendimiento general:</h3>
-											<p className='text'>
-												Los resultados obtenidos del screening de precursores de dificultades específicas en el
-												aprendizaje indican que {student.alias} presenta un desarrollo de habilidades para la
-												adquisición de la lectoescritura dentro de los parámetros <b>{item.performance.literacy.state}</b> en
-												comparación con chicos de su edad cronológica. Asimismo, en el desarrollo de habilidades
-												esenciales del área de matemática presenta un rendimiento dentro de los parámetros{' '}
-												<b>{item.performance.math.state}</b> en comparación con la media.
-											</p>
-										</div>
-										{/* <div className='item'>
-											<h3>Gráfico comparativo de las pruebas a lo largo del año</h3>
-											<div style={{ height: 300, width: 650, backgroundColor: '#ccc' }}></div>
-										</div> */}
-										{/* <div className='item'>
-											<h3>Gráfico comparativo con los alumnos del usuario XXX</h3>
-											<div className='chart'>
-												<h5 className='label'>Lecto-escritura</h5>
-												<div style={{ height: 300, width: 500, backgroundColor: '#ccc' }}></div>
-											</div>
-											<div className='chart'>
-												<h5 className='label'>Matemática</h5>
-												<div style={{ height: 300, width: 500, backgroundColor: '#ccc' }}></div>
-											</div>
-										</div> */}
-										<div className='result-paragraph'>
-											<h3>Informe de desempeño en las pruebas</h3>
-											<ul>
-												{Object.entries(item.answersResults).map(([key, value]) =>
-													textForTypeOfExercise[key].text({ name: student.alias, answerResult: value })
-												)}
-											</ul>
-										</div>
-									</div>
-								))}
+								<Accordion
+									items={[
+										{
+											title: 'Conocimiento alfabético',
+											component: () => <ExerciseResultsComponent type='letters-question' />,
+										},
+										{
+											title: 'Conciencia fonética: discriminación del sonido',
+											component: () => <ExerciseResultsComponent type='matching' />,
+										},
+										{
+											title: 'Conciencia fonética: discriminación de fonema',
+											component: () => <ExerciseResultsComponent type='contains-letter' />,
+										},
+										{
+											title: 'Conciencia silábica: separar en sílabas',
+											component: () => <ExerciseResultsComponent type='syllables' />,
+										},
+										{
+											title: 'Vocabulario: adivinanzas',
+											component: () => <ExerciseResultsComponent type='multiple-choice' />,
+										},
+										{
+											title: 'Fluidez verbal: acceso al léxico',
+											component: () => <ExerciseResultsComponent type='say-items' />,
+										},
+										{
+											title: 'Lectura de palabras',
+											component: () => <ExerciseResultsComponent type='match-words' />,
+										},
+										{
+											title: 'Lectura de pseudopalabras',
+											component: () => <ExerciseResultsComponent type='nonexisting-words' />,
+										},
+									]}
+								/>
 							</div>
 						</div>
 					</div>

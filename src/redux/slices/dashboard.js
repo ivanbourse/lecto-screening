@@ -41,8 +41,45 @@ const slice = createSlice({
 		user: {},
 		students: [],
 		currentStudent: {},
+		exerciseResults: {
+			dyscalculia: {
+				'reaction-time': [],
+				'dots-comparison': [],
+				'match-points-number': [],
+				'symbolic-magnitude': [],
+				'numeric-line': [],
+				'simple-arithmetic': [],
+				counting: [],
+				'match-sample': [],
+			},
+			dyslexia: {
+				'multiple-choice': [],
+				'letters-question': [],
+				matching: [],
+				syllables: [],
+				'contains-letter': [],
+				'say-items': [],
+				'match-words': [],
+				'nonexisting-words': [],
+			},
+		},
+		popupOpen: false,
+		exercise: {},
 	},
-	reducers: {},
+	reducers: {
+		setPopupOpen: (state, action) => {
+			state.popupOpen = action.payload;
+		},
+		setExercise: (state, action) => {
+			state.exercise = action.payload;
+		},
+		setExerciseResults: (state, action) => {
+			state.exerciseResults = action.payload;
+		},
+		addExerciseToResults: (state, action) => {
+			state.exerciseResults[action.payload.testType][action.payload.type].push(action.payload.result);
+		},
+	},
 	extraReducers: builder => {
 		builder
 			.addCase(getInformation.fulfilled, (state, action) => {
@@ -74,6 +111,6 @@ const slice = createSlice({
 	},
 });
 
-// export const { } = slice.actions;
+export const { setPopupOpen, setExercise, setExerciseResults, addExerciseToResults } = slice.actions;
 
 export default slice.reducer;
