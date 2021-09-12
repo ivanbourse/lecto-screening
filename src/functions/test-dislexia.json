@@ -7,8 +7,8 @@
 			"type": "letters-question",
 			"autocorrect": false,
 			"instructions": [
-				"DECÍ EL NOMBRE DE LAS LETRAS LO MÁS RÁPIDO QUE PUEDAS. ",
-				"APRETAR LA FLECHA DERECHA EN LAS RESPUESTAS CORRECTAS Y LA FLECHA IZQUIERDA CUANDO ES INCORRECTA"
+				"Decí el nombre de las letras lo más rápido que puedas.",
+				"Apretar la flecha derecha en las respuestas correctas y la flecha izquierda en las incorrectas."
 			],
 			"exercises": [
 				{
@@ -60,8 +60,8 @@
 			"type": "letters-question",
 			"autocorrect": false,
 			"instructions": [
-				"DECÍ EL SONIDO DE LAS LETRAS LO MÁS RÁPIDO QUE PUEDAS.",
-				"APRETAR LA FLECHA DERECHA EN LAS RESPUESTAS CORRECTAS Y LA FLECHA IZQUIERDA CUANDO ES INCORRECTA"
+				"Decí el sonido de las letras lo más rápido que puedas.",
+				"Apretar la flecha derecha en las respuestas correctas y la flecha izquierda en las incorrectas."
 			],
 			"exercises": [
 				{
@@ -112,7 +112,7 @@
 			"description": "Descripción",
 			"type": "matching",
 			"autocorrect": true,
-			"instructions": ["SEÑALÁ LOS DIBUJOS QUE COMIENCEN CON EL MISMO SONIDO. "],
+			"instructions": ["Señalá los dibujos que comiencen con el mismo sonido."],
 			"exercises": [
 				{
 					"screenType": "practice",
@@ -163,12 +163,12 @@
 						{ "word": "Mesa", "matchNumber": 0 },
 						{ "word": "Caracol", "matchNumber": 1 },
 						{ "word": "Cocodrilo", "matchNumber": 1 },
-						{ "word": "Sapo", "matchNumber": 2 },
+						{ "word": "Sol", "matchNumber": 2 },
 						{ "word": "Sandía", "matchNumber": 2 },
 						{ "word": "Ratón", "matchNumber": 3 },
-						{ "word": "Rojo", "matchNumber": 3 },
+						{ "word": "Rinoceronte", "matchNumber": 3 },
 						{ "word": "Delfín", "matchNumber": 4 },
-						{ "word": "Durazno", "matchNumber": 4 }
+						{ "word": "Dragón", "matchNumber": 4 }
 					]
 				}
 			]
@@ -178,10 +178,11 @@
 			"description": "Descripción",
 			"type": "contains-letter",
 			"autocorrect": true,
-			"instructions": ["SEÑALÁ EL DIBUJO QUE CONTEGA EL SONIDO \"S\""],
+			"instructions": ["Señalá el dibujo que contenga el sonido de la letra indicada"],
 			"exercises": [
 				{
 					"screenType": "practice",
+					"letter": "S",
 					"words": [
 						{ "word": "Sal", "correct": true },
 						{ "word": "Pan", "correct": false }
@@ -189,6 +190,7 @@
 				},
 				{
 					"screenType": "practice",
+					"letter": "S",
 					"words": [
 						{ "word": "Pelota", "correct": false },
 						{ "word": "Pasta", "correct": true }
@@ -196,6 +198,7 @@
 				},
 				{
 					"screenType": "practice",
+					"letter": "R",
 					"words": [
 						{ "word": "Auto", "correct": false },
 						{ "word": "Rosa", "correct": true }
@@ -206,13 +209,15 @@
 				},
 				{
 					"screenType": "exercise",
+					"letter": "M",
 					"words": [
-						{ "word": "Casa", "correct": true },
-						{ "word": "Mono", "correct": false }
+						{ "word": "Casa", "correct": false },
+						{ "word": "Mono", "correct": true }
 					]
 				},
 				{
 					"screenType": "exercise",
+					"letter": "P",
 					"words": [
 						{ "word": "Mano", "correct": false },
 						{ "word": "Sopa", "correct": true }
@@ -220,6 +225,7 @@
 				},
 				{
 					"screenType": "exercise",
+					"letter": "T",
 					"words": [
 						{ "word": "Pasto", "correct": true },
 						{ "word": "Pierna", "correct": false }
@@ -227,13 +233,15 @@
 				},
 				{
 					"screenType": "exercise",
+					"letter": "S",
 					"words": [
-						{ "word": "Sapo", "correct": true },
+						{ "word": "Sol", "correct": true },
 						{ "word": "Pato", "correct": false }
 					]
 				},
 				{
 					"screenType": "exercise",
+					"letter": "C",
 					"words": [
 						{ "word": "Canasta", "correct": true },
 						{ "word": "Empanada", "correct": false }
@@ -241,27 +249,31 @@
 				},
 				{
 					"screenType": "exercise",
+					"letter": "D",
 					"words": [
-						{ "word": "Moneda", "correct": false },
-						{ "word": "Mesa", "correct": true }
+						{ "word": "Moneda", "correct": true },
+						{ "word": "Mesa", "correct": false }
 					]
 				},
 				{
 					"screenType": "exercise",
+					"letter": "V",
 					"words": [
-						{ "word": "Bote", "correct": false },
-						{ "word": "Masa", "correct": true }
+						{ "word": "Bote", "correct": true },
+						{ "word": "Masa", "correct": false }
 					]
 				},
 				{
 					"screenType": "exercise",
+					"letter": "T",
 					"words": [
-						{ "word": "Camisa", "correct": true },
-						{ "word": "Pantalón", "correct": false }
+						{ "word": "Camisa", "correct": false },
+						{ "word": "Pantalón", "correct": true }
 					]
 				},
 				{
 					"screenType": "exercise",
+					"letter": "S",
 					"words": [
 						{ "word": "Sandía", "correct": true },
 						{ "word": "Pera", "correct": false }
@@ -269,6 +281,7 @@
 				},
 				{
 					"screenType": "exercise",
+					"letter": "P",
 					"words": [
 						{ "word": "Postre", "correct": true },
 						{ "word": "Remera", "correct": false }
@@ -281,7 +294,7 @@
 			"description": "Descripción",
 			"type": "syllables",
 			"autocorrect": true,
-			"instructions": ["PINTÁ LOS CIRCULOS SEGÚN LA CANTIDAD DE SILABAS QUE TENGA LA PALABRA."],
+			"instructions": ["Pintá los círculos según la cantidad de sílabas que tenga la palabra."],
 			"exercises": [
 				{
 					"screenType": "practice",
@@ -358,7 +371,7 @@
 			"description": "Descripción",
 			"type": "multiple-choice",
 			"autocorrect": true,
-			"instructions": ["NOMBRÁ LA RESPUESTA CORRECTA"],
+			"instructions": ["Seleccioná la respuesta correcta."],
 			"exercises": [
 				{
 					"screenType": "practice",
@@ -467,7 +480,7 @@
 			"description": "Descripción",
 			"type": "say-items",
 			"autocorrect": false,
-			"instructions": ["NOMBRÁ EN UN MINUTO, TODOS LOS ANIMALES QUE SE TE OCURRAN."],
+			"instructions": ["Nombrá en un minuto todos los animales que se te ocurran."],
 			"exercises": [
 				{
 					"screenType": "exercise"
@@ -480,7 +493,7 @@
 			"type": "say-items",
 			"autocorrect": false,
 			"instructions": [
-				"NOMBRÁ EN UN MINUTO, TODAS LAS PALABRAS QUE SE TE OCURRAN QUE EMPIECEN CON LAS SILABAS MA, ME, MI, MO O MU."
+				"Nombrá en un minuto todas las palabras que se te ocurran que empiecen con las sílabas MA, ME, MI, MO o MU."
 			],
 			"exercises": [
 				{
@@ -493,7 +506,7 @@
 			"description": "Descripción",
 			"type": "match-words",
 			"autocorrect": false,
-			"instructions": ["LEÉ LA PALABRA Y SEÑALÁ LA IMAGEN CORRECTA."],
+			"instructions": ["Leé la palabra y señalá la imagen correcta."],
 			"exercises": [
 				{
 					"screenType": "practice",
@@ -525,7 +538,7 @@
 					"images": [
 						{ "image": "moto", "correct": true },
 						{ "image": "mono", "correct": false },
-						{ "image": "mate", "correct": false }
+						{ "image": "manzana", "correct": false }
 					]
 				},
 				{
@@ -571,7 +584,7 @@
 				{
 					"screenType": "exercise",
 					"images": [
-						{ "image": "blanco", "correct": true },
+						{ "image": "barco", "correct": true },
 						{ "image": "bloque", "correct": false },
 						{ "image": "banco", "correct": false }
 					]
@@ -584,8 +597,8 @@
 			"type": "nonexisting-words",
 			"autocorrect": false,
 			"instructions": [
-				"LEÉ ESTÁS PALABRAS INVENTADAS, NO EXISTEN.",
-				"APRETAR LA FLECHA DERECHA EN LAS RESPUESTAS CORRECTAS Y LA FLECHA IZQUIERDA CUANDO ES INCORRECTA"
+				"Leé estas palabras inventadas, no existen",
+				"Apretar la flecha derecha en las respuestas correctas y la flecha izquierda en las incorrectas."
 			],
 			"exercises": [
 				{

@@ -23,6 +23,8 @@ const GapQuestion = () => {
 
 	useEffect(() => {
 		if (input.current) input.current.value = '';
+		setTimerStarted(false);
+		setRemainingTime(60);
 	}, [exercise]);
 
 	return (
@@ -51,7 +53,7 @@ const GapQuestion = () => {
 					Empezar timer
 				</div>
 			)}
-			<NextButton setUserAnswer={submitAnswer} answered={input?.current?.value !== '' && remainingTime <= 0} />
+			<NextButton setUserAnswer={submitAnswer} answered={input?.current?.value !== ''} />
 		</ExerciseContainer>
 	);
 };

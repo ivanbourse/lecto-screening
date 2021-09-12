@@ -1,6 +1,4 @@
-import blanco from 'assets/exercises-images/blanco.png';
 import moneda from 'assets/exercises-images/moneda.png';
-import rojo from 'assets/exercises-images/rojo.png';
 
 export const images = {
 	arbol: 3057,
@@ -8,7 +6,7 @@ export const images = {
 	auto: 2339,
 	avion: 2264,
 	banco: 36830,
-	blanco,
+	barco: 8714,
 	bloque: 2951,
 	boca: 2663,
 	bote: 8714,
@@ -20,7 +18,7 @@ export const images = {
 	cocodrilo: 2343,
 	corazon: 4613,
 	delfin: 2732,
-	durazno: 2468,
+	dragon: 5572,
 	elefante: 2372,
 	empanada: 8310,
 	escalera: 2379,
@@ -58,11 +56,10 @@ export const images = {
 	remedio: 3006,
 	remera: 2309,
 	remo: 6206,
-	rojo,
+	rinoceronte: 2550,
 	rosa: 3151,
 	sal: 25576,
 	sandia: 2557,
-	sapo: 3384,
 	sol: 7252,
 	sopa: 2573,
 	te: 29802,
