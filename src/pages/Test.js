@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { resetTest } from '../redux/slices/questions';
+import { finishTest, resetTest } from '../redux/slices/questions';
 import { useDispatch, useSelector } from 'react-redux';
 
 import MotionAnimation from '../components/MotionAnimation';
@@ -24,16 +24,21 @@ const Test = () => {
 		function confirmExit() {
 			return 'show warning';
 		}
+
+		return () => {
+			window.onbeforeunload = null;
+		};
 	}, []);
 
 	useEffect(() => {
-		console.log(current);
-	}, [questions]);
+		async function finishTestRedux() {
+			await dispatch(finishTest());
+			history.push('/finished-test');
+		}
 
-	useEffect(() => {
 		if (finished === true) {
 			window.onbeforeunload = null;
-			history.push('/finished-test');
+			finishTestRedux();
 		}
 	}, [finished]);
 

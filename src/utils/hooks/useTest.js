@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAnswer } from 'redux/slices/questions';
+import { nextQuestion, setAnswer } from 'redux/slices/questions';
 
 const useTest = props => {
 	const dispatch = useDispatch();
@@ -17,9 +17,9 @@ const useTest = props => {
 
 	const submitAnswer = answer => {
 		if (props?.customTime === true) {
-			dispatch(setAnswer({ time: answer.time, answer }));
+			dispatch(nextQuestion({ time: answer.time, answer }));
 		} else {
-			dispatch(setAnswer({ time: Date.now() - startTime, answer: answer ?? userAnswer }));
+			dispatch(nextQuestion({ time: Date.now() - startTime, answer: answer ?? userAnswer }));
 		}
 		setUserAnswer({});
 	};

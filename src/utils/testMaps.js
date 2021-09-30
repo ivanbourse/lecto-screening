@@ -20,6 +20,7 @@ import SplitSyllables from 'components/exercises/dyslexia/SplitSyllables';
 import ContainsLetter from 'components/exercises/dyslexia/ContainsLetter';
 import MatchWordsToImage from 'components/exercises/dyslexia/MatchWordsToImage';
 import PracticeFeedback from 'components/exercises/PracticeFeedback';
+import SendResults from 'components/exercises/SendResults';
 
 export const screenTypesComponentsMap = {
 	instructions: () => <ExerciseInstructions />,
@@ -27,6 +28,7 @@ export const screenTypesComponentsMap = {
 	exercise: () => <Exercise />,
 	'practice-feedback': () => <PracticeFeedback />,
 	'practice-finish': () => <ExerciseInstructions practiceFinish />,
+	'exercise-finish': () => <SendResults practiceFinish />,
 	empty: () => <></>,
 };
 

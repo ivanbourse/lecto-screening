@@ -1,8 +1,8 @@
 import Keyboard from 'components/exercises/dyscalculia/components/Keyboard';
-import useTest from 'utils/hooks/useTest';
+import useSetAnswer from 'functions/setAnswer';
 
 const SimpleArithmetic = ({ isResult }) => {
-	const { exercise, submitAnswer } = useTest({ isResult });
+	const { exercise, submitAnswer } = useSetAnswer({ isResult });
 	return (
 		<div className='exercise simple-arithmetic-container'>
 			<div className='panel'>

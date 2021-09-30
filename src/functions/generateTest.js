@@ -55,33 +55,38 @@ const randomGenerators = {
 		const value = randomValueBetweenTwoNumbers(min, max);
 		return { correct: value, value };
 	},
-	'simple-arithmetic': ({ operand }) => {
+	'simple-arithmetic': ({ uid }) => {
 		// possible values are 1, 2, 3 or 4 so the result is always a one-digit number
 		const value1 = randomValueBetweenTwoNumbers(1, 5);
 		const value2 = randomValueBetweenTwoNumbers(1, 5);
 
-		const operations = {
-			'+': (a, b) => a + b,
-			'-': (a, b) => a - b,
+		const operationFunctions = {
+			plus: (a, b) => a + b,
+			minus: (a, b) => a - b,
 		};
 
-		if (operand === '-' && value2 > value1) {
-			const sumText = `${value2} ${operand} ${value1} = ?`;
-			const correct = operations[operand](value2, value1);
+		const operationToText = {
+			plus: '+',
+			minus: '-',
+		};
+
+		if (uid === 'minus' && value2 > value1) {
+			const sumText = `${value2} ${operationToText[uid]} ${value1} = ?`;
+			const correct = operationFunctions[uid](value2, value1);
 
 			return { value: sumText, correct };
 		}
 
-		const sumText = `${value1} ${operand} ${value2} = ?`;
-		const correct = operations[operand](value1, value2);
+		const sumText = `${value1} ${operationToText[uid]} ${value2} = ?`;
+		const correct = operationFunctions[uid](value1, value2);
 
 		return { value: sumText, correct };
 	},
-	counting: ({ min, max, reverse }) => {
+	counting: ({ min, max, uid }) => {
 		const randomNumber = randomValueBetweenTwoNumbers(min, max);
 
 		let values = [];
-		if (reverse) {
+		if (uid) {
 			values = [randomNumber + 2, randomNumber + 1, randomNumber];
 		} else {
 			values = [randomNumber - 2, randomNumber - 1, randomNumber];
@@ -160,6 +165,8 @@ export async function generateTest(testInfo) {
 				const randomValue = randomGenerators[exerciseInfo.type](exerciseInfo);
 				testArray.push({ screenType: 'exercise', ...exerciseInfo, ...randomValue });
 			}
+
+			testArray.push({ screenType: 'exercise-finish', ...exerciseInfo });
 		}
 	} else {
 		const { exercises } = testInfo;
@@ -176,6 +183,8 @@ export async function generateTest(testInfo) {
 					testArray.push({ ...realExercise, type: exerciseInfo.type });
 				}
 			});
+
+			testArray.push({ screenType: 'exercise-finish', ...exerciseInfo });
 		}
 	}
 

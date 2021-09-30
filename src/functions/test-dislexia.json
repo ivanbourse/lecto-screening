@@ -5,6 +5,7 @@
 			"title": "Conocimiento alfabético",
 			"description": "Descripción",
 			"type": "letters-question",
+			"uid": "name",
 			"autocorrect": false,
 			"instructions": [
 				"Decí el nombre de las letras lo más rápido que puedas.",
@@ -58,6 +59,7 @@
 			"title": "Conocimiento alfabético",
 			"description": "Descripción",
 			"type": "letters-question",
+			"uid": "sound",
 			"autocorrect": false,
 			"instructions": [
 				"Decí el sonido de las letras lo más rápido que puedas.",

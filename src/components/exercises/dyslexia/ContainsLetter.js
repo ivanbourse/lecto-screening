@@ -6,12 +6,11 @@ import { getImage } from 'functions/getImage';
 
 const ContainsLetter = () => {
 	const { exercise, userAnswer, setUserAnswer, submitAnswer } = useSetAnswer();
-	const [correctWord] = exercise.words.filter(({ correct }) => !!correct);
 
 	return (
 		<>
 			<ExerciseContainer classes='contains-letter-container multiple-choice-container'>
-				<p className='instruction'>{correctWord.word}</p>
+				<p className='instruction'>{exercise.letter}</p>
 				<div className='options'>
 					{exercise.words.map((word, i) => (
 						<div

@@ -8,7 +8,7 @@ import sadFace from 'assets/emojis/sad-face.png';
 const PracticeFeedback = () => {
 	const { current, answers } = useSelector(state => state.questions);
 	const dispatch = useDispatch();
-	const isCorrect = !!answers[current - 1].answer.correct.isCorrect;
+	const isCorrect = !!answers[current - 1]?.answer?.correct?.isCorrect;
 
 	return (
 		<div className='exercise-instructions-container'>
@@ -18,7 +18,7 @@ const PracticeFeedback = () => {
 			) : (
 				<img className='emoji' src={sadFace} alt='Respuesta incorrecta' />
 			)}
-			<Button className='btn btn-primary' onClick={() => dispatch(setAnswer())}>
+			<Button className='btn btn-primary' onClick={() => dispatch(setAnswer({ sendAnswers: false }))}>
 				Comenzar
 			</Button>
 		</div>

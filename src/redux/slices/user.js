@@ -37,9 +37,15 @@ const slice = createSlice({
 	name: 'user',
 	initialState: {
 		user: { token: '' },
-		loading: false,
+		login: {
+			loading: false,
+			error: { error: false },
+		},
+		register: {
+			loading: false,
+			error: { error: false },
+		},
 		loggedIn: isLoggedIn,
-		error: { error: false },
 	},
 	reducers: {
 		setUser: (state, action) => {
@@ -47,36 +53,39 @@ const slice = createSlice({
 		},
 		clearUser: (state, action) => {
 			state.user = { token: '' };
-			state.loading = false;
 			state.loggedIn = false;
-			state.error = { error: false };
+
+			state.login.loading = false;
+			state.register.loading = false;
+			state.login.error = { error: false };
+			state.register.error = { error: false };
 		},
 	},
 	extraReducers: {
 		[signIn.fulfilled]: (state, action) => {
 			state.user = action.payload;
 			state.loggedIn = true;
-			state.loading = false;
+			state.login.loading = false;
 		},
 		[signIn.pending]: (state, action) => {
-			state.loading = true;
+			state.login.loading = true;
 		},
 		[signIn.rejected]: (state, action) => {
-			state.error = { error: true, data: action.error.message };
-			state.loading = false;
+			state.login.error = { error: true, data: action.error.message };
+			state.login.loading = false;
 		},
 		[signUp.fulfilled]: (state, action) => {
 			state.user = action.payload;
 			state.loggedIn = true;
-			state.loading = false;
-			state.error = { error: false };
+			state.register.loading = false;
+			state.register.error = { error: false };
 		},
 		[signUp.pending]: (state, action) => {
-			state.loading = true;
+			state.register.loading = true;
 		},
 		[signUp.rejected]: (state, action) => {
-			state.error = { error: true, data: action.error.message };
-			state.loading = false;
+			state.register.error = { error: true, data: action.error.message };
+			state.register.loading = false;
 		},
 		[keepAlive.fulfilled]: (state, action) => {
 			state.user = action.payload;
@@ -93,6 +102,6 @@ const slice = createSlice({
 	},
 });
 
-export const { setUser } = slice.actions;
+export const { setUser, clearUser } = slice.actions;
 
 export default slice.reducer;

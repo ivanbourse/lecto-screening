@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { generateTest } from 'functions/generateTest';
 import { getToken } from 'functions/userManager';
-import { baseUrl } from '../../variables';
+import { correctCountMap } from 'utils/getCorrectCount';
 
 import discalculiaJSON from 'functions/test-discalculia.json';
 import dislexiaJSON from 'functions/test-dislexia.json';
 import { checkIfIsCorrect } from 'utils/checkCorrect';
+import axios from 'functions/axios';
 
 const initialState = {
 	questions: [],
@@ -18,38 +18,104 @@ const initialState = {
 	started: false,
 	animate: false,
 	finished: false,
+	resultId: '',
+};
+
+const getAnswersAndScore = async (questions, type) => {
+	const allExercises = questions.filter(question => question.screenType === 'exercise' && question.type === type);
+	const score = 0;
+
+	console.log({ allExercises, score });
 };
 
 export const startTest = createAsyncThunk('questions/startTest', async ({ student, type }, thunkAPI) => {
 	const token = thunkAPI.getState().user.user.token || getToken;
-	/* const result = await axios.post(
-		'https://screeninglecto.azurewebsites.net/api/startTest?code=/up1GX9SrCEmxuPwR1ujqJY2LCAO6xH5PfxGsy8wfQFKLf541evXag==',
-		baseUrl + 'results/start',
-		{ token, student }
-	); */
+	const typesMap = {
+		dyscalculia: 'Discalculia',
+		dyslexia: 'Dislexia',
+	};
+	const { data: resultData } = await axios.post('/test/start', { token, student, testType: typesMap[type] });
 
 	const test = await generateTest(type === 'dyslexia' ? dislexiaJSON : discalculiaJSON);
 
-	console.log(test);
-
-	return { data: test, testType: type, student };
+	return { data: test, testType: type, student, resultId: resultData.resultId };
 });
 
-export const nextQuestion = createAsyncThunk('questions/nextQuestion', async (student, thunkAPI) => {
-	thunkAPI.dispatch(slice.actions.startAnimation());
-	const state = thunkAPI.getState();
-	const currentQuestion = state.questions.current;
-	const result = await axios.post(
-		/* 'https://screeninglecto.azurewebsites.net/api/answerQuestion?code=JPT1vV0C3gftaEdKI00fMB7Z6pKYlsDS3MRsKjfh1mqIAcOMfjm4dQ==', */
-		baseUrl + 'results/answerQuestion',
-		{
-			token: state.user.user.token || getToken,
-			student: state.questions.student,
-			resultId: state.questions.resultId,
-			question: currentQuestion,
-			answer: state.questions.answers[currentQuestion].answer,
+export const nextQuestion = createAsyncThunk('questions/nextQuestion', async (answer, thunkAPI) => {
+	try {
+		thunkAPI.dispatch(slice.actions.startAnimation());
+		const state = await thunkAPI.getState();
+
+		const { questions, current, testType, resultId } = state.questions;
+		const { user } = state.user;
+
+		const { screenType, ...currentQuestion } = questions[current];
+		const isExercise = screenType === 'exercise';
+		const isPractice = screenType === 'practice';
+
+		const tempAnswer = {};
+
+		/* if (isExercise) {
+			const result = await axios.post('/test/answerQuestion', {
+				token: state.user.user.token || getToken,
+				student: student,
+				resultId: resultId,
+				questionName: currentQuestion.title || currentQuestion.type || 'no-name',
+				score: 0,
+				answer,
+			});
+		} */
+
+		if (isExercise || isPractice) {
+			const isCorrect = checkIfIsCorrect(testType, currentQuestion, answer);
+			tempAnswer.type = currentQuestion.type;
+			tempAnswer.answer = { correct: isCorrect, ...answer };
+
+			tempAnswer.answered = isExercise;
+			tempAnswer.saveValue = isExercise;
+
+			return tempAnswer;
 		}
-	);
+
+		return {};
+	} catch (err) {
+		console.log(err);
+	}
+});
+
+export const finishTest = createAsyncThunk('questions/finishTest', async (payload, thunkAPI) => {
+	const state = thunkAPI.getState();
+
+	const { data: resultData } = await axios.post('/test/finishTest', {
+		token: state.user.user.token || getToken,
+		student: state.questions.student,
+		resultId: state.questions.resultId,
+	});
+
+	return true;
+});
+
+export const sendAnswers = createAsyncThunk('questions/sendAnswers', async ({ type, uid }, thunkAPI) => {
+	const state = thunkAPI.getState();
+	const { answers, resultId, student } = state.questions;
+	const { user } = state.user;
+
+	const allTypeAnswers = answers.filter(item => item.type === type && item.saveValue === true);
+
+	console.log(allTypeAnswers);
+
+	const correctCount = correctCountMap[type](allTypeAnswers) || 0;
+
+	const result = await axios.post('/test/answerQuestion', {
+		token: user.token || getToken,
+		student,
+		resultId,
+		questionName: uid ? `${type}-${uid}` : type,
+		score: correctCount,
+		answer: allTypeAnswers.map(({ answer }) => answer),
+	});
+
+	return true;
 });
 
 const slice = createSlice({
@@ -64,20 +130,6 @@ const slice = createSlice({
 		},
 		setAnswer: (state, action) => {
 			state.animate = true;
-			const { screenType, ...currentQuestion } = state.questions[state.current];
-			const isExercise = screenType === 'exercise';
-			const isPractice = screenType === 'practice';
-
-			state.answers[state.current] = {};
-
-			if (isExercise || isPractice) {
-				const isCorrect = checkIfIsCorrect(state.testType, currentQuestion, action.payload);
-				state.answers[state.current].type = currentQuestion.type;
-				state.answers[state.current].answer = { correct: isCorrect, ...action.payload };
-
-				state.answers[state.current].answered = isExercise;
-				state.answers[state.current].saveValue = isExercise;
-			}
 		},
 		resetTest: (state, action) => {
 			state.current = 0;
@@ -103,8 +155,14 @@ const slice = createSlice({
 				state.testType = action.payload.testType;
 				state.answers = Array(action.payload.data.length).fill({ answered: false, answer: {} });
 				state.testId = action.payload.data.testId;
-				state.resultId = action.payload.data.resultId;
+				state.resultId = action.payload.resultId;
 				state.started = true;
+			})
+			.addCase(nextQuestion.fulfilled, (state, action) => {
+				state.answers[state.current] = action.payload;
+			})
+			.addCase(sendAnswers.fulfilled, (state, action) => {
+				state.animate = true;
 			})
 			.addMatcher(
 				action => action.type.endsWith('rejected'),

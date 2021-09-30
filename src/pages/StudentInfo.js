@@ -26,42 +26,28 @@ const getAverageAnswerTime = exercises => {
 	return averageInSeconds.toFixed(2);
 };
 
-const ExerciseResultsComponent = ({ type }) => {
-	const dispatch = useDispatch();
-
-	const { questions, testType } = useSelector(state => state.questions);
-
-	const { exerciseResults } = useSelector(state => state.dashboard);
-
-	console.log({ testType, exerciseResults });
-	const exercises = exerciseResults[testType][type];
+const ExerciseResultsComponent = ({ type, exercises }) => {
+	const typeExercises = exercises[type];
 
 	const exercisesAmounts = {
-		total: exercises.length,
-		correct: exercises.filter(item => item.correct.isCorrect).length,
-		incorrect: exercises.filter(item => !item.correct.isCorrect).length,
+		total: typeExercises.answer.length,
+		correct: typeExercises.answer.filter(item => item?.answer?.correct?.isCorrect).length,
+		incorrect: typeExercises.answer.filter(item => !item?.answer?.correct?.isCorrect).length,
 	};
 
-	const percentages = {
-		correct: (exercisesAmounts.correct / exercisesAmounts.total) * 100 + '%',
-		incorrect: (exercisesAmounts.incorrect / exercisesAmounts.total) * 100 + '%',
-	};
-
-	const averageAnswerTime = getAverageAnswerTime(exercises);
-
-	const openPopup = index => {
-		const exercise = questions.filter(item => item.type === type && item.screenType === 'exercise')[index];
-		dispatch(setPopupOpen(true));
-		dispatch(setExercise(exercise));
-	};
+	useEffect(() => {
+		typeExercises.answer.forEach(item => {
+			console.log(item);
+		});
+	}, []);
 
 	return (
 		<div className='exercise-result-container'>
 			<div className='labels'>
 				<p className='total-label'>
-					Total: <span>{exercisesAmounts.total}</span>
+					Puntaje: <span>{typeExercises.score}</span>
 				</p>
-				<p className='correct-label'>
+				{/* <p className='correct-label'>
 					Correctas:{' '}
 					<span>
 						<b>{exercisesAmounts.correct}</b> ({percentages.correct})
@@ -75,42 +61,53 @@ const ExerciseResultsComponent = ({ type }) => {
 				</p>
 				<p className='average-time-label'>
 					Tiempo de respuesta promedio: <span>{averageAnswerTime}s</span>
-				</p>
+				</p> */}
 			</div>
-			<div className='result-icons-container'>
-				{exercises.map((item, i) => {
-					return (
-						<div className='result-icon' onClick={() => openPopup(i)} key={item.type + ' ' + i}>
-							<img
-								src={item.correct.isCorrect ? correctIcon : incorrectIcon}
-								data-tip
-								data-for={`${type} ${Date.now} ${i}`}
-								alt='icon'
-							/>
-							<ReactTooltip id={`${type} ${Date.now} ${i}`} type='dark' effect='solid' className='tooltip'>
-								{type === 'match-points-number' ? (
-									<>
-										<p>Respuesta ingresada: {item.answer === true ? 'verdadero' : 'falso'}</p>
-										<p>Respuesta correcta: {item.correct.value === true ? 'verdadero' : 'falso'}</p>
-									</>
-								) : (
-									<>
-										{type !== 'reaction-time' && (
-											<>
-												<p>Respuesta ingresada: {item.answer}</p>
-												<p>Respuesta correcta: {item.correct.value}</p>
-											</>
-										)}
-									</>
-								)}
-								<p>Tiempo tardado: {item.time / 1000} segundos</p>
-							</ReactTooltip>
-						</div>
-					);
-				})}
-			</div>
+			<div className='result-icons-container'>{JSON.stringify(typeExercises, null, 2)}</div>
 		</div>
 	);
+};
+
+const exercisesToShowPerType = {
+	Dislexia: exercises => [
+		{
+			title: 'Conocimiento alfabético - Nombre',
+			component: () => <ExerciseResultsComponent type='letters-question-name' exercises={exercises} />,
+		},
+		{
+			title: 'Conocimiento alfabético - Sonido',
+			component: () => <ExerciseResultsComponent type='letters-question-sound' exercises={exercises} />,
+		},
+		{
+			title: 'Conciencia fonética: discriminación del sonido',
+			component: () => <ExerciseResultsComponent type='matching' exercises={exercises} />,
+		},
+		{
+			title: 'Conciencia fonética: discriminación de fonema',
+			component: () => <ExerciseResultsComponent type='contains-letter' exercises={exercises} />,
+		},
+		{
+			title: 'Conciencia silábica: separar en sílabas',
+			component: () => <ExerciseResultsComponent type='syllables' exercises={exercises} />,
+		},
+		{
+			title: 'Vocabulario: adivinanzas',
+			component: () => <ExerciseResultsComponent type='multiple-choice' exercises={exercises} />,
+		},
+		{
+			title: 'Fluidez verbal: acceso al léxico',
+			component: () => <ExerciseResultsComponent type='say-items' exercises={exercises} />,
+		},
+		{
+			title: 'Lectura de palabras',
+			component: () => <ExerciseResultsComponent type='match-words' exercises={exercises} />,
+		},
+		{
+			title: 'Lectura de pseudopalabras',
+			component: () => <ExerciseResultsComponent type='nonexisting-words' exercises={exercises} />,
+		},
+	],
+	Discalculia: exercises => [],
 };
 
 const Exercise = () => {
@@ -120,8 +117,7 @@ const Exercise = () => {
 };
 
 const StudentInfo = props => {
-	const { user } = useSelector(state => state.dashboard);
-	const { student, results, loading } = useSelector(state => state.student);
+	const { student, loading } = useSelector(state => state.student);
 	const urlId = props.match.params.studentId;
 	const dispatch = useDispatch();
 
@@ -132,34 +128,6 @@ const StudentInfo = props => {
 	const logOut = () => {
 		dispatch(signOut());
 		history.push('/');
-	};
-
-	const { answers, testType } = useSelector(state => state.questions);
-
-	const { popupOpen, exerciseResults } = useSelector(state => state.dashboard);
-
-	const updateResults = () => {
-		const allAnswers = answers && answers.filter(answer => answer.saveValue === true);
-		const temp = { ...exerciseResults };
-
-		console.log({ temp, answers });
-
-		for (let i = 0; i < allAnswers.length; i++) {
-			const exercise = allAnswers[i];
-			/* temp[exercise.exerciseType] = [...temp[exercise.exerciseType], exercise.answer]; */
-			dispatch(
-				addExerciseToResults({ type: exercise?.exerciseType || exercise?.type, result: exercise.answer, testType })
-			);
-		}
-	};
-
-	useEffect(() => {
-		updateResults();
-	}, [answers]);
-
-	const closePopup = () => {
-		dispatch(setPopupOpen(false));
-		dispatch(setExercise({}));
 	};
 
 	return (
@@ -181,11 +149,11 @@ const StudentInfo = props => {
 								<div className='col'>
 									<div className='item'>
 										<span className='label'>Año de nacimiento</span>:{' '}
-										<span className='info'>{student.birth?.year}</span>
+										<span className='info'>{new Date(student.birth).getFullYear()}</span>
 									</div>
 									<div className='item'>
 										<span className='label'>Mes de nacimiento</span>:{' '}
-										<span className='info'>{student.birth?.month}</span>
+										<span className='info'>{new Date(student.birth).getMonth()}</span>
 									</div>
 									<div className='item'>
 										<span className='label'>Género</span>: <span className='info'>{student.genre}</span>
@@ -216,52 +184,28 @@ const StudentInfo = props => {
 									</div>
 									<div className='item'>
 										<span className='label'>Cantidad de tests realizados</span>:{' '}
-										<span className='info'>{results.length}</span>
+										<span className='info'>{(student.results && student.results.length) || 0}</span>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div className='container'>
+						{/* <div className='container'>
 							<h2 className='subtitle'>Resultados de {student.alias}:</h2>
 							<div className='info-container'>
-								<Accordion
-									items={[
-										{
-											title: 'Conocimiento alfabético',
-											component: () => <ExerciseResultsComponent type='letters-question' />,
-										},
-										{
-											title: 'Conciencia fonética: discriminación del sonido',
-											component: () => <ExerciseResultsComponent type='matching' />,
-										},
-										{
-											title: 'Conciencia fonética: discriminación de fonema',
-											component: () => <ExerciseResultsComponent type='contains-letter' />,
-										},
-										{
-											title: 'Conciencia silábica: separar en sílabas',
-											component: () => <ExerciseResultsComponent type='syllables' />,
-										},
-										{
-											title: 'Vocabulario: adivinanzas',
-											component: () => <ExerciseResultsComponent type='multiple-choice' />,
-										},
-										{
-											title: 'Fluidez verbal: acceso al léxico',
-											component: () => <ExerciseResultsComponent type='say-items' />,
-										},
-										{
-											title: 'Lectura de palabras',
-											component: () => <ExerciseResultsComponent type='match-words' />,
-										},
-										{
-											title: 'Lectura de pseudopalabras',
-											component: () => <ExerciseResultsComponent type='nonexisting-words' />,
-										},
-									]}
-								/>
+								<div className='col'>
+									{student.results &&
+										student.results.length > 0 &&
+										student.results
+											.filter(r => r.finished && r.answers)
+											.map(result => (
+												<div className='result-container' key={result._id}>
+													{result.testType} {result._id}
+													<Accordion items={exercisesToShowPerType[result.testType](result.answers)} />
+												</div>
+											))}
+								</div>
 							</div>
-						</div>
+						</div> */}
 					</div>
 				</div>
 			)}

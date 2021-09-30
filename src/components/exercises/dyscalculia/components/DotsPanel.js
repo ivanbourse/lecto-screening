@@ -7,7 +7,6 @@ const DotsPanel = ({ dots, onClick, className, style }) => {
 				.fill(0)
 				.map((dot, index) => {
 					const randomSize = randomValueBetweenTwoNumbers(20, 40);
-					console.log(randomSize, index);
 					return (
 						<div className='dot-row' style={{ flex: 1 }} key={randomSize + ' ' + index}>
 							<div

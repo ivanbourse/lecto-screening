@@ -21,9 +21,7 @@ const AddStudent = () => {
 	const { register, handleSubmit, errors, formState } = useForm();
 
 	const onSubmit = async data => {
-		const [year, month] = data.date.split('-');
-		const { date, ...dataToSend } = { ...data, birth: { year, month } };
-		dispatch(addStudent(dataToSend));
+		dispatch(addStudent(data));
 	};
 
 	return (
@@ -41,24 +39,35 @@ const AddStudent = () => {
 				</div>
 
 				<div className='input-group'>
-					<label className='label' htmlFor='date'>
+					<label className='label' htmlFor='birth'>
 						Mes y año de nacimiento
 					</label>
-					<input className='input' name='date' id='date' type='date' ref={register({ required: true })} />
-					{errors.date && <span className='error'>Ingrese el mes y año de nacimiento</span>}
+					<input
+						className='input'
+						name='birth'
+						id='birth'
+						type='date'
+						ref={register({ required: true, valueAsDate: true })}
+					/>
+					{errors.birth && <span className='error'>Ingrese el mes y año de nacimiento</span>}
 				</div>
 
 				<div className='input-group'>
-					<label className='label' htmlFor='scholar-year'>
+					<label className='label' htmlFor='schoolYear'>
 						Año escolar de el/la estudiante
 					</label>
-					<select className='input' name='scholar-year' id='scholar-year' ref={register({ required: true })}>
-						<option value='kinder-5'>Sala de 5 - Jardín</option>
-						<option value='primary-1'>1er grado - Primaria</option>
-						<option value='primary-2'>2do grado - Primaria</option>
-						<option value='primary-3'>3er grado - Primaria</option>
+					<select
+						className='input'
+						name='schoolYear'
+						id='schoolYear'
+						ref={register({ required: true, valueAsNumber: true })}
+					>
+						<option value='0'>Sala de 5 - Jardín</option>
+						<option value='1'>1er grado - Primaria</option>
+						<option value='2'>2do grado - Primaria</option>
+						<option value='3'>3er grado - Primaria</option>
 					</select>
-					{errors['scholar-year'] && <span className='error'>Ingrese el año escolar</span>}
+					{errors['schoolYear'] && <span className='error'>Ingrese el año escolar</span>}
 				</div>
 
 				<div className='input-group'>

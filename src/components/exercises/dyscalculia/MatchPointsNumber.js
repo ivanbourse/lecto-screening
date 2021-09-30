@@ -1,9 +1,9 @@
-import useTest from 'utils/hooks/useTest';
+import useSetAnswer from 'functions/setAnswer';
 import CorrectButtons from './components/CorrectButtons';
 import DotsPanel from './components/DotsPanel';
 
 const MatchPointsNumber = ({ isResult }) => {
-	const { exercise, submitAnswer } = useTest({ isResult });
+	const { exercise, submitAnswer } = useSetAnswer({ isResult });
 	const { number1, number2 } = exercise.value;
 
 	return (

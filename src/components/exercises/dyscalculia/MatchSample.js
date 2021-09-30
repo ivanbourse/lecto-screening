@@ -1,11 +1,10 @@
-import { randomValueBetweenTwoNumbers } from 'functions/generateTest';
+import useSetAnswer from 'functions/setAnswer';
 import { useEffect, useState } from 'react';
-import useTest from 'utils/hooks/useTest';
 import CorrectButtons from './components/CorrectButtons';
 import DotsPanel from './components/DotsPanel';
 
 const MatchSample = ({ isResult, rotate }) => {
-	const { exercise, submitAnswer } = useTest({ customTime: true, isResult });
+	const { exercise, submitAnswer } = useSetAnswer({ customTime: true, isResult });
 
 	const { number1, number2, rotation } = exercise.value;
 

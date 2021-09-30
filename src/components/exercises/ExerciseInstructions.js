@@ -1,11 +1,11 @@
 import Button from 'components/global/Button';
+import useSetAnswer from 'functions/setAnswer';
 import { Play } from 'react-feather';
 import { useDispatch } from 'react-redux';
 import { setAnswer } from 'redux/slices/questions';
-import useTest from 'utils/hooks/useTest';
 
 const ExerciseInstructions = ({ practiceFinish }) => {
-	const { exercise } = useTest();
+	const { exercise } = useSetAnswer();
 
 	const dispatch = useDispatch();
 

@@ -1,8 +1,8 @@
 import Button from 'components/global/Button';
-import useTest from 'utils/hooks/useTest';
+import useSetAnswer from 'functions/setAnswer';
 
 const NumericLine = ({ isResult }) => {
-	const { exercise, userAnswer, setUserAnswer, submitAnswer } = useTest({ isResult });
+	const { exercise, userAnswer, setUserAnswer, submitAnswer } = useSetAnswer({ isResult });
 
 	return (
 		<div className='exercise numeric-line-container'>

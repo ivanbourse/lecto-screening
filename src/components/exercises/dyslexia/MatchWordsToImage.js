@@ -9,7 +9,7 @@ const MatchWordsToImage = () => {
 	const [correctWord] = exercise.images.filter(({ correct }) => !!correct);
 
 	return (
-		<ExerciseContainer classes='multiple-choice-container'>
+		<ExerciseContainer classes='multiple-choice-container match-words-to-image-container'>
 			<p className='instruction'>{correctWord.image.toUpperCase()}</p>
 			<div className='options'>
 				{exercise.images &&

@@ -8,29 +8,36 @@ export const getStudentInfo = createAsyncThunk('student/getStudentInfo', async (
 	const token = thunkAPI.getState().user.user.token || getToken;
 	const { data } = await axios.post(baseUrl + 'students/getById', { token, studentId: props });
 
-	return data;
+	const results = [];
+
+	for (const result of data.student.results) {
+		// if the result is not finished, go to next iteration in for
+		if (!result.finished) continue;
+		const { data: resultInfo } = await axios.post('/results/getResult', { token, resultId: result._id });
+		const { data: resultStats } = await axios.post('/results/getStatistics', { token, resultId: result._id });
+		results.push({ ...resultInfo, ...resultStats });
+	}
+
+	return { ...data.student, results };
 });
 
 const slice = createSlice({
 	name: 'user',
 	initialState: {
 		student: {},
-		results: [],
 		loading: false,
 		error: { error: false },
 	},
 	reducers: {
 		clearStudent: (state, action) => {
 			state.student = {};
-			state.results = {};
 			state.loading = false;
 			state.error = { error: false };
 		},
 	},
 	extraReducers: {
 		[getStudentInfo.fulfilled]: (state, action) => {
-			state.student = action.payload.student;
-			state.results = action.payload.results;
+			state.student = action.payload;
 			state.loading = false;
 		},
 		[getStudentInfo.pending]: (state, action) => {

@@ -1,7 +1,7 @@
-import useTest from 'utils/hooks/useTest';
+import useSetAnswer from 'functions/setAnswer';
 
 const SymbolicMagnitude = ({ isResult }) => {
-	const { exercise, submitAnswer } = useTest({ isResult });
+	const { exercise, submitAnswer } = useSetAnswer({ isResult });
 	const { number1, number2 } = exercise.value;
 	return (
 		<div className='exercise symbolic-magnitude-container panel-container'>

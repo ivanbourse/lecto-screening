@@ -1,7 +1,7 @@
 {
 	"isRandom": true,
-	"practicesPerType": 4,
-	"exercisesPerType": 10,
+	"practicesPerType": 1,
+	"exercisesPerType": 2,
 	"exercises": [
 		{
 			"title": "Tiempo de reacción",
@@ -100,7 +100,7 @@
 			],
 			"min": 4,
 			"max": 8,
-			"reverse": false
+			"uid": false
 		},
 		{
 			"title": "Contar para atrás",
@@ -112,7 +112,7 @@
 			],
 			"min": 4,
 			"max": 8,
-			"reverse": true
+			"uid": true
 		},
 		{
 			"title": "Suma",
@@ -122,7 +122,7 @@
 				"En la pantalla aparecerán cuentas de suma. Deberás escribir el resultado correcto.",
 				"Recuerda que los primeros 4 ejercicios serán de prueba para que veas cómo funciona."
 			],
-			"operand": "+"
+			"uid": "plus"
 		},
 		{
 			"title": "Resta",
@@ -132,7 +132,7 @@
 				"En la pantalla aparecerán cuentas de resta. Deberás escribir el resultado correcto.",
 				"Recuerda que los primeros 4 ejercicios serán de prueba para que veas cómo funciona."
 			],
-			"operand": "-"
+			"uid": "minus"
 		}
 	]
 }

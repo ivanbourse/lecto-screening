@@ -28,7 +28,6 @@ const Dashboard = () => {
 	useEffect(() => setFiltered(data.students), [data]);
 
 	const btnTestClick = (id, type) => {
-		if (data?.user?.paidTests < 0) return;
 		dispatch(startTest({ student: id, type }));
 		history.push('/test');
 	};
@@ -79,7 +78,7 @@ const Dashboard = () => {
 				)}
 				<div className='top-section'>
 					<h2 className='available-tests'>
-						Tests tomados: <br /> <span className='number'>{data?.user?.paidTests}</span>
+						Tests tomados: <br /> <span className='number'>{data?.user?.takenTests}</span>
 					</h2>
 					<div className='buttons'>
 						<div className='button' onClick={() => btnAddStudent()}>

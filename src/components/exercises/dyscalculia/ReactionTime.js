@@ -1,9 +1,8 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
-import useTest from 'utils/hooks/useTest';
+import useSetAnswer from 'functions/setAnswer';
+import { useState, useEffect } from 'react';
 
 const ReactionTime = ({ isResult }) => {
-	const { exercise, submitAnswer } = useTest({ customTime: true, isResult });
+	const { exercise, submitAnswer } = useSetAnswer({ customTime: true, isResult });
 
 	const { value } = exercise;
 
