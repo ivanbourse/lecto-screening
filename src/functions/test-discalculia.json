@@ -1,7 +1,7 @@
 {
 	"isRandom": true,
-	"practicesPerType": 1,
-	"exercisesPerType": 2,
+	"practicesPerType": 4,
+	"exercisesPerType": 10,
 	"exercises": [
 		{
 			"title": "Tiempo de reacción",

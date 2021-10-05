@@ -26,7 +26,7 @@ const getAverageAnswerTime = exercises => {
 	return averageInSeconds.toFixed(2);
 };
 
-const ExerciseResultsComponent = ({ type, exercises }) => {
+const ExerciseResultsComponentDyslexia = ({ type, exercises }) => {
 	const typeExercises = exercises[type];
 
 	const exercisesAmounts = {
@@ -35,11 +35,35 @@ const ExerciseResultsComponent = ({ type, exercises }) => {
 		incorrect: typeExercises.answer.filter(item => !item?.answer?.correct?.isCorrect).length,
 	};
 
-	useEffect(() => {
-		typeExercises.answer.forEach(item => {
-			console.log(item);
-		});
-	}, []);
+	return (
+		<div className='exercise-result-container'>
+			<div className='labels'>
+				<p className='total-label'>
+					Puntaje: <span>{typeExercises.score}</span>
+				</p>
+				{/* <p className='correct-label'>
+					Correctas:{' '}
+					<span>
+						<b>{exercisesAmounts.correct}</b> ({percentages.correct})
+					</span>
+				</p>
+				<p className='incorrect-label'>
+					Incorrectas:{' '}
+					<span>
+						<b>{exercisesAmounts.incorrect}</b> ({percentages.incorrect})
+					</span>
+				</p>
+				<p className='average-time-label'>
+					Tiempo de respuesta promedio: <span>{averageAnswerTime}s</span>
+				</p> */}
+			</div>
+			<div className='result-icons-container'>{JSON.stringify(typeExercises, null, 2)}</div>
+		</div>
+	);
+};
+
+const ExerciseResultsComponentDyscalculia = ({ type, exercises }) => {
+	const typeExercises = exercises[type];
 
 	return (
 		<div className='exercise-result-container'>
@@ -72,42 +96,83 @@ const exercisesToShowPerType = {
 	Dislexia: exercises => [
 		{
 			title: 'Conocimiento alfabético - Nombre',
-			component: () => <ExerciseResultsComponent type='letters-question-name' exercises={exercises} />,
+			component: () => <ExerciseResultsComponentDyslexia type='letters-question-name' exercises={exercises} />,
 		},
 		{
 			title: 'Conocimiento alfabético - Sonido',
-			component: () => <ExerciseResultsComponent type='letters-question-sound' exercises={exercises} />,
+			component: () => <ExerciseResultsComponentDyslexia type='letters-question-sound' exercises={exercises} />,
 		},
 		{
 			title: 'Conciencia fonética: discriminación del sonido',
-			component: () => <ExerciseResultsComponent type='matching' exercises={exercises} />,
+			component: () => <ExerciseResultsComponentDyslexia type='matching' exercises={exercises} />,
 		},
 		{
 			title: 'Conciencia fonética: discriminación de fonema',
-			component: () => <ExerciseResultsComponent type='contains-letter' exercises={exercises} />,
+			component: () => <ExerciseResultsComponentDyslexia type='contains-letter' exercises={exercises} />,
 		},
 		{
 			title: 'Conciencia silábica: separar en sílabas',
-			component: () => <ExerciseResultsComponent type='syllables' exercises={exercises} />,
+			component: () => <ExerciseResultsComponentDyslexia type='syllables' exercises={exercises} />,
 		},
 		{
 			title: 'Vocabulario: adivinanzas',
-			component: () => <ExerciseResultsComponent type='multiple-choice' exercises={exercises} />,
+			component: () => <ExerciseResultsComponentDyslexia type='multiple-choice' exercises={exercises} />,
 		},
 		{
 			title: 'Fluidez verbal: acceso al léxico',
-			component: () => <ExerciseResultsComponent type='say-items' exercises={exercises} />,
+			component: () => <ExerciseResultsComponentDyslexia type='say-items' exercises={exercises} />,
 		},
 		{
 			title: 'Lectura de palabras',
-			component: () => <ExerciseResultsComponent type='match-words' exercises={exercises} />,
+			component: () => <ExerciseResultsComponentDyslexia type='match-words' exercises={exercises} />,
 		},
 		{
 			title: 'Lectura de pseudopalabras',
-			component: () => <ExerciseResultsComponent type='nonexisting-words' exercises={exercises} />,
+			component: () => <ExerciseResultsComponentDyslexia type='nonexisting-words' exercises={exercises} />,
 		},
 	],
-	Discalculia: exercises => [],
+	Discalculia: exercises => [
+		{
+			title: 'Matchear ejemplo',
+			component: () => <ExerciseResultsComponentDyscalculia type='match-sample' exercises={exercises} />,
+		},
+		{
+			title: 'Tiempo de reacción',
+			component: () => <ExerciseResultsComponentDyscalculia type='reaction-time' exercises={exercises} />,
+		},
+		{
+			title: 'Comparación de puntos',
+			component: () => <ExerciseResultsComponentDyscalculia type='dots-comparison' exercises={exercises} />,
+		},
+		{
+			title: 'Matchear Patron de puntos - números simbolicos',
+			component: () => <ExerciseResultsComponentDyscalculia type='match-points-number' exercises={exercises} />,
+		},
+		{
+			title: 'Magnitud simbolica',
+			component: () => <ExerciseResultsComponentDyscalculia type='symbolic-magnitude' exercises={exercises} />,
+		},
+		{
+			title: 'Recta numérica',
+			component: () => <ExerciseResultsComponentDyscalculia type='numeric-line' exercises={exercises} />,
+		},
+		{
+			title: 'Aritmética - suma',
+			component: () => <ExerciseResultsComponentDyscalculia type='simple-arithmetic-plus' exercises={exercises} />,
+		},
+		{
+			title: 'Aritmética - resta',
+			component: () => <ExerciseResultsComponentDyscalculia type='simple-arithmetic-minus' exercises={exercises} />,
+		},
+		{
+			title: 'Conteo directo',
+			component: () => <ExerciseResultsComponentDyscalculia type='counting' exercises={exercises} />,
+		},
+		{
+			title: 'Conteo inverso',
+			component: () => <ExerciseResultsComponentDyscalculia type='counting-true' exercises={exercises} />,
+		},
+	],
 };
 
 const Exercise = () => {
@@ -189,7 +254,7 @@ const StudentInfo = props => {
 								</div>
 							</div>
 						</div>
-						{/* <div className='container'>
+						<div className='container'>
 							<h2 className='subtitle'>Resultados de {student.alias}:</h2>
 							<div className='info-container'>
 								<div className='col'>
@@ -205,7 +270,7 @@ const StudentInfo = props => {
 											))}
 								</div>
 							</div>
-						</div> */}
+						</div>
 					</div>
 				</div>
 			)}
