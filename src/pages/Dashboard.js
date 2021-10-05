@@ -25,7 +25,7 @@ const Dashboard = () => {
 	useEffect(() => {
 		dispatch(getInformation());
 	}, []);
-	useEffect(() => setFiltered(data.students), [data]);
+	useEffect(() => {setFiltered(data.students); console.log(data);}, [data]);
 
 	const btnTestClick = (id, type) => {
 		dispatch(startTest({ student: id, type }));
