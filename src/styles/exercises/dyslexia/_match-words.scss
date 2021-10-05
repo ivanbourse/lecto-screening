@@ -1,0 +1,16 @@
+.match-words-to-image-container {
+	.options {
+		@include mobile {
+			grid-template-columns: repeat(1, 1fr);
+		}
+	}
+
+	.image-option {
+		@include number;
+
+		img {
+			width: 200px;
+			height: 200px;
+		}
+	}
+}

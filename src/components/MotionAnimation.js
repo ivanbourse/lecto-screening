@@ -7,6 +7,7 @@ const ExerciseContainer = props => {
 	const animate = useSelector(state => state.questions.animate);
 	const status = useSelector(state => state.questions.status);
 	const started = useSelector(state => state.questions.started);
+	const current = useSelector(state => state.questions.current);
 
 	const dispatch = useDispatch();
 	const controls = useAnimation();
@@ -15,9 +16,9 @@ const ExerciseContainer = props => {
 
 	useEffect(() => {
 		const animation = async () => {
-			await controls.start({ clipPath: 'circle(100%)' }, { ease: 'easeInOut', duration: 0.4 });
+			await controls.start({ opacity: 1 }, { ease: 'easeInOut', duration: 0 });
 			animate === true && dispatch(afterAnimation());
-			return await controls.start({ clipPath: 'circle(0%)' }, { ease: 'easeInOut', duration: 0.4 });
+			return await controls.start({ opacity: 0 }, { duration: 0.6 });
 		};
 
 		if (started) {

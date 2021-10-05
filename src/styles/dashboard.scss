@@ -198,6 +198,57 @@ $paddingSides: 5vw;
 		.input-group {
 			@include input;
 		}
+		.custom-checkbox {
+			display: flex;
+			align-items: center;
+			position: relative;
+			cursor: pointer;
+			font-size: var(--fs-xsmall);
+			user-select: none;
+			gap: 8px;
+
+			input {
+				position: absolute;
+				opacity: 0;
+				cursor: pointer;
+				height: 0;
+				width: 0;
+			}
+
+			.checkmark {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 25px;
+				width: 25px;
+				background-color: rgb(255, 255, 255);
+				border: 2px solid #ccc;
+			}
+
+			/* When the checkbox is checked, add a blue background */
+			input:checked ~ .checkmark {
+				background-color: var(--clr-main);
+			}
+
+			.checkmark:after {
+				content: '';
+				position: absolute;
+				display: none;
+			}
+
+			input:checked ~ .checkmark:after {
+				display: block;
+			}
+
+			.checkmark:after {
+				top: 6px;
+				width: 4px;
+				height: 8px;
+				border: solid #fff;
+				border-width: 0 3px 3px 0;
+				transform: rotate(45deg);
+			}
+		}
 		.button {
 			@include button(var(--clr-yellow));
 			margin: 4vh auto;

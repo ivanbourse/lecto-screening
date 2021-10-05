@@ -1,0 +1,618 @@
+{
+	"isRandom": false,
+	"exercises": [
+		{
+			"title": "Conocimiento alfabético",
+			"description": "Descripción",
+			"type": "letters-question",
+			"uid": "name",
+			"autocorrect": false,
+			"instructions": [
+				"Decí el nombre de las letras lo más rápido que puedas.",
+				"Apretar la flecha derecha en las respuestas correctas y la flecha izquierda en las incorrectas."
+			],
+			"exercises": [
+				{
+					"screenType": "practice",
+					"letters": ["M"]
+				},
+				{
+					"screenType": "practice",
+					"letters": ["A"]
+				},
+				{
+					"screenType": "practice",
+					"letters": ["O"]
+				},
+				{
+					"screenType": "practice-finish"
+				},
+				{
+					"screenType": "exercise",
+					"letters": [
+						"A",
+						"O",
+						"I",
+						"E",
+						"U",
+						"M",
+						"P",
+						"S",
+						"T",
+						"R",
+						"F",
+						"L",
+						"B",
+						"G",
+						"D",
+						"C",
+						"J",
+						"V",
+						"Q",
+						"Z",
+						"K"
+					]
+				}
+			]
+		},
+		{
+			"title": "Conocimiento alfabético",
+			"description": "Descripción",
+			"type": "letters-question",
+			"uid": "sound",
+			"autocorrect": false,
+			"instructions": [
+				"Decí el sonido de las letras lo más rápido que puedas.",
+				"Apretar la flecha derecha en las respuestas correctas y la flecha izquierda en las incorrectas."
+			],
+			"exercises": [
+				{
+					"screenType": "practice",
+					"letters": ["S"]
+				},
+				{
+					"screenType": "practice",
+					"letters": ["R"]
+				},
+				{
+					"screenType": "practice",
+					"letters": ["L"]
+				},
+				{
+					"screenType": "practice-finish"
+				},
+				{
+					"screenType": "exercise",
+					"letters": [
+						"A",
+						"O",
+						"I",
+						"E",
+						"U",
+						"M",
+						"P",
+						"S",
+						"T",
+						"R",
+						"F",
+						"L",
+						"B",
+						"G",
+						"D",
+						"C",
+						"J",
+						"V",
+						"Q",
+						"Z",
+						"K"
+					]
+				}
+			]
+		},
+		{
+			"title": "Conciencia fonética: discriminación del sonido inicial",
+			"description": "Descripción",
+			"type": "matching",
+			"autocorrect": true,
+			"instructions": ["Señalá los dibujos que comiencen con el mismo sonido."],
+			"exercises": [
+				{
+					"screenType": "practice",
+					"words": [
+						{ "word": "Árbol", "matchNumber": 0 },
+						{ "word": "Pelota", "matchNumber": 0 },
+						{ "word": "Avión", "matchNumber": 1 }
+					]
+				},
+				{
+					"screenType": "practice",
+					"words": [
+						{ "word": "Ojo", "matchNumber": 0 },
+						{ "word": "Oreja", "matchNumber": 0 },
+						{ "word": "Boca", "matchNumber": 1 }
+					]
+				},
+				{
+					"screenType": "practice",
+					"words": [
+						{ "word": "Mono", "matchNumber": 0 },
+						{ "word": "Mariposa", "matchNumber": 0 },
+						{ "word": "Pato", "matchNumber": 1 }
+					]
+				},
+				{
+					"screenType": "practice-finish"
+				},
+				{
+					"screenType": "exercise",
+					"words": [
+						{ "word": "Pera", "matchNumber": 0 },
+						{ "word": "Pelota", "matchNumber": 0 },
+						{ "word": "León", "matchNumber": 1 },
+						{ "word": "Luna", "matchNumber": 1 },
+						{ "word": "Tijera", "matchNumber": 2 },
+						{ "word": "Tenedor", "matchNumber": 2 },
+						{ "word": "Elefante", "matchNumber": 3 },
+						{ "word": "Escalera", "matchNumber": 3 },
+						{ "word": "Flor", "matchNumber": 4 },
+						{ "word": "Foca", "matchNumber": 4 }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"words": [
+						{ "word": "Moño", "matchNumber": 0 },
+						{ "word": "Mesa", "matchNumber": 0 },
+						{ "word": "Caracol", "matchNumber": 1 },
+						{ "word": "Cocodrilo", "matchNumber": 1 },
+						{ "word": "Sol", "matchNumber": 2 },
+						{ "word": "Sandía", "matchNumber": 2 },
+						{ "word": "Ratón", "matchNumber": 3 },
+						{ "word": "Rinoceronte", "matchNumber": 3 },
+						{ "word": "Delfín", "matchNumber": 4 },
+						{ "word": "Dragón", "matchNumber": 4 }
+					]
+				}
+			]
+		},
+		{
+			"title": "Conciencia fonética: discriminación de fonemas dentro de una palabra",
+			"description": "Descripción",
+			"type": "contains-letter",
+			"autocorrect": true,
+			"instructions": ["Señalá el dibujo que contenga el sonido de la letra indicada"],
+			"exercises": [
+				{
+					"screenType": "practice",
+					"letter": "S",
+					"words": [
+						{ "word": "Sal", "correct": true },
+						{ "word": "Pan", "correct": false }
+					]
+				},
+				{
+					"screenType": "practice",
+					"letter": "S",
+					"words": [
+						{ "word": "Pelota", "correct": false },
+						{ "word": "Pasta", "correct": true }
+					]
+				},
+				{
+					"screenType": "practice",
+					"letter": "R",
+					"words": [
+						{ "word": "Auto", "correct": false },
+						{ "word": "Rosa", "correct": true }
+					]
+				},
+				{
+					"screenType": "practice-finish"
+				},
+				{
+					"screenType": "exercise",
+					"letter": "M",
+					"words": [
+						{ "word": "Casa", "correct": false },
+						{ "word": "Mono", "correct": true }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"letter": "P",
+					"words": [
+						{ "word": "Mano", "correct": false },
+						{ "word": "Sopa", "correct": true }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"letter": "T",
+					"words": [
+						{ "word": "Pasto", "correct": true },
+						{ "word": "Pierna", "correct": false }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"letter": "S",
+					"words": [
+						{ "word": "Sol", "correct": true },
+						{ "word": "Pato", "correct": false }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"letter": "C",
+					"words": [
+						{ "word": "Canasta", "correct": true },
+						{ "word": "Empanada", "correct": false }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"letter": "D",
+					"words": [
+						{ "word": "Moneda", "correct": true },
+						{ "word": "Mesa", "correct": false }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"letter": "V",
+					"words": [
+						{ "word": "Bote", "correct": true },
+						{ "word": "Masa", "correct": false }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"letter": "T",
+					"words": [
+						{ "word": "Camisa", "correct": false },
+						{ "word": "Pantalón", "correct": true }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"letter": "S",
+					"words": [
+						{ "word": "Sandía", "correct": true },
+						{ "word": "Pera", "correct": false }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"letter": "P",
+					"words": [
+						{ "word": "Postre", "correct": true },
+						{ "word": "Remera", "correct": false }
+					]
+				}
+			]
+		},
+		{
+			"title": "Conciencia silábica: separar en sílabas",
+			"description": "Descripción",
+			"type": "syllables",
+			"autocorrect": true,
+			"instructions": ["Pintá los círculos según la cantidad de sílabas que tenga la palabra."],
+			"exercises": [
+				{
+					"screenType": "practice",
+					"word": "Mesa",
+					"syllables": 2
+				},
+				{
+					"screenType": "practice",
+					"word": "Pato",
+					"syllables": 2
+				},
+				{
+					"screenType": "practice",
+					"word": "Remera",
+					"syllables": 3
+				},
+				{
+					"screenType": "practice-finish"
+				},
+				{
+					"screenType": "exercise",
+					"word": "Pala",
+					"syllables": 2
+				},
+				{
+					"screenType": "exercise",
+					"word": "Gato",
+					"syllables": 2
+				},
+				{
+					"screenType": "exercise",
+					"word": "Pelota",
+					"syllables": 3
+				},
+				{
+					"screenType": "exercise",
+					"word": "Manzana",
+					"syllables": 3
+				},
+				{
+					"screenType": "exercise",
+					"word": "Cocodrilo",
+					"syllables": 4
+				},
+				{
+					"screenType": "exercise",
+					"word": "Pantalón",
+					"syllables": 3
+				},
+				{
+					"screenType": "exercise",
+					"word": "Corazón",
+					"syllables": 3
+				},
+				{
+					"screenType": "exercise",
+					"word": "Mariposa",
+					"syllables": 4
+				},
+				{
+					"screenType": "exercise",
+					"word": "Ardilla",
+					"syllables": 3
+				},
+				{
+					"screenType": "exercise",
+					"word": "Trompeta",
+					"syllables": 3
+				}
+			]
+		},
+		{
+			"title": "Vocabulario: adivinanzas",
+			"description": "Descripción",
+			"type": "multiple-choice",
+			"autocorrect": true,
+			"instructions": ["Seleccioná la respuesta correcta."],
+			"exercises": [
+				{
+					"screenType": "practice",
+					"question": "¿Qué animal vive en el agua?",
+					"answers": [
+						{ "answer": "Caracol", "correct": false },
+						{ "answer": "Jirafa", "correct": false },
+						{ "answer": "Ballena", "correct": true }
+					]
+				},
+				{ "screenType": "practice-finish" },
+				{
+					"screenType": "exercise",
+					"question": "¿De qué animal se produce la leche?",
+					"answers": [
+						{ "answer": "Cocodrilo", "correct": false },
+						{ "answer": "Vaca", "correct": true },
+						{ "answer": "Pájaro", "correct": false }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"question": "¿Qué comida es una fruta?",
+					"answers": [
+						{ "answer": "Zanahoria", "correct": false },
+						{ "answer": "Fideos", "correct": false },
+						{ "answer": "Banana", "correct": true }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"question": "¿Qué se usa para escribir?",
+					"answers": [
+						{ "answer": "Lápiz", "correct": true },
+						{ "answer": "Sacapuntas", "correct": false },
+						{ "answer": "Regla", "correct": false }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"question": "¿De qué puede ser el jugo?",
+					"answers": [
+						{ "answer": "Torta", "correct": false },
+						{ "answer": "Ravioles", "correct": false },
+						{ "answer": "Naranja", "correct": true }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"question": "¿Qué hay en el aeropuerto?",
+					"answers": [
+						{ "answer": "Barco", "correct": false },
+						{ "answer": "Avión", "correct": true },
+						{ "answer": "Caballo", "correct": false }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"question": "¿Qué animal vive en el desierto?",
+					"answers": [
+						{ "answer": "Camello", "correct": true },
+						{ "answer": "Búho", "correct": false },
+						{ "answer": "Toro", "correct": false }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"question": "¿De dónde sale la lava?",
+					"answers": [
+						{ "answer": "Mar", "correct": false },
+						{ "answer": "Volcán", "correct": true },
+						{ "answer": "Desierto", "correct": false }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"question": "¿Qué día viene después del viernes?",
+					"answers": [
+						{ "answer": "Lunes", "correct": false },
+						{ "answer": "Miércoles", "correct": false },
+						{ "answer": "Sábado", "correct": true }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"question": "¿A dónde hay que ir si estás enfermo?",
+					"answers": [
+						{ "answer": "Colegio", "correct": false },
+						{ "answer": "Hospital", "correct": true },
+						{ "answer": "Policía", "correct": false }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"question": "¿Qué pueden tener los dientes?",
+					"answers": [
+						{ "answer": "Caries", "correct": true },
+						{ "answer": "Piojos", "correct": false },
+						{ "answer": "Pulgas", "correct": false }
+					]
+				}
+			]
+		},
+		{
+			"title": "Fluidez verbal: acceso al léxico",
+			"description": "Descripción",
+			"type": "say-items",
+			"autocorrect": false,
+			"instructions": ["Nombrá en un minuto todos los animales que se te ocurran."],
+			"exercises": [
+				{
+					"screenType": "exercise"
+				}
+			]
+		},
+		{
+			"title": "Fluidez verbal: acceso al léxico",
+			"description": "Descripción",
+			"type": "say-items",
+			"autocorrect": false,
+			"instructions": [
+				"Nombrá en un minuto todas las palabras que se te ocurran que empiecen con las sílabas MA, ME, MI, MO o MU."
+			],
+			"exercises": [
+				{
+					"screenType": "exercise"
+				}
+			]
+		},
+		{
+			"title": "Lectura de palabras",
+			"description": "Descripción",
+			"type": "match-words",
+			"autocorrect": false,
+			"instructions": ["Leé la palabra y señalá la imagen correcta."],
+			"exercises": [
+				{
+					"screenType": "practice",
+					"images": [
+						{ "image": "mano", "correct": false },
+						{ "image": "mesa", "correct": true },
+						{ "image": "mono", "correct": false }
+					]
+				},
+				{ "screenType": "practice-finish" },
+				{
+					"screenType": "exercise",
+					"images": [
+						{ "image": "pala", "correct": false },
+						{ "image": "perro", "correct": false },
+						{ "image": "pato", "correct": true }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"images": [
+						{ "image": "sal", "correct": false },
+						{ "image": "sol", "correct": true },
+						{ "image": "sopa", "correct": false }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"images": [
+						{ "image": "moto", "correct": true },
+						{ "image": "mono", "correct": false },
+						{ "image": "manzana", "correct": false }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"images": [
+						{ "image": "te", "correct": false },
+						{ "image": "tren", "correct": true },
+						{ "image": "tres", "correct": false }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"images": [
+						{ "image": "toro", "correct": false },
+						{ "image": "tomate", "correct": true },
+						{ "image": "tostada", "correct": false }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"images": [
+						{ "image": "plata", "correct": false },
+						{ "image": "plaza", "correct": false },
+						{ "image": "pasto", "correct": true }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"images": [
+						{ "image": "remo", "correct": false },
+						{ "image": "remera", "correct": true },
+						{ "image": "remedio", "correct": false }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"images": [
+						{ "image": "cara", "correct": false },
+						{ "image": "caracol", "correct": true },
+						{ "image": "camisa", "correct": false }
+					]
+				},
+				{
+					"screenType": "exercise",
+					"images": [
+						{ "image": "barco", "correct": true },
+						{ "image": "bloque", "correct": false },
+						{ "image": "banco", "correct": false }
+					]
+				}
+			]
+		},
+		{
+			"title": "Lectura de pseudopalabras",
+			"description": "Descripción",
+			"type": "nonexisting-words",
+			"autocorrect": false,
+			"instructions": [
+				"Leé estas palabras inventadas, no existen",
+				"Apretar la flecha derecha en las respuestas correctas y la flecha izquierda en las incorrectas."
+			],
+			"exercises": [
+				{
+					"screenType": "practice",
+					"words": ["palabra", "palabra", "palabra", "palabra"]
+				},
+				{ "screenType": "practice-finish" },
+				{
+					"screenType": "exercise",
+					"words": ["US", "TUPE", "MICO", "FUNOMI", "CLATA", "BRIME", "ALMO", "ARSO", "PINAMOTA", "TRELU"]
+				}
+			]
+		}
+	]
+}

@@ -11,3 +11,18 @@
 @import './verify-email';
 @import './account';
 @import './dashboard';
+
+@import './exercises/dyscalculia/panel-exercises';
+@import './exercises/dyscalculia/reaction-time';
+@import './exercises/dyscalculia/match-points-number';
+@import './exercises/dyscalculia/symbolic-magnitude';
+@import './exercises/dyscalculia/numeric-line';
+@import './exercises/dyscalculia/simple-arithmetic';
+@import './exercises/dyscalculia/counting';
+
+@import './exercises/dyslexia/contains-letter';
+@import './exercises/dyslexia/match-words';
+
+@import './components/keyboard';
+@import './components/correct-buttons';
+@import './components/accordion';

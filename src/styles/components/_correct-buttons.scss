@@ -1,0 +1,24 @@
+.correct-buttons {
+	margin: 5rem 0 0 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 3rem;
+	div {
+		$size: 100px;
+		border-radius: 50%;
+		width: $size;
+		height: $size;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+	}
+
+	.btn-correct {
+		background-color: hsl(117, 52%, 44%);
+	}
+	.btn-incorrect {
+		background-color: hsl(357, 77%, 52%);
+	}
+}

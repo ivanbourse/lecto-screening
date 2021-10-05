@@ -27,13 +27,11 @@ const Dashboard = () => {
 	}, []);
 	useEffect(() => {setFiltered(data.students); console.log(data);}, [data]);
 
-	const btnTestClick = id => {
-		if (data?.user?.paidTests < 0) return;
-		dispatch(startTest(id));
+	const btnTestClick = (id, type) => {
+		dispatch(startTest({ student: id, type }));
 		history.push('/test');
 	};
 
-	const btnBuyTests = () => dispatch(buyTests());
 	const btnAddStudent = () => history.push('/dashboard/add-student');
 
 	const onSearchBarChange = e => {
@@ -80,7 +78,7 @@ const Dashboard = () => {
 				)}
 				<div className='top-section'>
 					<h2 className='available-tests'>
-						Tests tomados: <br /> <span className='number'>{data?.user?.paidTests}</span>
+						Tests tomados: <br /> <span className='number'>{data?.user?.takenTests}</span>
 					</h2>
 					<div className='buttons'>
 						<div className='button' onClick={() => btnAddStudent()}>
@@ -116,8 +114,11 @@ const Dashboard = () => {
 										<Link to={`/dashboard/student/${student._id}`} className='button view'>
 											Ver más
 										</Link>
-										<div className='button start' onClick={e => btnTestClick(student._id)}>
-											Comenzar test
+										<div className='button start' onClick={e => btnTestClick(student._id, 'dyslexia')}>
+											Comenzar test de dislexia
+										</div>
+										<div className='button start' onClick={e => btnTestClick(student._id, 'dyscalculia')}>
+											Comenzar test de discalculia
 										</div>
 									</div>
 								</div>
