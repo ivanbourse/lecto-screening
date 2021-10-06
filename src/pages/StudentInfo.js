@@ -87,7 +87,42 @@ const ExerciseResultsComponentDyscalculia = ({ type, exercises }) => {
 					Tiempo de respuesta promedio: <span>{averageAnswerTime}s</span>
 				</p> */}
 			</div>
-			<div className='result-icons-container'>{JSON.stringify(typeExercises, null, 2)}</div>
+
+			<div className='result-icons-container'>
+				{typeExercises.answer.map((item, i) => {
+					return (
+						<div className='result-icon' key={type + ' ' + i}>
+							<img
+								src={item.correct.isCorrect ? correctIcon : incorrectIcon}
+								data-tip
+								data-for={`${type} ${Date.now} ${i}`}
+								alt='icon'
+							/>
+							<ReactTooltip id={`${type} ${Date.now} ${i}`} type='dark' effect='solid' className='tooltip'>
+								{type === 'match-points-number' ? (
+									<>
+										<p>Respuesta ingresada: {item.answer === true ? 'verdadero' : 'falso'}</p>
+										<p>Respuesta correcta: {item.correct.answer === true ? 'verdadero' : 'falso'}</p>
+									</>
+								) : (
+									<>
+										{type !== 'reaction-time' ? (
+											<>
+												<p>
+													Respuesta ingresada:{' '}
+													{typeof item.answer === 'object' ? JSON.stringify(item.answer) : item.answer}
+												</p>
+												<p>Respuesta correcta: {item.correct.answer}</p>
+											</>
+										) : null}
+									</>
+								)}
+								<p>Tiempo tardado: {item.time / 1000} segundos</p>
+							</ReactTooltip>
+						</div>
+					);
+				})}
+			</div>
 		</div>
 	);
 };

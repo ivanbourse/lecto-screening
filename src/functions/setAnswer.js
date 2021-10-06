@@ -34,7 +34,8 @@ const useSetAnswer = props => {
 
 	const submitAnswer = async answer => {
 		if (props?.customTime === true) {
-			await dispatch(nextQuestion({ time: answer.time, answer }));
+			const { time, ...answerWithoutTime } = answer;
+			await dispatch(nextQuestion({ time: answer.time, answer: answerWithoutTime }));
 		} else {
 			await dispatch(nextQuestion({ time: Date.now() - startTime, answer: answer ?? userAnswer }));
 		}
