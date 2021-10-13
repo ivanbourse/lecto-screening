@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import { testTypesComponentsMap } from 'utils/testMaps';
@@ -14,6 +14,12 @@ import correctIcon from 'assets/icons/correct.svg';
 import { addExerciseToResults, setExercise, setExerciseResults, setPopupOpen } from 'redux/slices/dashboard';
 import Accordion from 'components/global/Accordion';
 
+import HighchartsReact from 'highcharts-react-official';
+import bellcurve from 'highcharts/modules/histogram-bellcurve';
+import Highcharts from 'highcharts';
+
+bellcurve(Highcharts);
+
 const getAverageAnswerTime = exercises => {
 	const allAnswerTimes = exercises.map(item => item.time || item.answer.time);
 
@@ -26,8 +32,96 @@ const getAverageAnswerTime = exercises => {
 	return averageInSeconds.toFixed(2);
 };
 
+const data = [1.3, 2.1];
+
 const ExerciseResultsComponentDyslexia = ({ type, exercises }) => {
-	const typeExercises = exercises[type];
+	const pointsInInterval = 5;
+	const [config, setConfig] = useState({
+		chart: {
+			margin: [50, 0, 50, 50],
+			events: {
+				load: function () {
+					Highcharts.each(this.series[0].data, function (point, i) {
+						var labels = ['4σ', '3σ', '2σ', 'σ', 'μ', 'σ', '2σ', '3σ', '4σ'];
+						if (i % pointsInInterval === 0) {
+							point.update({
+								color: 'black',
+								dataLabels: {
+									enabled: true,
+									format: labels[Math.floor(i / pointsInInterval)],
+									overflow: 'none',
+									crop: false,
+									y: -2,
+									style: {
+										fontSize: '13px',
+									},
+								},
+							});
+						}
+					});
+				},
+			},
+		},
+
+		title: {
+			text: 'Bell curve',
+		},
+
+		xAxis: [
+			{
+				title: {
+					text: 'Data',
+				},
+				alignTicks: false,
+			},
+			{
+				title: {
+					text: 'Bell curve',
+				},
+				alignTicks: false,
+				opposite: true,
+			},
+		],
+
+		yAxis: [
+			{
+				title: { text: 'Data' },
+			},
+			{
+				title: { text: 'Bell curve' },
+				opposite: true,
+			},
+		],
+
+		series: [
+			{
+				name: 'Bell curve',
+				type: 'bellcurve',
+				xAxis: 1,
+				yAxis: 1,
+				baseSeries: 1,
+				intervals: 4,
+				pointsInInterval,
+				zIndex: -1,
+				marker: {
+					enabled: true,
+				},
+			},
+			{
+				name: 'Data',
+				type: 'scatter',
+				data: data,
+				accessibility: {
+					exposeAsGroupOnly: true,
+				},
+				marker: {
+					radius: 1.5,
+				},
+			},
+		],
+	});
+
+	const typeExercises = exercises.answers[type];
 
 	const exercisesAmounts = {
 		total: typeExercises.answer.length,
@@ -41,29 +135,15 @@ const ExerciseResultsComponentDyslexia = ({ type, exercises }) => {
 				<p className='total-label'>
 					Puntaje: <span>{typeExercises.score}</span>
 				</p>
-				{/* <p className='correct-label'>
-					Correctas:{' '}
-					<span>
-						<b>{exercisesAmounts.correct}</b> ({percentages.correct})
-					</span>
-				</p>
-				<p className='incorrect-label'>
-					Incorrectas:{' '}
-					<span>
-						<b>{exercisesAmounts.incorrect}</b> ({percentages.incorrect})
-					</span>
-				</p>
-				<p className='average-time-label'>
-					Tiempo de respuesta promedio: <span>{averageAnswerTime}s</span>
-				</p> */}
 			</div>
 			<div className='result-icons-container'>{JSON.stringify(typeExercises, null, 2)}</div>
+			<HighchartsReact highcharts={Highcharts} options={config} />
 		</div>
 	);
 };
 
 const ExerciseResultsComponentDyscalculia = ({ type, exercises }) => {
-	const typeExercises = exercises[type];
+	const typeExercises = exercises.answers[type];
 
 	return (
 		<div className='exercise-result-container'>
@@ -300,7 +380,7 @@ const StudentInfo = props => {
 											.map(result => (
 												<div className='result-container' key={result._id}>
 													{result.testType} {result._id}
-													<Accordion items={exercisesToShowPerType[result.testType](result.answers)} />
+													<Accordion items={exercisesToShowPerType[result.testType](result)} />
 												</div>
 											))}
 								</div>
