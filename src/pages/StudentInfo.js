@@ -94,7 +94,7 @@ const ExerciseResultsComponentDyslexia = ({ type, exercises }) => {
 			{
 				name: 'Data',
 				type: 'scatter',
-				data: [point],
+				data: data,
 				accessibility: {
 					exposeAsGroupOnly: true,
 				},
