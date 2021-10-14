@@ -17,6 +17,7 @@ import Accordion from 'components/global/Accordion';
 import HighchartsReact from 'highcharts-react-official';
 import bellcurve from 'highcharts/modules/histogram-bellcurve';
 import Highcharts from 'highcharts';
+import NormalDistribution from 'normal-distribution';
 
 bellcurve(Highcharts);
 
@@ -34,35 +35,19 @@ const getAverageAnswerTime = exercises => {
 
 const data = [1.3, 2.1];
 
-const ExerciseResultsComponentDyslexia = ({ type, exercises }) => {
-	const pointsInInterval = 5;
-	const [config, setConfig] = useState({
-		chart: {
-			margin: [50, 0, 50, 50],
-			events: {
-				load: function () {
-					Highcharts.each(this.series[0].data, function (point, i) {
-						var labels = ['4σ', '3σ', '2σ', 'σ', 'μ', 'σ', '2σ', '3σ', '4σ'];
-						if (i % pointsInInterval === 0) {
-							point.update({
-								color: 'black',
-								dataLabels: {
-									enabled: true,
-									format: labels[Math.floor(i / pointsInInterval)],
-									overflow: 'none',
-									crop: false,
-									y: -2,
-									style: {
-										fontSize: '13px',
-									},
-								},
-							});
-						}
-					});
-				},
-			},
-		},
+function normalDensity(x, mean, standardDeviation) {
+	var translation = x - mean;
+	return (
+		Math.exp(-(translation * translation) / (2 * standardDeviation * standardDeviation)) /
+		(standardDeviation * Math.sqrt(2 * Math.PI))
+	);
+}
 
+const ExerciseResultsComponentDyslexia = ({ type, exercises }) => {
+	const typeExercises = exercises.answers[type];
+	const stats = Object.values(exercises).find(val => val._id === type);
+
+	const [config, setConfig] = useState({
 		title: {
 			text: 'Bell curve',
 		},
@@ -101,7 +86,6 @@ const ExerciseResultsComponentDyslexia = ({ type, exercises }) => {
 				yAxis: 1,
 				baseSeries: 1,
 				intervals: 4,
-				pointsInInterval,
 				zIndex: -1,
 				marker: {
 					enabled: true,
@@ -110,7 +94,7 @@ const ExerciseResultsComponentDyslexia = ({ type, exercises }) => {
 			{
 				name: 'Data',
 				type: 'scatter',
-				data: data,
+				data: [point],
 				accessibility: {
 					exposeAsGroupOnly: true,
 				},
@@ -120,8 +104,6 @@ const ExerciseResultsComponentDyslexia = ({ type, exercises }) => {
 			},
 		],
 	});
-
-	const typeExercises = exercises.answers[type];
 
 	const exercisesAmounts = {
 		total: typeExercises.answer.length,
