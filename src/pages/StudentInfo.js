@@ -20,6 +20,24 @@ import Highcharts from 'highcharts';
 import NormalDistribution from 'normal-distribution';
 
 bellcurve(Highcharts);
+// https://benmccormick.org/2017/05/11/building-normal-curves-highcharts/ https://www.highcharts.com/docs/chart-and-series-types/bell-curve-series https://codepen.io/pen/?editors=1010 https://api.highcharts.com/highcharts/plotOptions.bellcurve https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/bellcurve/
+
+const normalY = (x, mean, stdDev) => Math.exp((-0.5) * Math.pow((x - mean) / stdDev, 2));
+
+const generatePoints = (mean, stdDev) => {
+	let min = mean - (5 * stdDev);
+	let max = mean + (5 * stdDev);
+	let unit = (max - min) / 100;
+
+	if (unit === 0) return [mean];
+
+	var ans = [];
+	for (let i = min; i <= max; i += unit)
+		ans.push(i);
+	return ans;
+}
+
+const pointsInInterval = 5;
 
 const getAverageAnswerTime = exercises => {
 	const allAnswerTimes = exercises.map(item => item.time || item.answer.time);
@@ -44,13 +62,45 @@ function normalDensity(x, mean, standardDeviation) {
 }
 
 const ExerciseResultsComponentDyslexia = ({ type, exercises }) => {
+
 	const typeExercises = exercises.answers[type];
 	const stats = Object.values(exercises).find(val => val._id === type);
+	const points = generatePoints(stats.mediana, stats.desvioEstandar)
+	const seriesData = points.map(x => normalY(x, stats.mediana, stats.desvioEstandar));
 
 	const [config, setConfig] = useState({
 		title: {
 			text: 'Bell curve',
 		},
+
+		legend: {
+			enabled: false,
+		},
+
+		chart: {
+			events: {
+				load: function () {
+					Highcharts.each(this.series[0].data, function (point, i) {
+						var labels = ['4σ', '3σ', '2σ', 'σ', 'μ', 'σ', '2σ', '3σ', '4σ'];
+						if (i % pointsInInterval === 0) {
+							point.update({
+								color: 'black',
+								dataLabels: {
+									enabled: true,
+									format: labels[Math.floor(i / pointsInInterval)],
+									overflow: 'none',
+									crop: false,
+									y: -2,
+									style: {
+										fontSize: '13px'
+									}
+								}
+							});
+						}
+					});
+				}
+			},
+		},	
 
 		xAxis: [
 			{
@@ -86,15 +136,17 @@ const ExerciseResultsComponentDyslexia = ({ type, exercises }) => {
 				yAxis: 1,
 				baseSeries: 1,
 				intervals: 4,
+				pointsInInterval: pointsInInterval,
 				zIndex: -1,
 				marker: {
-					enabled: true,
+					enabled: false,
 				},
 			},
 			{
 				name: 'Data',
 				type: 'scatter',
-				data: data,
+				data: seriesData,
+				visible: false,
 				accessibility: {
 					exposeAsGroupOnly: true,
 				},
