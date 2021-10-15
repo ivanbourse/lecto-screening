@@ -22,8 +22,6 @@ import NormalDistribution from 'normal-distribution';
 bellcurve(Highcharts);
 // https://benmccormick.org/2017/05/11/building-normal-curves-highcharts/ https://www.highcharts.com/docs/chart-and-series-types/bell-curve-series https://codepen.io/pen/?editors=1010 https://api.highcharts.com/highcharts/plotOptions.bellcurve https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/bellcurve/
 
-const normalY = (x, mean, stdDev) => Math.exp((-0.5) * Math.pow((x - mean) / stdDev, 2));
-
 const generatePoints = (mean, stdDev) => {
 	let min = mean - (5 * stdDev);
 	let max = mean + (5 * stdDev);
@@ -66,7 +64,7 @@ const ExerciseResultsComponentDyslexia = ({ type, exercises }) => {
 	const typeExercises = exercises.answers[type];
 	const stats = Object.values(exercises).find(val => val._id === type);
 	const points = generatePoints(stats.mediana, stats.desvioEstandar)
-	const seriesData = points.map(x => normalY(x, stats.mediana, stats.desvioEstandar));
+	const seriesData = points.map(x => normalDensity(x, stats.mediana, stats.desvioEstandar));
 
 	const [config, setConfig] = useState({
 		title: {
@@ -100,33 +98,28 @@ const ExerciseResultsComponentDyslexia = ({ type, exercises }) => {
 					});
 				}
 			},
-		},	
+		},
 
-		xAxis: [
-			{
-				title: {
-					text: 'Data',
-				},
-				alignTicks: false,
-			},
-			{
-				title: {
-					text: 'Bell curve',
-				},
-				alignTicks: false,
-				opposite: true,
-			},
-		],
 
-		yAxis: [
-			{
-				title: { text: 'Data' },
+		xAxis: [{
+			title: {
+				text: 'Data'
 			},
-			{
-				title: { text: 'Bell curve' },
-				opposite: true,
+			alignTicks: false
+		}, {
+			title: {
+				text: 'Bell curve'
 			},
-		],
+			alignTicks: false,
+			opposite: true
+		}],
+
+		yAxis: [{
+			title: { text: 'Data' }
+		}, {
+			title: { text: 'Bell curve' },
+			opposite: true
+		}],
 
 		series: [
 			{
