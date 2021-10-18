@@ -18,8 +18,8 @@ const NumericLine = ({ isResult }) => {
 					min={0}
 					max={10}
 					step={0.00001}
-					defaultValue={5}
-					value={userAnswer ?? 5}
+					defaultValue={0}
+					value={userAnswer ?? 0}
 					onChange={e => setUserAnswer(+e.target.value)}
 				/>
 			</div>

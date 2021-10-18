@@ -23,7 +23,7 @@ const randomGenerators = {
 		// with paddings so that it doesn't appear on corners of the screen
 
 		const positionX = randomValueBetweenTwoNumbers(0, 100);
-		const positionY = randomValueBetweenTwoNumbers(0, 100);
+		const positionY = randomValueBetweenTwoNumbers(0, 60);
 
 		const position = [positionX + '%', positionY + '%'];
 
