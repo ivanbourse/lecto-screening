@@ -9,7 +9,7 @@
 			"type": "reaction-time",
 			"instructions": [
 				"En la pantalla aparecerá un punto negro.",
-				"Apenas aparezca, deberás presionar cualquier tecla lo más rápido posible.",
+				"Apenas aparezca, deberás presionar el botón verde lo más rápido posible.",
 				"Los primeros 4 ejercicios serán de prueba para que veas cómo funciona."
 			],
 			"min": 1.5,

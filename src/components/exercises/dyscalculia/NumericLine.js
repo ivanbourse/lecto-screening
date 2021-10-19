@@ -19,8 +19,11 @@ const NumericLine = ({ isResult }) => {
 					max={10}
 					step={0.00001}
 					defaultValue={0}
-					value={userAnswer ?? 0}
-					onChange={e => setUserAnswer(+e.target.value)}
+					value={0}
+					onChange={e => {
+						setUserAnswer(+e.target.value);
+						console.log(e.target.value);
+					}}
 				/>
 			</div>
 			<Button className='btn btn-primary' onClick={() => submitAnswer()}>

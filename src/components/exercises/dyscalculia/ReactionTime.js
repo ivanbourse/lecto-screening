@@ -10,10 +10,12 @@ const ReactionTime = ({ isResult }) => {
 	const [date, setDate] = useState(Date.now());
 
 	const onKeyDown = e => {
-		window.removeEventListener('keydown', onKeyDown);
-		const time = Date.now() - date - value.randomDelay;
-		submitAnswer({ time });
-		setVisible(false);
+		if (visible) {
+			window.removeEventListener('keydown', onKeyDown);
+			const time = Date.now() - date - value.randomDelay;
+			submitAnswer({ time });
+			setVisible(false);
+		}
 	};
 
 	useEffect(() => {
