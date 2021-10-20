@@ -1,8 +1,13 @@
+import { useEffect } from 'react';
 import Button from 'components/global/Button';
 import useSetAnswer from 'functions/setAnswer';
 
 const NumericLine = ({ isResult }) => {
 	const { exercise, userAnswer, setUserAnswer, submitAnswer } = useSetAnswer({ isResult });
+
+	useEffect(() => {
+		setUserAnswer(0);
+	}, [exercise]);
 
 	return (
 		<div className='exercise numeric-line-container'>
@@ -19,7 +24,7 @@ const NumericLine = ({ isResult }) => {
 					max={10}
 					step={0.00001}
 					defaultValue={0}
-					value={userAnswer || 0}
+					value={userAnswer ?? 0}
 					onChange={e => {
 						setUserAnswer(+e.target.value);
 						console.log(e.target.value);

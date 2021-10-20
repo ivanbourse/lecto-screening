@@ -13,6 +13,22 @@ export const randomBetweenMinMax = ({ min, max }) => {
 	return { number1, number2 };
 };
 
+const randomSortWithoutConsecutiveEquals = (options, amount) => {
+	let arr = options.sort(() => Math.random() - 0.5).slice(0, amount);
+	if (arr.length === amount) return arr;
+
+	let lastOption = arr[arr.length - 1];
+
+	for (let i = 0; i <= amount - arr.length; i++) {
+		let randomOption = options[randomValueBetweenTwoNumbers(0, options.length - 1)];
+		while (randomOption === lastOption) randomOption = options[randomValueBetweenTwoNumbers(0, options.length - 1)];
+		arr.push(randomOption);
+		lastOption = randomOption;
+	}
+
+	return arr;
+};
+
 const getRandomOption = (a, b) => {
 	return Math.random() > 0.5 ? a : b;
 };
@@ -54,44 +70,6 @@ const randomGenerators = {
 	'numeric-line': ({ min, max }) => {
 		const value = randomValueBetweenTwoNumbers(min, max);
 		return { correct: value, value };
-	},
-	'simple-arithmetic': ({ uid }) => {
-		// possible values are 1, 2, 3 or 4 so the result is always a one-digit number
-		const value1 = randomValueBetweenTwoNumbers(1, 5);
-		const value2 = randomValueBetweenTwoNumbers(1, 5);
-
-		const operationFunctions = {
-			plus: (a, b) => a + b,
-			minus: (a, b) => a - b,
-		};
-
-		const operationToText = {
-			plus: '+',
-			minus: '-',
-		};
-
-		if (uid === 'minus' && value2 > value1) {
-			const sumText = `${value2} ${operationToText[uid]} ${value1} = ?`;
-			const correct = operationFunctions[uid](value2, value1);
-
-			return { value: sumText, correct };
-		}
-
-		const sumText = `${value1} ${operationToText[uid]} ${value2} = ?`;
-		const correct = operationFunctions[uid](value1, value2);
-
-		return { value: sumText, correct };
-	},
-	counting: ({ min, max, uid }) => {
-		const randomNumber = randomValueBetweenTwoNumbers(min, max);
-
-		let values = [];
-		if (uid) {
-			values = [randomNumber + 2, randomNumber + 1, randomNumber];
-		} else {
-			values = [randomNumber - 2, randomNumber - 1, randomNumber];
-		}
-		return { correct: randomNumber, values };
 	},
 	'match-sample': ({ min, max }) => {
 		const isTheSame = getRandomOption(true, false);
@@ -137,6 +115,58 @@ const randomGenerators = {
 	},
 };
 
+const generateCustomOptions = {
+	plus: amount => {
+		let sums = [];
+
+		const limit = 10;
+
+		for (let i = 1; i < limit; i++) {
+			for (let j = 1; i + j < limit; j++) {
+				sums.push([i, j, i + j]);
+			}
+		}
+
+		const randomSortedSums = randomSortWithoutConsecutiveEquals(sums, amount);
+
+		return randomSortedSums.map(arr => ({ value: `${arr[0]} + ${arr[1]} = ?`, correct: arr[2] }));
+	},
+	minus: amount => {
+		let substractions = [];
+
+		for (let i = 9; i > 2; i--) {
+			console.log(i);
+			for (let j = 1; i - j > 0; j++) {
+				substractions.push([i, j, i - j]);
+			}
+		}
+
+		const randomSortedSubstractions = randomSortWithoutConsecutiveEquals(substractions, amount);
+
+		return randomSortedSubstractions.map(arr => ({ value: `${arr[0]} - ${arr[1]} = ?`, correct: arr[2] }));
+	},
+	true: amount => {
+		let arrays = [];
+
+		for (let i = 1; i + 2 < 11; i++) {
+			arrays.push([i, i + 1, i + 2]);
+		}
+
+		const randomSortedArrays = randomSortWithoutConsecutiveEquals(arrays, amount);
+		return randomSortedArrays.map(arr => ({ correct: arr[2], values: arr }));
+	},
+	false: amount => {
+		let arrays = [];
+
+		for (let i = 10; i - 2 > 0; i--) {
+			arrays.push([i, i - 1, i - 2]);
+		}
+
+		const randomSortedArrays = randomSortWithoutConsecutiveEquals(arrays, amount);
+		return randomSortedArrays.map(arr => ({ correct: arr[2], values: arr }));
+	},
+};
+
 export async function generateTest(testInfo) {
 	const testArray = [];
 
@@ -151,19 +181,34 @@ export async function generateTest(testInfo) {
 			// agregar pantalla de instrucciones
 			testArray.push({ screenType: 'instructions', ...exerciseInfo });
 
-			// agregar ejercicios de prueba
-			for (let i = 0; i < practicesPerType; i++) {
-				const randomValue = randomGenerators[exerciseInfo.type](exerciseInfo);
-				testArray.push({ screenType: 'practice', ...exerciseInfo, ...randomValue });
-				testArray.push({ screenType: 'practice-feedback', ...exerciseInfo, ...randomValue });
-			}
+			if (exerciseInfo.customOptions) {
+				const practiceValues = generateCustomOptions[exerciseInfo.uid](practicesPerType);
+				for (let option of practiceValues) {
+					testArray.push({ screenType: 'practice', ...exerciseInfo, ...option });
+					testArray.push({ screenType: 'practice-feedback', ...exerciseInfo, ...option });
+				}
 
-			testArray.push({ screenType: 'practice-finish', ...exerciseInfo });
+				testArray.push({ screenType: 'practice-finish', ...exerciseInfo });
 
-			// agregar ejercicios de verdad
-			for (let i = 0; i < exercisesPerType; i++) {
-				const randomValue = randomGenerators[exerciseInfo.type](exerciseInfo);
-				testArray.push({ screenType: 'exercise', ...exerciseInfo, ...randomValue });
+				const testValues = generateCustomOptions[exerciseInfo.uid](exercisesPerType);
+				for (let option of testValues) {
+					testArray.push({ screenType: 'exercise', ...exerciseInfo, ...option });
+				}
+			} else {
+				// agregar ejercicios de prueba
+				for (let i = 0; i < practicesPerType; i++) {
+					const randomValue = randomGenerators[exerciseInfo.type](exerciseInfo);
+					testArray.push({ screenType: 'practice', ...exerciseInfo, ...randomValue });
+					testArray.push({ screenType: 'practice-feedback', ...exerciseInfo, ...randomValue });
+				}
+
+				testArray.push({ screenType: 'practice-finish', ...exerciseInfo });
+
+				// agregar ejercicios de verdad
+				for (let i = 0; i < exercisesPerType; i++) {
+					const randomValue = randomGenerators[exerciseInfo.type](exerciseInfo);
+					testArray.push({ screenType: 'exercise', ...exerciseInfo, ...randomValue });
+				}
 			}
 
 			testArray.push({ screenType: 'exercise-finish', ...exerciseInfo });

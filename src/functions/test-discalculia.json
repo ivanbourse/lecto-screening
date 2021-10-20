@@ -100,7 +100,8 @@
 			],
 			"min": 4,
 			"max": 8,
-			"uid": false
+			"uid": false,
+			"customOptions": true
 		},
 		{
 			"title": "Contar para atrás",
@@ -112,7 +113,8 @@
 			],
 			"min": 4,
 			"max": 8,
-			"uid": true
+			"uid": true,
+			"customOptions": true
 		},
 		{
 			"title": "Suma",
@@ -122,7 +124,8 @@
 				"En la pantalla aparecerán cuentas de suma. Deberás escribir el resultado correcto.",
 				"Recuerda que los primeros 4 ejercicios serán de prueba para que veas cómo funciona."
 			],
-			"uid": "plus"
+			"uid": "plus",
+			"customOptions": true
 		},
 		{
 			"title": "Resta",
@@ -132,7 +135,8 @@
 				"En la pantalla aparecerán cuentas de resta. Deberás escribir el resultado correcto.",
 				"Recuerda que los primeros 4 ejercicios serán de prueba para que veas cómo funciona."
 			],
-			"uid": "minus"
+			"uid": "minus",
+			"customOptions": true
 		}
 	]
 }
