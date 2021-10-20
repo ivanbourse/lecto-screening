@@ -19,7 +19,7 @@ const NumericLine = ({ isResult }) => {
 					max={10}
 					step={0.00001}
 					defaultValue={0}
-					value={0}
+					value={userAnswer || 0}
 					onChange={e => {
 						setUserAnswer(+e.target.value);
 						console.log(e.target.value);
