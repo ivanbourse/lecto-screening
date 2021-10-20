@@ -119,7 +119,7 @@ const generateCustomOptions = {
 	plus: amount => {
 		let sums = [];
 
-		const limit = 10;
+		const limit = 9;
 
 		for (let i = 1; i < limit; i++) {
 			for (let j = 1; i + j < limit; j++) {
