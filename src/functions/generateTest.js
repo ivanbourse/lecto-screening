@@ -182,7 +182,7 @@ export async function generateTest(testInfo) {
 			testArray.push({ screenType: 'instructions', ...exerciseInfo });
 
 			if (exerciseInfo.customOptions) {
-				const practiceValues = generateCustomOptions[exerciseInfo.uid](practicesPerType);
+				const practiceValues = generateCustomOptions[exerciseInfo.uid + ""](practicesPerType);
 				for (let option of practiceValues) {
 					testArray.push({ screenType: 'practice', ...exerciseInfo, ...option });
 					testArray.push({ screenType: 'practice-feedback', ...exerciseInfo, ...option });
@@ -190,7 +190,7 @@ export async function generateTest(testInfo) {
 
 				testArray.push({ screenType: 'practice-finish', ...exerciseInfo });
 
-				const testValues = generateCustomOptions[exerciseInfo.uid](exercisesPerType);
+				const testValues = generateCustomOptions[exerciseInfo.uid + ""](exercisesPerType);
 				for (let option of testValues) {
 					testArray.push({ screenType: 'exercise', ...exerciseInfo, ...option });
 				}
