@@ -145,7 +145,7 @@ const generateCustomOptions = {
 
 		return randomSortedSubstractions.map(arr => ({ value: `${arr[0]} - ${arr[1]} = ?`, correct: arr[2] }));
 	},
-	true: amount => {
+	false: amount => {
 		let arrays = [];
 
 		for (let i = 1; i + 2 < 11; i++) {
@@ -155,7 +155,7 @@ const generateCustomOptions = {
 		const randomSortedArrays = randomSortWithoutConsecutiveEquals(arrays, amount);
 		return randomSortedArrays.map(arr => ({ correct: arr[2], values: arr }));
 	},
-	false: amount => {
+	true: amount => {
 		let arrays = [];
 
 		for (let i = 10; i - 2 > 0; i--) {
