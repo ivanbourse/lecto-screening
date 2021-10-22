@@ -148,7 +148,7 @@ const generateCustomOptions = {
 	false: amount => {
 		let arrays = [];
 
-		for (let i = 1; i + 2 < 11; i++) {
+		for (let i = 1; i + 2 < 10; i++) {
 			arrays.push([i, i + 1, i + 2]);
 		}
 
