@@ -7,9 +7,11 @@ import NextButton from 'components/NextButton';
 const NonexistingWords = () => {
 	const { exercise, setUserAnswer, submitAnswer } = useSetAnswer(false);
 
-	const arrayToShow = exercise.letters || [exercise.exercise.number];
+	const arrayToShow = exercise.words;
 	const [answers, setAnswers] = useState([]);
 	const currentItem = answers.length;
+
+	const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
 	const addAnswer = answer => {
 		if (arrayToShow.length > answers.length) {
@@ -17,6 +19,7 @@ const NonexistingWords = () => {
 				setUserAnswer([...prev, answer]);
 				return [...prev, answer];
 			});
+			setCurrentWordIndex(prev => prev + 1);
 		}
 	};
 
@@ -38,6 +41,10 @@ const NonexistingWords = () => {
 			window.removeEventListener('keydown', keydownEvent);
 			window.addEventListener('keydown', keydownEvent);
 		}
+		if (arrayToShow.length - 1 === currentWordIndex) {
+			submitAnswer();
+		}
+
 		return () => {
 			window.removeEventListener('keydown', keydownEvent);
 		};
@@ -46,11 +53,17 @@ const NonexistingWords = () => {
 	return (
 		<ExerciseContainer classes='say-the-letters-container'>
 			<div className='letters'>
-				{arrayToShow.map((item, index) => (
+				{/* {arrayToShow.map((item, index) => (
 					<div className={`letter ${index < currentItem ? 'answered' : ''}`} key={item}>
 						{item}
 					</div>
-				))}
+				))} */}
+				<div
+					className={`letter ${currentWordIndex < currentItem ? 'answered' : ''}`}
+					key={arrayToShow[currentWordIndex]}
+				>
+					{arrayToShow[currentWordIndex]}
+				</div>
 			</div>
 
 			<NextButton setUserAnswer={nextExercise} answered={true} />

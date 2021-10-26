@@ -4,6 +4,7 @@ import ExerciseContainer from 'components/ExerciseContainer';
 import useSetAnswer from 'functions/setAnswer';
 import NextButton from 'components/NextButton';
 import { getImage } from 'functions/getImage';
+import PictogramWithSound from './components/PictogramWithSound';
 
 const CountItems = () => {
 	const current = useSelector(state => state.questions.current);
@@ -23,7 +24,7 @@ const CountItems = () => {
 				{Array(exercise.exercise.count)
 					.fill(0)
 					.map((item, i) => (
-						<img className='count-image' src={getImage(item.word)} alt={`Pictograma de ${item.word}`} />
+						<PictogramWithSound classes='count-image' word={item.word} />
 					))}
 			</div>
 			<p className='instruction'>Ingresá el número de elementos que contó</p>

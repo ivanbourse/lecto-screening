@@ -4,6 +4,7 @@ import useSetAnswer from 'functions/setAnswer';
 import ExerciseContainer from 'components/ExerciseContainer';
 
 import NextButton from 'components/NextButton';
+import PictogramWithSound from './components/PictogramWithSound';
 
 const MultipleChoice = props => {
 	const { exercise, userAnswer, setUserAnswer, submitAnswer } = useSetAnswer();
@@ -24,6 +25,7 @@ const MultipleChoice = props => {
 							</div>
 						))}
 					</div>
+
 					<NextButton setUserAnswer={submitAnswer} answered={Object.keys(userAnswer).length !== 0} />
 				</ExerciseContainer>
 			)}

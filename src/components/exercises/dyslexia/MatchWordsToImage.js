@@ -3,6 +3,7 @@ import { getImage } from 'functions/getImage';
 import ExerciseContainer from 'components/ExerciseContainer';
 import NextButton from 'components/NextButton';
 import { useEffect } from 'react';
+import PictogramWithSound from './components/PictogramWithSound';
 
 const MatchWordsToImage = () => {
 	const { exercise, userAnswer, setUserAnswer, submitAnswer } = useSetAnswer();
@@ -19,7 +20,7 @@ const MatchWordsToImage = () => {
 							className={`image-option option ${userAnswer.i === i ? 'selected' : ''}`}
 							onClick={() => setUserAnswer({ i, item })}
 						>
-							<img src={getImage(item.image)} alt={`Pictogram for ${item.image}`} />
+							<PictogramWithSound word={item.image} />
 							<p>{item.answer}</p>
 						</div>
 					))}

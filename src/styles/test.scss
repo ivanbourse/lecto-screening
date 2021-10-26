@@ -169,12 +169,14 @@
 		margin: 5vh 0 10vh 0;
 		flex-wrap: wrap;
 		.count-image {
-			width: 100px;
+			img {
+				width: 100px;
 
-			@include desktop {
-				margin: 0 1vw;
+				@include desktop {
+					margin: 0 1vw;
+				}
+				margin: 1rem;
 			}
-			margin: 1rem;
 		}
 	}
 	.number-input {
@@ -320,7 +322,29 @@
 }
 
 .join-with-arrows-container {
-	.images {
+	.row {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		flex-direction: row;
+		gap: 5vw;
+	}
+
+	.images-col {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		gap: 3vh;
+
+		.image {
+			@include number;
+			padding: 10px;
+			width: 120px;
+			height: 120px;
+		}
+	}
+	/* .images {
 		display: grid;
 		grid-template-columns: repeat(5, 1fr);
 		gap: 3vmax;
@@ -334,14 +358,36 @@
 			width: 120px;
 			height: 120px;
 		}
+	} */
+}
+
+.pictogram-with-sound {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+
+	.play-icon {
+		position: absolute;
+		top: -10px;
+		right: -10px;
+		padding: 0.5rem;
+		border-radius: 50%;
+		background-color: var(--clr-main);
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 }
 
 .split-syllables-container {
 	.image {
 		@include number;
-		width: 300px;
-		height: 300px;
+		img {
+			width: 300px;
+			height: 300px;
+		}
 		margin: 2vh 0;
 	}
 
@@ -395,9 +441,10 @@
 
 .multiple-choice-container {
 	.options {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		align-content: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
 		gap: 2vw;
 		margin: 4vh 0 0 0;
 		.option {

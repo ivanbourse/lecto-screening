@@ -3,6 +3,7 @@ import ExerciseContainer from 'components/ExerciseContainer';
 import NextButton from 'components/NextButton';
 import useSetAnswer from 'functions/setAnswer';
 import { getImage } from 'functions/getImage';
+import PictogramWithSound from './components/PictogramWithSound';
 
 const ContainsLetter = () => {
 	const { exercise, userAnswer, setUserAnswer, submitAnswer } = useSetAnswer();
@@ -18,7 +19,7 @@ const ContainsLetter = () => {
 							className={`option ${userAnswer.i === i ? 'selected' : ''}`}
 							onClick={() => setUserAnswer({ i, word: word.word })}
 						>
-							<img className='image-option' src={getImage(word.word)} alt={`Pictograma de ${word.word}`} />
+							<PictogramWithSound classes='image-option' word={word.word} />
 						</div>
 					))}
 				</div>

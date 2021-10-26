@@ -1,6 +1,9 @@
 .contains-letter-container {
-	.image-option {
-		height: clamp(100px, 25vmax, 250px);
-		width: clamp(100px, 25vmax, 250px);
+	.instruction {
+		font-size: var(--fs-large);
+	}
+	.image-option img {
+		height: clamp(80px, 25vmax, 150px);
+		width: clamp(80px, 25vmax, 150px);
 	}
 }

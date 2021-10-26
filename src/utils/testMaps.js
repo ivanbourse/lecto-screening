@@ -21,6 +21,7 @@ import ContainsLetter from 'components/exercises/dyslexia/ContainsLetter';
 import MatchWordsToImage from 'components/exercises/dyslexia/MatchWordsToImage';
 import PracticeFeedback from 'components/exercises/PracticeFeedback';
 import SendResults from 'components/exercises/SendResults';
+import NonexistingWords from 'components/exercises/dyslexia/NonexistingWords';
 
 export const screenTypesComponentsMap = {
 	instructions: () => <ExerciseInstructions />,
@@ -52,7 +53,7 @@ export const dyslexiaExercisesComponentsMap = {
 	'contains-letter': () => <ContainsLetter />,
 	'say-items': () => <GapQuestion />,
 	'match-words': () => <MatchWordsToImage />,
-	'nonexisting-words': () => <SayTheLetters />,
+	'nonexisting-words': () => <NonexistingWords />,
 };
 
 export const testTypesComponentsMap = {
