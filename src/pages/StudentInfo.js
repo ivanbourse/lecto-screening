@@ -23,17 +23,16 @@ bellcurve(Highcharts);
 // https://benmccormick.org/2017/05/11/building-normal-curves-highcharts/ https://www.highcharts.com/docs/chart-and-series-types/bell-curve-series https://codepen.io/pen/?editors=1010 https://api.highcharts.com/highcharts/plotOptions.bellcurve https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/bellcurve/
 
 const generatePoints = (mean, stdDev) => {
-	let min = mean - (5 * stdDev);
-	let max = mean + (5 * stdDev);
+	let min = mean - 5 * stdDev;
+	let max = mean + 5 * stdDev;
 	let unit = (max - min) / 100;
 
 	if (unit === 0) return [mean];
 
 	var ans = [];
-	for (let i = min; i <= max; i += unit)
-		ans.push(i);
+	for (let i = min; i <= max; i += unit) ans.push(i);
 	return ans;
-}
+};
 
 const pointsInInterval = 5;
 
@@ -60,10 +59,9 @@ function normalDensity(x, mean, standardDeviation) {
 }
 
 const ExerciseResultsComponentDyslexia = ({ type, exercises }) => {
-
 	const typeExercises = exercises.answers[type];
 	const stats = Object.values(exercises).find(val => val._id === type);
-	const points = generatePoints(stats.mediana, stats.desvioEstandar)
+	const points = generatePoints(stats.mediana, stats.desvioEstandar);
 	const seriesData = points.map(x => normalDensity(x, stats.mediana, stats.desvioEstandar));
 
 	const [config, setConfig] = useState({
@@ -90,36 +88,41 @@ const ExerciseResultsComponentDyslexia = ({ type, exercises }) => {
 									crop: false,
 									y: -2,
 									style: {
-										fontSize: '13px'
-									}
-								}
+										fontSize: '13px',
+									},
+								},
 							});
 						}
 					});
-				}
+				},
 			},
 		},
 
-
-		xAxis: [{
-			title: {
-				text: 'Data'
+		xAxis: [
+			{
+				title: {
+					text: 'Data',
+				},
+				alignTicks: false,
 			},
-			alignTicks: false
-		}, {
-			title: {
-				text: 'Bell curve'
+			{
+				title: {
+					text: 'Bell curve',
+				},
+				alignTicks: false,
+				opposite: true,
 			},
-			alignTicks: false,
-			opposite: true
-		}],
+		],
 
-		yAxis: [{
-			title: { text: 'Data' }
-		}, {
-			title: { text: 'Bell curve' },
-			opposite: true
-		}],
+		yAxis: [
+			{
+				title: { text: 'Data' },
+			},
+			{
+				title: { text: 'Bell curve' },
+				opposite: true,
+			},
+		],
 
 		series: [
 			{
@@ -160,23 +163,31 @@ const ExerciseResultsComponentDyslexia = ({ type, exercises }) => {
 		<div className='exercise-result-container'>
 			<div className='labels'>
 				<p className='total-label'>
-					Puntaje: <span>{typeExercises.score}</span>
+					Puntaje: <span>{typeExercises?.score}</span>
+				</p>
+				<p className='total-label'>
+					Media: <span>{stats.mediana}</span>
+				</p>
+				<p className='total-label'>
+					Desvios estandar: <span>{stats.desvioEstandar}</span>
 				</p>
 			</div>
-			<div className='result-icons-container'>{JSON.stringify(typeExercises, null, 2)}</div>
-			<HighchartsReact highcharts={Highcharts} options={config} />
+			{/* <div className='result-icons-container'>{JSON.stringify(typeExercises, null, 2)}</div> */}
+
+			{/* <HighchartsReact highcharts={Highcharts} options={config} /> */}
 		</div>
 	);
 };
 
 const ExerciseResultsComponentDyscalculia = ({ type, exercises }) => {
-	const typeExercises = exercises.answers[type];
+	const typeExercises = exercises.answers[type] || {};
+	console.log(exercises);
 
 	return (
 		<div className='exercise-result-container'>
 			<div className='labels'>
 				<p className='total-label'>
-					Puntaje: <span>{typeExercises.score}</span>
+					Puntaje: <span>{typeExercises?.score}</span>
 				</p>
 				{/* <p className='correct-label'>
 					Correctas:{' '}
@@ -196,39 +207,40 @@ const ExerciseResultsComponentDyscalculia = ({ type, exercises }) => {
 			</div>
 
 			<div className='result-icons-container'>
-				{typeExercises.answer.map((item, i) => {
-					return (
-						<div className='result-icon' key={type + ' ' + i}>
-							<img
-								src={item.correct.isCorrect ? correctIcon : incorrectIcon}
-								data-tip
-								data-for={`${type} ${Date.now} ${i}`}
-								alt='icon'
-							/>
-							<ReactTooltip id={`${type} ${Date.now} ${i}`} type='dark' effect='solid' className='tooltip'>
-								{type === 'match-points-number' ? (
-									<>
-										<p>Respuesta ingresada: {item.answer === true ? 'verdadero' : 'falso'}</p>
-										<p>Respuesta correcta: {item.correct.answer === true ? 'verdadero' : 'falso'}</p>
-									</>
-								) : (
-									<>
-										{type !== 'reaction-time' ? (
-											<>
-												<p>
-													Respuesta ingresada:{' '}
-													{typeof item.answer === 'object' ? JSON.stringify(item.answer) : item.answer}
-												</p>
-												<p>Respuesta correcta: {item.correct.answer}</p>
-											</>
-										) : null}
-									</>
-								)}
-								<p>Tiempo tardado: {item.time / 1000} segundos</p>
-							</ReactTooltip>
-						</div>
-					);
-				})}
+				{typeExercises.answer &&
+					typeExercises.answer.map((item, i) => {
+						return (
+							<div className='result-icon' key={type + ' ' + i}>
+								<img
+									src={item.correct.isCorrect ? correctIcon : incorrectIcon}
+									data-tip
+									data-for={`${type} ${Date.now} ${i}`}
+									alt='icon'
+								/>
+								<ReactTooltip id={`${type} ${Date.now} ${i}`} type='dark' effect='solid' className='tooltip'>
+									{type === 'match-points-number' ? (
+										<>
+											<p>Respuesta ingresada: {item.answer === true ? 'verdadero' : 'falso'}</p>
+											<p>Respuesta correcta: {item.correct.answer === true ? 'verdadero' : 'falso'}</p>
+										</>
+									) : (
+										<>
+											{type !== 'reaction-time' ? (
+												<>
+													<p>
+														Respuesta ingresada:{' '}
+														{typeof item.answer === 'object' ? JSON.stringify(item.answer) : item.answer}
+													</p>
+													<p>Respuesta correcta: {item.correct.answer}</p>
+												</>
+											) : null}
+										</>
+									)}
+									<p>Tiempo tardado: {item.time / 1000} segundos</p>
+								</ReactTooltip>
+							</div>
+						);
+					})}
 			</div>
 		</div>
 	);

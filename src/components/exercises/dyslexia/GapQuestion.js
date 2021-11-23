@@ -11,8 +11,6 @@ const GapQuestion = () => {
 	const [timerStarted, setTimerStarted] = useState(false);
 	const [remainingTime, setRemainingTime] = useState(60);
 
-	const input = useRef(null);
-
 	useEffect(() => {
 		let timeout;
 		if (!!timerStarted) {
@@ -22,7 +20,6 @@ const GapQuestion = () => {
 	}, [timerStarted]);
 
 	useEffect(() => {
-		if (input.current) input.current.value = '';
 		setTimerStarted(false);
 		setRemainingTime(60);
 	}, [exercise]);
@@ -36,16 +33,21 @@ const GapQuestion = () => {
 			<p className='instruction'>Ingresá el número de elementos que contó</p>
 
 			{timerStarted ? (
-				<div className='number-input'>
-					<div className='number'>
-						<input
-							ref={input}
-							autoComplete='off'
-							type='number'
-							name='post'
-							id='post'
-							onChange={e => setUserAnswer(+e.target.value)}
-						/>
+				<div className='counter'>
+					<div
+						className='number counter-button'
+						onClick={() => setUserAnswer(prev => (typeof prev === 'number' ? prev - 1 : 0))}
+					>
+						-
+					</div>
+
+					<div className='number counter-number'>{typeof userAnswer !== 'number' ? 0 : userAnswer}</div>
+
+					<div
+						className='number counter-button'
+						onClick={() => setUserAnswer(prev => (typeof prev === 'number' ? prev + 1 : 0))}
+					>
+						+
 					</div>
 				</div>
 			) : (
@@ -53,7 +55,7 @@ const GapQuestion = () => {
 					Empezar timer
 				</div>
 			)}
-			<NextButton setUserAnswer={submitAnswer} answered={input?.current?.value !== ''} />
+			<NextButton setUserAnswer={submitAnswer} answered={!!userAnswer && userAnswer !== 0} />
 		</ExerciseContainer>
 	);
 };

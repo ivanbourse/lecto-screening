@@ -20,7 +20,7 @@ const MatchWordsToImage = () => {
 							className={`image-option option ${userAnswer.i === i ? 'selected' : ''}`}
 							onClick={() => setUserAnswer({ i, item })}
 						>
-							<PictogramWithSound word={item.image} />
+							<img src={getImage(item.image)} alt={`Pictograma de ${item.image}`} />
 							<p>{item.answer}</p>
 						</div>
 					))}

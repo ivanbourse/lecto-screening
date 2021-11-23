@@ -134,6 +134,13 @@
 		@include icon-button;
 	}
 
+	.instruction-with-sound {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+	}
+
 	.instruction {
 		font-size: var(--fs-medium);
 		font-weight: 600;
@@ -440,6 +447,16 @@
 }
 
 .multiple-choice-container {
+	.play-icon {
+		background: var(--clr-main);
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0.6rem;
+		cursor: pointer;
+	}
+
 	.options {
 		display: flex;
 		align-items: center;
@@ -453,6 +470,11 @@
 			padding: 2vh 3vw;
 			border-radius: 12px;
 			cursor: pointer;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 1rem;
+
 			&:hover:not(.selected) {
 				background-color: rgb(209, 209, 209);
 			}
@@ -477,6 +499,9 @@
 
 			&.answered {
 				box-shadow: 0 0 0 4px #121212;
+			}
+			&.current {
+				box-shadow: 0 0 0 4px var(--clr-yellow);
 			}
 		}
 	}
@@ -512,6 +537,26 @@
 	}
 	.instruction {
 		margin: 0 0 2vh 0;
+	}
+
+	.counter {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+
+		.number {
+			width: 100px;
+			height: 100px;
+		}
+
+		.counter-number {
+			z-index: 1000;
+		}
+
+		.counter-button {
+			cursor: pointer;
+		}
 	}
 }
 

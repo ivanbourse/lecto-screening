@@ -42,11 +42,11 @@ const MatchSample = ({ isResult }) => {
 
 					<CorrectButtons
 						onCorrect={() => {
-							submitAnswer({ time, answer: true });
+							submitAnswer({ time: Date.now() - time, answer: true });
 							reset();
 						}}
 						onIncorrect={() => {
-							submitAnswer({ time, answer: false });
+							submitAnswer({ time: Date.now() - time, answer: false });
 							reset();
 						}}
 					/>

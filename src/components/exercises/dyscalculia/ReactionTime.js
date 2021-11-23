@@ -12,7 +12,8 @@ const ReactionTime = ({ isResult }) => {
 	const onKeyDown = e => {
 		if (visible) {
 			window.removeEventListener('keydown', onKeyDown);
-			const time = Date.now() - date - value.randomDelay;
+			console.log(Date.now() - date);
+			const time = Date.now() - date;
 			submitAnswer({ time });
 			setVisible(false);
 		}

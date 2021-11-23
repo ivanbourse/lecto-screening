@@ -1,7 +1,7 @@
 import { getImage } from 'functions/getImage';
 import { Play, Volume, Volume2 } from 'react-feather';
 
-const PictogramWithSound = ({ classes, word }) => {
+const PictogramWithSound = ({ classes, word, ...props }) => {
 	const read = isPracticeFinish => {
 		const synth = window.speechSynthesis;
 		const utterance = new SpeechSynthesisUtterance();
@@ -12,7 +12,7 @@ const PictogramWithSound = ({ classes, word }) => {
 	};
 
 	return (
-		<div className={`${classes} pictogram-with-sound`}>
+		<div className={`${classes} pictogram-with-sound`} {...props}>
 			<div onClick={read} className='play-icon'>
 				<Volume2 size={32} color='#fff' />
 			</div>

@@ -4,6 +4,7 @@ import useSetAnswer from 'functions/setAnswer';
 import 'styles/matching.scss';
 import ExerciseContainer from 'components/ExerciseContainer';
 import NextButton from 'components/NextButton';
+import PictogramWithSound from './components/PictogramWithSound';
 
 let selected = -1;
 
@@ -91,24 +92,20 @@ const JoinWithArrows = () => {
 			<div className='row'>
 				<div className='images-col'>
 					{imageState.slice(0, 5).map((item, ind) => (
-						<img
-							src={getImage(item.word)}
-							alt={`Pictograma de ${item.word}`}
-							className={'image ' + item.selectionState}
+						<PictogramWithSound
+							word={item.word}
+							classes={'image ' + item.selectionState}
 							onClick={e => onImageClick(e, ind, 0)}
-							/* onClick={e => imageClicked(e, ind)}*/
 							onAnimationEnd={e => onAnimationEnd(e, ind)}
 						/>
 					))}
 				</div>
 				<div className='images-col'>
 					{imageState.slice(5, 10).map((item, ind) => (
-						<img
-							src={getImage(item.word)}
-							alt={`Pictograma de ${item.word}`}
-							className={'image ' + item.selectionState}
+						<PictogramWithSound
+							word={item.word}
+							classes={'image ' + item.selectionState}
 							onClick={e => onImageClick(e, ind, 5)}
-							/* onClick={e => imageClicked(e, ind)}*/
 							onAnimationEnd={e => onAnimationEnd(e, ind)}
 						/>
 					))}

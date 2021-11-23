@@ -66,7 +66,7 @@ const NonexistingWords = () => {
 				</div>
 			</div>
 
-			<NextButton setUserAnswer={nextExercise} answered={true} />
+			<NextButton setUserAnswer={nextExercise} answered={currentWordIndex >= answers.length} />
 		</ExerciseContainer>
 	);
 };
