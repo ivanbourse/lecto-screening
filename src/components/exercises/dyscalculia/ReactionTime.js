@@ -9,14 +9,17 @@ const ReactionTime = ({ isResult }) => {
 	const [visible, setVisible] = useState(false);
 	const [date, setDate] = useState(Date.now());
 
-	useEffect(() => {
-		const onKeyDown = e => {
+	const onKeyDown = e => {
+		if (visible) {
 			window.removeEventListener('keydown', onKeyDown);
-			const time = Date.now() - date - value.randomDelay;
+			console.log(Date.now() - date);
+			const time = Date.now() - date;
 			submitAnswer({ time });
 			setVisible(false);
-		};
+		}
+	};
 
+	useEffect(() => {
 		const timeoutFn = () => {
 			setVisible(true);
 			window.addEventListener('keydown', onKeyDown);
@@ -35,6 +38,9 @@ const ReactionTime = ({ isResult }) => {
 		<div className='exercise reaction-time-container'>
 			<div className='dot-container'>
 				{visible && <div className='dot' style={{ top: value.position[0], left: value.position[1] }}></div>}
+				<div className='correct-buttons correct-buttons-absolute'>
+					<div className='btn-correct' onClick={onKeyDown}></div>
+				</div>
 			</div>
 		</div>
 	);

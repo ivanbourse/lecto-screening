@@ -4,6 +4,7 @@ import useSetAnswer from 'functions/setAnswer';
 import 'styles/matching.scss';
 import ExerciseContainer from 'components/ExerciseContainer';
 import NextButton from 'components/NextButton';
+import PictogramWithSound from './components/PictogramWithSound';
 
 let selected = -1;
 
@@ -27,14 +28,26 @@ const JoinWithArrows = () => {
 					selectionState: 'none', // none, wnone, selected, used
 				});
 			});
-			// shuffle the array inline
-			const shuffled = list.sort((a, b) => 0.5 - Math.random());
 
-			return shuffled;
+			if (exercise.words.length === 10) {
+				const leftArr = list.slice(0, 5);
+				const rightArr = list.slice(5, 10);
+
+				// shuffle the array inline
+				const shuffledLeft = leftArr.sort((a, b) => 0.5 - Math.random());
+				const shuffledRight = rightArr.sort((a, b) => 0.5 - Math.random());
+
+				console.log({ list, shuffledLeft, shuffledRight });
+
+				return [...shuffledLeft, ...shuffledRight];
+			}
+
+			return list.sort((a, b) => 0.5 - Math.random());
 		});
 	}, [exercise]);
 
-	const onImageClick = async (e, index) => {
+	const onImageClick = async (e, i, start) => {
+		let index = i + start;
 		let modify = [...imageState];
 
 		if (modify[index].selectionState === 'selected') {
@@ -76,17 +89,27 @@ const JoinWithArrows = () => {
 
 	return (
 		<ExerciseContainer classes='join-with-arrows-container'>
-			<div className='images'>
-				{imageState.map((item, ind) => (
-					<img
-						src={getImage(item.word)}
-						alt={`Pictograma de ${item.word}`}
-						className={'image ' + item.selectionState}
-						onClick={e => onImageClick(e, ind)}
-						/* onClick={e => imageClicked(e, ind)}*/
-						onAnimationEnd={e => onAnimationEnd(e, ind)}
-					/>
-				))}
+			<div className='row'>
+				<div className='images-col'>
+					{imageState.slice(0, 5).map((item, ind) => (
+						<PictogramWithSound
+							word={item.word}
+							classes={'image ' + item.selectionState}
+							onClick={e => onImageClick(e, ind, 0)}
+							onAnimationEnd={e => onAnimationEnd(e, ind)}
+						/>
+					))}
+				</div>
+				<div className='images-col'>
+					{imageState.slice(5, 10).map((item, ind) => (
+						<PictogramWithSound
+							word={item.word}
+							classes={'image ' + item.selectionState}
+							onClick={e => onImageClick(e, ind, 5)}
+							onAnimationEnd={e => onAnimationEnd(e, ind)}
+						/>
+					))}
+				</div>
 			</div>
 
 			<NextButton setUserAnswer={submitAnswer} answered={cantPairs >= Math.floor(exercise.words.length / 2)} />

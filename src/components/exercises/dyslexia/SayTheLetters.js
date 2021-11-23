@@ -47,7 +47,10 @@ const SayTheLetters = () => {
 		<ExerciseContainer classes='say-the-letters-container'>
 			<div className='letters'>
 				{arrayToShow.map((item, index) => (
-					<div className={`letter ${index < currentItem ? 'answered' : ''}`} key={item}>
+					<div
+						className={`letter ${index < currentItem ? 'answered' : ''} ${index === currentItem ? 'current' : ''}`}
+						key={item}
+					>
 						{item}
 					</div>
 				))}

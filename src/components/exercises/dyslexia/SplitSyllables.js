@@ -4,13 +4,14 @@ import { useSelector } from 'react-redux';
 import useSetAnswer from 'functions/setAnswer';
 import NextButton from 'components/NextButton';
 import { getImage } from 'functions/getImage';
+import PictogramWithSound from './components/PictogramWithSound';
 
 const SplitSyllables = props => {
 	const { exercise, userAnswer, setUserAnswer, submitAnswer } = useSetAnswer();
 
 	return (
 		<ExerciseContainer classes='split-syllables-container'>
-			<img src={getImage(exercise.word)} className='image' alt={`Imagen de ${exercise.word}`} />
+			<PictogramWithSound classes='image' word={exercise.word} />
 
 			<div className='circles'>
 				{Array(6)

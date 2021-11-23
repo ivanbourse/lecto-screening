@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import CorrectButtons from './components/CorrectButtons';
 import DotsPanel from './components/DotsPanel';
 
-const MatchSample = ({ isResult, rotate }) => {
+const MatchSample = ({ isResult }) => {
 	const { exercise, submitAnswer } = useSetAnswer({ customTime: true, isResult });
 
 	const { number1, number2, rotation } = exercise.value;
@@ -42,11 +42,11 @@ const MatchSample = ({ isResult, rotate }) => {
 
 					<CorrectButtons
 						onCorrect={() => {
-							submitAnswer({ time, answer: true });
+							submitAnswer({ time: Date.now() - time, answer: true });
 							reset();
 						}}
 						onIncorrect={() => {
-							submitAnswer({ time, answer: false });
+							submitAnswer({ time: Date.now() - time, answer: false });
 							reset();
 						}}
 					/>

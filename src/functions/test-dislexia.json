@@ -147,14 +147,15 @@
 					"screenType": "exercise",
 					"words": [
 						{ "word": "Pera", "matchNumber": 0 },
-						{ "word": "Pelota", "matchNumber": 0 },
 						{ "word": "León", "matchNumber": 1 },
-						{ "word": "Luna", "matchNumber": 1 },
 						{ "word": "Tijera", "matchNumber": 2 },
-						{ "word": "Tenedor", "matchNumber": 2 },
 						{ "word": "Elefante", "matchNumber": 3 },
-						{ "word": "Escalera", "matchNumber": 3 },
 						{ "word": "Flor", "matchNumber": 4 },
+
+						{ "word": "Pelota", "matchNumber": 0 },
+						{ "word": "Luna", "matchNumber": 1 },
+						{ "word": "Tenedor", "matchNumber": 2 },
+						{ "word": "Escalera", "matchNumber": 3 },
 						{ "word": "Foca", "matchNumber": 4 }
 					]
 				},
@@ -162,14 +163,15 @@
 					"screenType": "exercise",
 					"words": [
 						{ "word": "Moño", "matchNumber": 0 },
-						{ "word": "Mesa", "matchNumber": 0 },
 						{ "word": "Caracol", "matchNumber": 1 },
-						{ "word": "Cocodrilo", "matchNumber": 1 },
 						{ "word": "Sol", "matchNumber": 2 },
-						{ "word": "Sandía", "matchNumber": 2 },
 						{ "word": "Ratón", "matchNumber": 3 },
-						{ "word": "Rinoceronte", "matchNumber": 3 },
 						{ "word": "Delfín", "matchNumber": 4 },
+
+						{ "word": "Mesa", "matchNumber": 0 },
+						{ "word": "Cocodrilo", "matchNumber": 1 },
+						{ "word": "Sandía", "matchNumber": 2 },
+						{ "word": "Rinoceronte", "matchNumber": 3 },
 						{ "word": "Dragón", "matchNumber": 4 }
 					]
 				}
@@ -605,7 +607,7 @@
 			"exercises": [
 				{
 					"screenType": "practice",
-					"words": ["palabra", "palabra", "palabra", "palabra"]
+					"words": ["PANO", "OLTE", "TRICA", "MUDESO"]
 				},
 				{ "screenType": "practice-finish" },
 				{

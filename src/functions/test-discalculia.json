@@ -1,6 +1,6 @@
 {
 	"isRandom": true,
-	"practicesPerType": 4,
+	"practicesPerType": 3,
 	"exercisesPerType": 10,
 	"exercises": [
 		{
@@ -9,7 +9,7 @@
 			"type": "reaction-time",
 			"instructions": [
 				"En la pantalla aparecerá un punto negro.",
-				"Apenas aparezca, deberás presionar cualquier tecla lo más rápido posible.",
+				"Apenas aparezca, deberás presionar el botón verde lo más rápido posible.",
 				"Los primeros 4 ejercicios serán de prueba para que veas cómo funciona."
 			],
 			"min": 1.5,
@@ -100,7 +100,8 @@
 			],
 			"min": 4,
 			"max": 8,
-			"uid": false
+			"uid": false,
+			"customOptions": true
 		},
 		{
 			"title": "Contar para atrás",
@@ -112,7 +113,8 @@
 			],
 			"min": 4,
 			"max": 8,
-			"uid": true
+			"uid": true,
+			"customOptions": true
 		},
 		{
 			"title": "Suma",
@@ -122,7 +124,8 @@
 				"En la pantalla aparecerán cuentas de suma. Deberás escribir el resultado correcto.",
 				"Recuerda que los primeros 4 ejercicios serán de prueba para que veas cómo funciona."
 			],
-			"uid": "plus"
+			"uid": "plus",
+			"customOptions": true
 		},
 		{
 			"title": "Resta",
@@ -132,7 +135,8 @@
 				"En la pantalla aparecerán cuentas de resta. Deberás escribir el resultado correcto.",
 				"Recuerda que los primeros 4 ejercicios serán de prueba para que veas cómo funciona."
 			],
-			"uid": "minus"
+			"uid": "minus",
+			"customOptions": true
 		}
 	]
 }
