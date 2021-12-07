@@ -2,7 +2,8 @@ import { getImage } from 'functions/getImage';
 import { Play, Volume, Volume2 } from 'react-feather';
 
 const PictogramWithSound = ({ classes, word, ...props }) => {
-	const read = isPracticeFinish => {
+	const read = e => {
+		e.stopPropagation();
 		const synth = window.speechSynthesis;
 		const utterance = new SpeechSynthesisUtterance();
 
