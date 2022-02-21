@@ -14,7 +14,10 @@ const MatchPointsNumber = ({ isResult }) => {
 					<span className='number'>{number2}</span>
 				</div>
 			</div>
-			<CorrectButtons onCorrect={() => submitAnswer(true)} onIncorrect={() => submitAnswer(false)} />
+			<CorrectButtons
+				onCorrect={() => submitAnswer({ answer: true, number1, number2 })}
+				onIncorrect={() => submitAnswer({ answer: false, number1, number2 })}
+			/>
 		</div>
 	);
 };

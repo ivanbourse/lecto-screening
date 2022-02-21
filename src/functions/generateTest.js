@@ -146,9 +146,10 @@ const generateCustomOptions = {
 		return randomSortedSubstractions.map(arr => ({ value: `${arr[0]} - ${arr[1]} = ?`, correct: arr[2] }));
 	},
 	false: amount => {
+		// forward
 		let arrays = [];
 
-		for (let i = 1; i + 2 < 10; i++) {
+		for (let i = 1; i + 2 < 11; i++) {
 			arrays.push([i, i + 1, i + 2]);
 		}
 
@@ -156,6 +157,7 @@ const generateCustomOptions = {
 		return randomSortedArrays.map(arr => ({ correct: arr[2], values: arr }));
 	},
 	true: amount => {
+		// backward
 		let arrays = [];
 
 		for (let i = 10; i - 2 > 0; i--) {
@@ -171,7 +173,17 @@ export async function generateTest(testInfo) {
 	const testArray = [];
 
 	if (testInfo.isRandom) {
-		const { exercises, exercisesPerType, practicesPerType } = testInfo;
+		let { exercises, exercisesPerType, practicesPerType, isRandom } = testInfo;
+
+		// isRandom = es de discalculia
+		if (isRandom) {
+			const swap = getRandomOption(true, false);
+			if (swap) {
+				const rotate = exercises[3];
+				exercises[3] = exercises[2];
+				exercises[2] = rotate;
+			}
+		}
 
 		// para cada ejercicio que hay en el JSON (que contiene la info del ejercicio) vamos a agregar:
 		// 1 item que es la pantalla de instrucciones
@@ -182,7 +194,7 @@ export async function generateTest(testInfo) {
 			testArray.push({ screenType: 'instructions', ...exerciseInfo });
 
 			if (exerciseInfo.customOptions) {
-				const practiceValues = generateCustomOptions[exerciseInfo.uid + ""](practicesPerType);
+				const practiceValues = generateCustomOptions[exerciseInfo.uid + ''](practicesPerType);
 				for (let option of practiceValues) {
 					testArray.push({ screenType: 'practice', ...exerciseInfo, ...option });
 					testArray.push({ screenType: 'practice-feedback', ...exerciseInfo, ...option });
@@ -190,7 +202,7 @@ export async function generateTest(testInfo) {
 
 				testArray.push({ screenType: 'practice-finish', ...exerciseInfo });
 
-				const testValues = generateCustomOptions[exerciseInfo.uid + ""](exercisesPerType);
+				const testValues = generateCustomOptions[exerciseInfo.uid + ''](exercisesPerType);
 				for (let option of testValues) {
 					testArray.push({ screenType: 'exercise', ...exerciseInfo, ...option });
 				}

@@ -1,6 +1,6 @@
 const defaultFunction = exercises => {
 	let count = 0;
-	exercises.forEach(({ answer }) => answer.correct.isCorrect && count++);
+	exercises.forEach(({ answerInfo }) => answerInfo.isCorrect && count++);
 	return count;
 };
 

@@ -8,7 +8,7 @@ import sadFace from 'assets/emojis/sad-face.png';
 const PracticeFeedback = () => {
 	const { current, answers } = useSelector(state => state.questions);
 	const dispatch = useDispatch();
-	const isCorrect = !!answers[current - 1]?.answer?.correct?.isCorrect;
+	const isCorrect = !!answers[current - 1]?.answerInfo?.isCorrect;
 
 	return (
 		<div className='exercise-instructions-container'>

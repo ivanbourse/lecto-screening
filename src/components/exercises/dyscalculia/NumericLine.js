@@ -27,7 +27,6 @@ const NumericLine = ({ isResult }) => {
 					value={userAnswer ?? 0}
 					onChange={e => {
 						setUserAnswer(+e.target.value);
-						console.log(e.target.value);
 					}}
 				/>
 			</div>
