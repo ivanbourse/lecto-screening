@@ -69,7 +69,7 @@ export const nextQuestion = createAsyncThunk('questions/nextQuestion', async (an
 		if (isExercise || isPractice) {
 			const answerInfo = getAnswerInfo(testType, currentQuestion, answer);
 			tempAnswer.type = currentQuestion.type;
-			tempAnswer.answerInfo = answerInfo;
+			tempAnswer.answerInfo = { ...answerInfo, time: answer.time };
 
 			tempAnswer.answered = isExercise;
 			tempAnswer.saveValue = isExercise;
@@ -96,7 +96,6 @@ export const finishTest = createAsyncThunk('questions/finishTest', async (payloa
 });
 
 export const sendAnswers = createAsyncThunk('questions/sendAnswers', async ({ type, uid }, thunkAPI) => {
-	console.log('SENDING ANSWERS');
 	const state = thunkAPI.getState();
 	const { answers, resultId, student } = state.questions;
 	const { user } = state.user;
@@ -109,6 +108,8 @@ export const sendAnswers = createAsyncThunk('questions/sendAnswers', async ({ ty
 
 	/* const allTypeAnswers = answers.filter(item => item.type === type && item.saveValue === true); */
 
+	console.log(allTypeAnswers);
+
 	const correctCount = correctCountMap[type](allTypeAnswers) || 0;
 
 	const result = await axios.post('/test/answerQuestion', {
@@ -117,7 +118,7 @@ export const sendAnswers = createAsyncThunk('questions/sendAnswers', async ({ ty
 		resultId,
 		questionName: uid ? `${type}-${uid}` : type,
 		score: correctCount,
-		answer: allTypeAnswers.map(({ answerInfo }) => answerInfo),
+		answer: allTypeAnswers,
 	});
 
 	return true;
