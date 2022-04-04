@@ -27,16 +27,16 @@ const dyscalculiaCheckCorrectMap = {
 	}),
 	counting: (exercise, answer) => ({ isCorrect: exercise.correct === answer, info: exercise.correct }),
 	'match-sample': (exercise, answer) => ({
-		isCorrect: exercise.correct === answer.answer.answer.answer,
+		isCorrect: exercise.correct === answer.answer.answer,
 		info: {
 			correctAnswer: exercise.correct,
 			first: answer.number1,
 			second: answer.number2,
-			userAnswer: answer.answer.answer,
+			userAnswer: answer.answer,
 		},
 	}),
 	'match-sample-rotate': (exercise, answer) => ({
-		isCorrect: exercise.correct === answer.answer,
+		isCorrect: exercise.correct === answer.answer.answer,
 		info: { correctAnswer: exercise.correct, first: answer.number1, second: answer.number2, userAnswer: answer.answer },
 	}),
 };

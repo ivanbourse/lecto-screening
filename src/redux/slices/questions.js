@@ -105,11 +105,6 @@ export const sendAnswers = createAsyncThunk('questions/sendAnswers', async ({ ty
 
 		return item.type === type && item.saveValue === true;
 	});
-
-	/* const allTypeAnswers = answers.filter(item => item.type === type && item.saveValue === true); */
-
-	console.log(allTypeAnswers);
-
 	const correctCount = correctCountMap[type](allTypeAnswers) || 0;
 
 	const result = await axios.post('/test/answerQuestion', {
