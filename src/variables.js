@@ -1,1 +1,1 @@
-export const baseUrl = 'https://lecto-screening.herokuapp.com/';
+export const baseUrl = 'https://lecto-back.herokuapp.com/';
