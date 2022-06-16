@@ -13,8 +13,8 @@
 		@include number;
 
 		img {
-			width: clamp(120px, 30vw, 200px);
-			height: clamp(120px, 30vw, 200px);
+			width: clamp(100px, 30vw, 120px);
+			height: clamp(100px, 30vw, 120px);
 		}
 	}
 }
