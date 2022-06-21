@@ -9,7 +9,8 @@
 			"autocorrect": false,
 			"instructions": [
 				"Decí el nombre de las letras lo más rápido que puedas.",
-				"Apretar la flecha derecha en las respuestas correctas y la flecha izquierda en las incorrectas."
+				"Apretar la flecha derecha en las respuestas correctas y la flecha izquierda en las incorrectas.",
+				"Los primeros 3 ejercicios serán de prueba para que veas cómo funciona."
 			],
 			"exercises": [
 				{
@@ -63,7 +64,8 @@
 			"autocorrect": false,
 			"instructions": [
 				"Decí el sonido de las letras lo más rápido que puedas.",
-				"Apretar la flecha derecha en las respuestas correctas y la flecha izquierda en las incorrectas."
+				"Apretar la flecha derecha en las respuestas correctas y la flecha izquierda en las incorrectas.",
+				"Los primeros 3 ejercicios serán de prueba para que veas cómo funciona."
 			],
 			"exercises": [
 				{
@@ -114,7 +116,10 @@
 			"description": "Descripción",
 			"type": "matching",
 			"autocorrect": true,
-			"instructions": ["Señalá los dibujos que comiencen con el mismo sonido."],
+			"instructions": [
+				"Señalá los dibujos que comiencen con el mismo sonido.",
+				"Los primeros 3 ejercicios serán de prueba para que veas cómo funciona."
+					],
 			"exercises": [
 				{
 					"screenType": "practice",
@@ -182,7 +187,10 @@
 			"description": "Descripción",
 			"type": "contains-letter",
 			"autocorrect": true,
-			"instructions": ["Señalá el dibujo que contenga el sonido de la letra indicada"],
+			"instructions": [
+				"Señalá el dibujo que contenga el sonido de la letra indicada",
+				"Los primeros 3 ejercicios serán de prueba para que veas cómo funciona."
+					],
 			"exercises": [
 				{
 					"screenType": "practice",
@@ -298,7 +306,10 @@
 			"description": "Descripción",
 			"type": "syllables",
 			"autocorrect": true,
-			"instructions": ["Pintá los círculos según la cantidad de sílabas que tenga la palabra."],
+			"instructions": [
+				"Pintá los círculos según la cantidad de sílabas que tenga la palabra.",
+				"Los primeros 3 ejercicios serán de prueba para que veas cómo funciona."
+					],
 			"exercises": [
 				{
 					"screenType": "practice",
@@ -375,7 +386,10 @@
 			"description": "Descripción",
 			"type": "multiple-choice",
 			"autocorrect": true,
-			"instructions": ["Seleccioná la respuesta correcta."],
+			"instructions": [
+				"Seleccioná la respuesta correcta.",
+				"Los primeros 3 ejercicios serán de prueba para que veas cómo funciona."
+					],
 			"exercises": [
 				{
 					"screenType": "practice",
@@ -484,7 +498,10 @@
 			"description": "Descripción",
 			"type": "say-items",
 			"autocorrect": false,
-			"instructions": ["Nombrá en un minuto todos los animales que se te ocurran."],
+			"instructions": [
+				"Nombrá en un minuto todos los animales que se te ocurran.",
+				"Los primeros 3 ejercicios serán de prueba para que veas cómo funciona."
+					],
 			"exercises": [
 				{
 					"screenType": "exercise"
@@ -497,7 +514,7 @@
 			"type": "say-items",
 			"autocorrect": false,
 			"instructions": [
-				"Nombrá en un minuto todas las palabras que se te ocurran que empiecen con las sílabas MA, ME, MI, MO o MU."
+				"Nombrá en un minuto todas las palabras que se te ocurran que empiecen con las sílabas MA, ME, MI, MO o MU.",
 			],
 			"exercises": [
 				{
